@@ -1,3 +1,12 @@
+Kanka çok haklısın, gözden kaçan aşırı saçma bir CSS kuralı yüzünden gelmiyor: **`body` etiketindeki `transform` özelliği.**
+
+CSS kurallarına göre, bir elemente `position: fixed` versen bile, eğer onun üst kapsayıcılarından birinde (bu kodda `body` üzerinde) `transform` veya `transition` varsa, o sabit element `fixed` gibi değil `absolute` gibi davranmaya başlar. Bizim sayfa açılışındaki süzülme animasyonu (`transform: translateY(10px)`) Stitch'i sayfaya çivilemiş, bu yüzden seninle aşağı gelmiyor.
+
+Sorunu kökten çözmek için **Stitch'i `body` dışına taşımak yerine, açılış animasyonunu doğrudan `main` ve `header` elementlerine böldüm.** Böylece `body` temiz kaldı ve Stitch artık ekranın sol ortasına mühürlendi, sen kaydırdıkça tıkır tıkır seninle gelecek.
+
+İşte tamamen düzeltilmiş, mobilde canavar gibi çalışan eksiksiz kod:
+
+```html
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -26,20 +35,38 @@
             line-height: 1.6;
             overflow-x: hidden;
             opacity: 0;
-            transform: translateY(10px);
-            transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
+            transition: opacity 0.4s ease-in-out;
         }
 
         /* Sayfa Hazır Olduğunda Süzülerek Açılma Sınıfı */
         body.page-ready {
             opacity: 1;
+        }
+
+        /* İÇERİK SÜZÜLME EFEKTİ: Body yerine alt elemanlara verdik ki Fixed bozulmasın */
+        .navbar, .hero, .main-content, .activities-section, .main-footer {
+            transform: translateY(15px);
+            transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        body.page-ready .navbar, 
+        body.page-ready .hero, 
+        body.page-ready .main-content, 
+        body.page-ready .activities-section, 
+        body.page-ready .main-footer {
             transform: translateY(0);
         }
 
         /* Sayfadan Çıkarken Süzülerek Kapanma Sınıfı */
         body.page-exit {
             opacity: 0;
-            transform: translateY(-10px);
+        }
+        body.page-exit .navbar, 
+        body.page-exit .hero, 
+        body.page-exit .main-content, 
+        body.page-exit .activities-section, 
+        body.page-exit .main-footer {
+            transform: translateY(-15px);
         }
 
         /* Sayfa Geçiş Perdesi */
@@ -318,13 +345,13 @@
             animation: pulseBtn 2s infinite ease-in-out;
         }
 
-        /* GÜNCELLENDİ: Süzülerek Takip Eden Ekran Sabitli Maskot Alanı */
+        /* KESİN ÇÖZÜM: Gerçekten Ekrana Yapışan Saf Fixed Maskot Alanı */
         .stitch-container {
-            position: fixed; /* absolute yerine fixed ile ekrana mühürlendi */
-            top: 50%;
-            left: 0;
-            transform: translateY(-50%); /* Dikeyde milimetrik ortalama */
-            z-index: 2000;
+            position: fixed !important; 
+            top: 50% !important;
+            left: 0 !important;
+            transform: translateY(-50%) !important; 
+            z-index: 9995;
             display: flex;
             align-items: center;
             text-decoration: none;
@@ -517,7 +544,7 @@
             .main-content { margin: -30px auto 40px; gap: 25px; }
             .activities-section { margin: 20px; padding: 40px 20px; }
             .footer-socials { gap: 15px; }
-            .stitch-container { transform: translateY(-50%) scale(0.85); left: -5px; } /* Mobilde ekranı çok kapatmasın diye hafif küçülttük */
+            .stitch-container { top: 50% !important; left: -5px !important; transform: translateY(-50%) scale(0.85) !important; } /* Mobilde ekranı çok kapatmasın diye hafif küçülttük */
             .stitch-img { width: 65px; height: 65px; }
             .stitch-bubble { width: 150px; font-size: 0.7rem; margin-left: 8px; }
         }
@@ -616,8 +643,6 @@
             }, 100);
         });
 
-        // GÜNCELLENDİ: Telefonları yoran scroll takibi JS kodları kaldırıldı, CSS Fixed yapısına geçildi.
-
         document.querySelectorAll('.nav-links a, .logo-container, .btn, .stitch-container').forEach(link => {
             link.addEventListener('click', function(e) {
                 const targetUrl = this.getAttribute('href');
@@ -637,3 +662,5 @@
 
 </body>
 </html>
+
+```
