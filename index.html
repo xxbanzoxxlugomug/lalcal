@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lal Çalıştay</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Genel Sayfa Ayarları */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #ffffff;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Üst Menü Barı (Navbar) */
+        .navbar {
+            background-color: #1a73e8;
+            color: white;
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 400;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+
+        /* Büyük Kapak Görseli Bölümü (Hero Section) */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)), 
+                        url('https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=1200') no-repeat center center/cover;
+            /* NOT: Yukarıdaki URL yerine okulun veya çalıştayın kendi görsel linkini koyabilirsin */
+            height: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 20px;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            max-width: 900px;
+            text-transform: uppercase;
+        }
+
+        /* Kartlar Bölümü (Çalıştay Bilgileri & Galeri) */
+        .main-content {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .card {
+            background: #fff;
+            border-radius: 8px;
+            text-align: center;
+            padding: 30px 20px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-icon {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 20px;
+            object-fit: contain;
+        }
+
+        /* Resim yoksa boşluk düzgün dursun diye gri alan */
+        .placeholder-box {
+            width: 100px;
+            height: 100px;
+            background: #f0f0f0;
+            border: 2px dashed #ccc;
+            margin: 0 auto 20px;
+            border-radius: 8px;
+        }
+
+        .card h3 {
+            color: #1a73e8;
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+
+        .card p {
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 25px;
+            min-height: 50px;
+        }
+
+        /* Ortak Buton Tasarımı */
+        .btn {
+            display: inline-block;
+            background-color: #1a73e8;
+            color: white;
+            text-decoration: none;
+            padding: 10px 30px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            width: 80%;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #1557b0;
+        }
+
+        /* Alt Kısım: Etkinlikler Bölümü */
+        .activities-section {
+            max-width: 800px;
+            margin: 40px auto 80px;
+            text-align: center;
+            padding: 0 25px;
+        }
+
+        .activities-section h2 {
+            color: #1a73e8;
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+
+        .activities-section p {
+            color: #555;
+            font-size: 1rem;
+            margin-bottom: 25px;
+        }
+
+        .activities-section .btn {
+            width: auto;
+            padding: 12px 50px;
+        }
+
+        /* Mobil Cihazlar İçin Uyumluluk (Responsive) */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            .main-content {
+                margin: 30px auto;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">Lal Çalıştay</div>
+        <ul class="nav-links">
+            <li><a href="#">Ana Sayfa</a></li>
+            <li><a href="#">Etkinlikler</a></li>
+            <li><a href="#">Galeri</a></li>
+            <li><a href="#">Çalıştay Nedir?</a></li>
+        </ul>
+    </nav>
+
+    <header class="hero">
+        <h1>Lüleburgaz Anadolu Lisesi Çalıştayı Sizleri Bekliyor!</h1>
+    </header>
+
+    <main class="main-content">
+        
+        <div class="card">
+            <img src="https://cdn-icons-png.flaticon.com/512/2666/2666505.png" alt="Çalıştay Bilgileri" class="card-icon">
+            <h3>Çalıştay Bilgileri</h3>
+            <p>Program hakkında tüm bilgilere ulaş.</p>
+            <a href="#" class="btn">Sayfaya Git</a>
+        </div>
+
+        <div class="card">
+            <div class="placeholder-box"></div>
+            <h3>Galeri</h3>
+            <p>Etkinliklerden karelere göz at.</p>
+            <a href="#" class="btn">Sayfaya Git</a>
+        </div>
+
+    </main>
+
+    <section class="activities-section">
+        <h2>Etkinlikler</h2>
+        <p>Fikirlerin paylaşıldığı, yeni dostlukların kurulduğu ve öğrenmenin eğlenceli hale geldiği farklı etkinliklerle dolu bir program seni bekliyor!</p>
+        <a href="#" class="btn">Etkinliklere Git</a>
+    </section>
+
+</body>
+</html>
