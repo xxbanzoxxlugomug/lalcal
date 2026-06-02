@@ -22,22 +22,21 @@
 
         /* Sayfa Geçişi İçin İlk Başta Gövdeyi Gizliyoruz */
         body {
-            background-color: #f1f5f9; /* Ana sayfayla birebir uyumlu platin gri */
+            background-color: #f1f5f9;
             color: #1e293b;
             line-height: 1.6;
             overflow-x: hidden;
             opacity: 0;
             transform: translateY(10px);
             transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
+            position: relative; /* Absolute nesnelerin (Stitch) referans noktası */
         }
 
-        /* Sayfa Hazır Olduğunda Süzülerek Açılma Sınıfı */
         body.page-ready {
             opacity: 1;
             transform: translateY(0);
         }
 
-        /* Sayfadan Çıkarken Süzülerek Kapanma Sınıfı */
         body.page-exit {
             opacity: 0;
             transform: translateY(-10px);
@@ -75,7 +74,6 @@
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.15);
         }
 
-        /* Logo ve Başlık Alanı Konteyneri */
         .logo-container {
             display: flex;
             align-items: center;
@@ -91,7 +89,6 @@
             filter: drop-shadow(0 2px 8px rgba(56, 189, 248, 0.3));
         }
 
-        /* Animasyonlu Canlı Renk Geçişli Yazı */
         .logo {
             font-weight: 700;
             font-size: 1.3rem;
@@ -147,7 +144,7 @@
             transform: scaleX(1);
         }
 
-        /* komitelerimiz.png Destekli Görsel Özel Banner Alanı */
+        /* Görsel Özel Banner Alanı */
         .page-header {
             position: relative;
             height: 350px;
@@ -192,7 +189,6 @@
             gap: 40px;
         }
 
-        /* Beyaz Cam Efektli Komite Kartları */
         .komite-card {
             background: rgba(255, 255, 255, 0.8);
             backdrop-filter: blur(12px);
@@ -217,7 +213,6 @@
                         0 0 25px 4px rgba(56, 189, 248, 0.12);
         }
 
-        /* Üst Çizgi Süslemesi */
         .komite-card::before {
             content: '';
             position: absolute;
@@ -234,7 +229,6 @@
             opacity: 1;
         }
 
-        /* Başlık ve İkon Düzeni */
         .card-top {
             display: flex;
             align-items: center;
@@ -278,7 +272,6 @@
             line-height: 1.3;
         }
 
-        /* Bilgilendirme Yazıları */
         .komite-card p {
             color: #64748b;
             font-size: 0.95rem;
@@ -286,7 +279,6 @@
             flex-grow: 1;
         }
 
-        /* Dahası / PDF Butonu */
         .more-btn {
             display: flex;
             align-items: center;
@@ -309,10 +301,10 @@
             transform: translateY(-1px);
         }
 
-        /* FIXED (SABİT) YAPILAN ATALETLİ STITCH MASKOTU ALANI */
+        /* İNDEX.HTML'DEKİ GİBİ ABSOLUTE VE LERP İLE SÜZÜLEN STITCH */
         .stitch-container {
-            position: fixed; 
-            top: 0; /* JS Motoru Y eksenini sıfırdan hesaplayarak pürüzsüz takip ettirecek */
+            position: absolute; /* Document body'sine bağlı, js ile scroll'a yetişecek */
+            top: 0;
             left: 20px;
             z-index: 2000;
             display: flex;
@@ -335,12 +327,10 @@
             border: 2px solid #1a73e8;
             position: relative;
             margin-left: 15px; 
-            /* Stitch ile senkronize dinamik float ve shake animasyonları */
             animation: bubbleSlideFloat 4s ease-in-out infinite, bubbleShake 2.5s cubic-bezier(.36,.07,.19,.97) infinite;
             transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.3s ease;
         }
 
-        /* Konuşma Balonu Oku */
         .stitch-bubble::after {
             content: '';
             position: absolute;
@@ -460,7 +450,7 @@
             margin-top: 10px;
         }
 
-        /* Tüm Animasyon Tanımlamaları */
+        /* Animasyonlar */
         @keyframes textShine {
             0% { background-position: 0% 50%; }
             100% { background-position: 300% 50%; }
@@ -487,7 +477,7 @@
             92% { transform: translateX(-2px); }
         }
 
-        /* Mobil Cihazlar İçin Uyumluluk */
+        /* Mobil */
         @media (max-width: 768px) {
             .navbar { flex-direction: column; gap: 15px; padding: 20px; }
             .nav-links { gap: 15px; flex-wrap: wrap; justify-content: center; margin-left: 0; }
@@ -506,7 +496,6 @@
     <!-- Sayfa Geçiş Örtüsü -->
     <div class="page-transition-overlay"></div>
 
-    <!-- ÜST MENÜ BARINIZ -->
     <nav class="navbar">
         <a href="index.html" class="logo-container">
             <img src="lal.png" alt="Lal Logo" class="navbar-logo-img">
@@ -520,17 +509,14 @@
         </ul>
     </nav>
 
-    <!-- GÖRSEL BANNER ALANI -->
     <header class="page-header">
         <h1>Çalıştay Komitelerimiz</h1>
         <p>Bilimsel, sosyal ve felsefi konuların masaya yatırıldığı heyecan dolu beyin fırtınası alanlarımız.</p>
     </header>
 
-    <!-- ANA İÇERİK: KOMİTE KARTLARI -->
     <div class="container">
         <div class="komite-grid">
             
-            <!-- Komite 1: Eğitim ve Pedagoji -->
             <div class="komite-card">
                 <div>
                     <div class="card-top">
@@ -546,7 +532,6 @@
                 <a href="egitim.pdf" target="_blank" class="more-btn">Dahası...</a>
             </div>
 
-            <!-- Komite 2: Hukuk ve Dijital Haklar -->
             <div class="komite-card">
                 <div>
                     <div class="card-top">
@@ -562,7 +547,6 @@
                 <a href="hukuk.pdf" target="_blank" class="more-btn">Dahası...</a>
             </div>
 
-            <!-- Komite 3: Psikoloji -->
             <div class="komite-card">
                 <div>
                     <div class="card-top">
@@ -578,7 +562,6 @@
                 <a href="psikoloji.pdf" target="_blank" class="more-btn">Dahası...</a>
             </div>
 
-            <!-- Komite 4: Sosyoloji -->
             <div class="komite-card">
                 <div>
                     <div class="card-top">
@@ -594,7 +577,6 @@
                 <a href="sosyoloji.pdf" target="_blank" class="more-btn">Dahası...</a>
             </div>
 
-            <!-- Komite 5: Medya ve İletişim -->
             <div class="komite-card">
                 <div>
                     <div class="card-top">
@@ -610,7 +592,6 @@
                 <a href="medya.pdf" target="_blank" class="more-btn">Dahası...</a>
             </div>
 
-            <!-- Komite 6: Teknoloji ve Yapay Zeka -->
             <div class="komite-card">
                 <div>
                     <div class="card-top">
@@ -635,7 +616,6 @@
         <div class="stitch-bubble">Başvurularımız başladı! Hemen sen de gel başvur. 🚀</div>
     </a>
 
-    <!-- FOOTER BÖLÜMÜ -->
     <footer class="main-footer">
         <div class="footer-content">
             <div class="footer-logo">Lüleburgaz Anadolu Lisesi Çalıştayı</div>
@@ -663,42 +643,39 @@
 
     <!-- SAYFA GEÇİŞ VE ATALETLİ SCROLL MOTORU -->
     <script>
-        // Sayfa süzülerek açılma efekti
         window.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
                 document.documentElement.classList.add('page-loaded');
                 document.body.classList.add('page-ready');
             }, 100);
             
-            // İlk açılışta Stitch yerini alsın
             updateStitchPosition();
         });
 
-        // FIXED ENTEGRASYONLU ATALETLİ TAKİP SİSTEMİ
+        // İNDEX.HTML'DEKİ GİBİ LERP İLE ARKADAN TAKİP EDEN SİSTEM
         const stitch = document.querySelector('.stitch-container');
-        let currentY = window.innerHeight / 2; 
-        let targetY = window.innerHeight / 2;
+        // Başlangıç noktasını o anki scroll seviyesine göre ayarla ki sayfayı yenileyince yukarıdan uçarak gelmesin
+        let currentY = window.scrollY + (window.innerHeight / 2); 
+        let targetY = currentY;
         const speed = 0.08; // Yumuşaklık (lerp katsayısı)
 
         function updateStitchPosition() {
-            // Element fixed pozisyonda olduğu için doğrudan görünür pencerenin dikey ortası hedeflenir
-            targetY = window.innerHeight / 2;
+            // Hedef Y: Sen ne kadar scroll yaparsan + ekranın yarısı
+            targetY = window.scrollY + (window.innerHeight / 2);
 
             // Aradaki farkı yumuşatarak kapatan LERP algoritması
             currentY += (targetY - currentY) * speed;
 
-            // Maskotun tam ortalanması için kendi yüksekliğinin yarısı kadar (-42px) ofset verilir
+            // Maskotu ortaya tam oturtmak için kendi boyunun yarısını çıkartıyoruz (-42)
             stitch.style.transform = `translateY(${currentY - 42}px)`;
 
             requestAnimationFrame(updateStitchPosition);
         }
 
-        // PDF ve Mailto harici sayfa geçiş dinleyicisi
         document.querySelectorAll('.nav-links a, .logo-container, .stitch-container').forEach(link => {
             link.addEventListener('click', function(e) {
                 const targetUrl = this.getAttribute('href');
                 
-                // .pdf uzantılı dosyaları ve özel linkleri geçiş kısıtlamasından muaf tutuyoruz
                 if (targetUrl && !targetUrl.endsWith('.pdf') && !targetUrl.startsWith('http') && !targetUrl.startsWith('mailto:') && targetUrl !== '#') {
                     e.preventDefault(); 
                     document.body.classList.remove('page-ready');
