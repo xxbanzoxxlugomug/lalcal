@@ -14,177 +14,249 @@
             font-family: 'Poppins', sans-serif;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            background-color: #ffffff;
-            color: #333;
+            background-color: #f8fafc;
+            color: #334155;
             line-height: 1.6;
         }
 
         /* Üst Menü Barı (Navbar) */
         .navbar {
-            background-color: #1a73e8;
+            background: linear-gradient(135deg, #1e3a8a, #1a73e8);
             color: white;
-            padding: 15px 5%;
+            padding: 18px 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
         }
 
         .logo {
             font-weight: 700;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
         }
 
         .nav-links {
             list-style: none;
             display: flex;
-            gap: 20px;
+            gap: 25px;
         }
 
         .nav-links a {
-            color: white;
+            color: rgba(255, 255, 255, 0.9);
             text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 400;
-            transition: opacity 0.3s;
+            font-size: 0.95rem;
+            font-weight: 500;
+            position: relative;
+            padding: 5px 0;
+            transition: color 0.3s ease;
+        }
+
+        /* Menü Linkleri Alt Çizgi Efekti */
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            transform: scaleX(0);
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #38bdf8;
+            transform-origin: bottom right;
+            transition: transform 0.25s ease-out;
+        }
+
+        .nav-links a:hover::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
         }
 
         .nav-links a:hover {
-            opacity: 0.8;
+            color: #fff;
         }
 
         /* Büyük Kapak Görseli Bölümü (Hero Section) */
         .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)), 
+            background: linear-gradient(rgba(15, 23, 42, 0.65), rgba(15, 23, 42, 0.65)), 
                         url('https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=1200') no-repeat center center/cover;
-            /* NOT: Yukarıdaki URL yerine okulun veya çalıştayın kendi görsel linkini koyabilirsin */
-            height: 400px;
+            height: 450px;
             display: flex;
             justify-content: center;
             align-items: center;
             text-align: center;
             color: white;
             padding: 20px;
+            animation: fadeIn 1s ease-in-out;
         }
 
         .hero h1 {
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             font-weight: 700;
             letter-spacing: 1px;
             max-width: 900px;
             text-transform: uppercase;
+            text-shadow: 0 4px 12px rgba(0,0,0,0.3);
         }
 
         /* Kartlar Bölümü (Çalıştay Bilgileri & Galeri) */
         .main-content {
             max-width: 1200px;
-            margin: 60px auto;
+            margin: 80px auto;
             padding: 0 20px;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 40px;
         }
 
         .card {
-            background: #fff;
-            border-radius: 8px;
+            background: #ffffff;
+            border-radius: 12px;
             text-align: center;
-            padding: 30px 20px;
-            transition: transform 0.3s, box-shadow 0.3s;
+            padding: 40px 30px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
         }
 
+        /* Kart Havada Süzülme Efekti */
         .card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
         }
 
         .card-icon {
-            width: 100px;
-            height: 100px;
-            margin: 0 auto 20px;
+            width: 90px;
+            height: 90px;
+            margin: 0 auto 25px;
             object-fit: contain;
+            transition: transform 0.3s ease;
         }
 
-        /* Resim yoksa boşluk düzgün dursun diye gri alan */
+        .card:hover .card-icon {
+            transform: scale(1.1);
+        }
+
+        /* Resim yoksa boşluk düzgün dursun diye modern gri alan */
         .placeholder-box {
-            width: 100px;
-            height: 100px;
-            background: #f0f0f0;
-            border: 2px dashed #ccc;
-            margin: 0 auto 20px;
-            border-radius: 8px;
+            width: 90px;
+            height: 90px;
+            background: #f1f5f9;
+            border: 2px dashed #cbd5e1;
+            margin: 0 auto 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .card h3 {
-            color: #1a73e8;
+            color: #1e3a8a;
             margin-bottom: 15px;
-            font-size: 1.4rem;
+            font-size: 1.5rem;
+            font-weight: 600;
         }
 
         .card p {
-            color: #666;
+            color: #64748b;
             font-size: 0.95rem;
-            margin-bottom: 25px;
+            margin-bottom: 30px;
             min-height: 50px;
         }
 
-        /* Ortak Buton Tasarımı */
+        /* Gelişmiş Dinamik Buton Tasarımı */
         .btn {
             display: inline-block;
-            background-color: #1a73e8;
+            background: linear-gradient(135deg, #1a73e8, #1557b0);
             color: white;
             text-decoration: none;
-            padding: 10px 30px;
-            border-radius: 4px;
+            padding: 12px 30px;
+            border-radius: 6px;
             font-weight: 600;
-            font-size: 0.9rem;
-            width: 80%;
-            transition: background-color 0.3s;
+            font-size: 0.95rem;
+            width: 85%;
+            box-shadow: 0 4px 6px rgba(26, 115, 232, 0.2);
+            transition: all 0.3s ease;
         }
 
         .btn:hover {
-            background-color: #1557b0;
+            background: linear-gradient(135deg, #1557b0, #114692);
+            box-shadow: 0 6px 15px rgba(21, 87, 176, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .btn:active {
+            transform: translateY(0);
         }
 
         /* Alt Kısım: Etkinlikler Bölümü */
         .activities-section {
-            max-width: 800px;
-            margin: 40px auto 80px;
+            background-color: #ffffff;
+            max-width: 900px;
+            margin: 40px auto 100px;
             text-align: center;
-            padding: 0 25px;
+            padding: 50px 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.02);
         }
 
         .activities-section h2 {
-            color: #1a73e8;
-            font-size: 2rem;
-            margin-bottom: 15px;
+            color: #1e3a8a;
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            font-weight: 700;
         }
 
         .activities-section p {
-            color: #555;
-            font-size: 1rem;
-            margin-bottom: 25px;
+            color: #475569;
+            font-size: 1.05rem;
+            margin-bottom: 35px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .activities-section .btn {
             width: auto;
-            padding: 12px 50px;
+            padding: 14px 60px;
+            font-size: 1rem;
+        }
+
+        /* Yumuşak Sayfa Açılış Animasyonu */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         /* Mobil Cihazlar İçin Uyumluluk (Responsive) */
         @media (max-width: 768px) {
             .navbar {
                 flex-direction: column;
-                gap: 10px;
+                gap: 15px;
+                padding: 20px;
+            }
+            .nav-links {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
             }
             .hero h1 {
                 font-size: 1.8rem;
             }
             .main-content {
-                margin: 30px auto;
+                margin: 40px auto;
+                gap: 25px;
+            }
+            .activities-section {
+                margin: 20px 20px 60px;
+                padding: 35px 20px;
             }
         }
     </style>
@@ -194,10 +266,10 @@
     <nav class="navbar">
         <div class="logo">Lal Çalıştay</div>
         <ul class="nav-links">
-            <li><a href="#">Ana Sayfa</a></li>
-            <li><a href="#">Etkinlikler</a></li>
-            <li><a href="#">Galeri</a></li>
-            <li><a href="#">Çalıştay Nedir?</a></li>
+            <li><a href="index.html">Ana Sayfa</a></li>
+            <li><a href="etkinlikler.html">Etkinlikler</a></li>
+            <li><a href="galeri.html">Galeri</a></li>
+            <li><a href="calistay-nedir.html">Çalıştay Nedir?</a></li>
         </ul>
     </nav>
 
@@ -211,22 +283,24 @@
             <img src="https://cdn-icons-png.flaticon.com/512/2666/2666505.png" alt="Çalıştay Bilgileri" class="card-icon">
             <h3>Çalıştay Bilgileri</h3>
             <p>Program hakkında tüm bilgilere ulaş.</p>
-            <a href="#" class="btn">Sayfaya Git</a>
+            <a href="calistay-nedir.html" class="btn">Sayfaya Git</a>
         </div>
 
         <div class="card">
-            <div class="placeholder-box"></div>
+            <div class="placeholder-box">
+                <img src="https://cdn-icons-png.flaticon.com/512/1040/1040244.png" alt="Galeri" style="width: 45px; height: 45px;">
+            </div>
             <h3>Galeri</h3>
             <p>Etkinliklerden karelere göz at.</p>
-            <a href="#" class="btn">Sayfaya Git</a>
+            <a href="galeri.html" class="btn">Sayfaya Git</a>
         </div>
 
     </main>
 
     <section class="activities-section">
         <h2>Etkinlikler</h2>
-        <p>Fikirlerin paylaşıldığı, yeni dostlukların kurulduğu ve öğrenmenin eğlenceli hale geldiği farklı etkinliklerle dolu bir program seni bekliyor!!</p>
-        <a href="#" class="btn">Etkinliklere Git</a>
+        <p>Fikirlerin paylaşıldığı, yeni dostlukların kurulduğu ve öğrenmenin eğlenceli hale geldiği farklı etkinliklerle dolu bir program seni bekliyor!</p>
+        <a href="etkinlikler.html" class="btn">Etkinliklere Git</a>
     </section>
 
 </body>
