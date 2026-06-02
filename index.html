@@ -110,7 +110,7 @@
             color: #fff;
         }
 
-        /* YENİ: Akıcı Modern Aurora/Nebula Banner Alanı (Hero Section) */
+        /* YENİ: Ultra Modern Akıcı Mesh Gradient Banner (Sıvı gibi pürüzsüz renk geçişi) */
         .hero {
             position: relative;
             height: 450px;
@@ -121,34 +121,10 @@
             color: white;
             padding: 20px;
             overflow: hidden;
-            background: #0f172a; /* Temel koyu arka plan */
-        }
-
-        /* Akıcı Aurora Işık Katmanları (Eski kötü dikdörtgen silindi) */
-        .hero::before, .hero::after {
-            content: "";
-            position: absolute;
-            width: 150%;
-            height: 150%;
-            top: -25%;
-            left: -25%;
-            opacity: 0.25;
-            pointer-events: none;
-            mix-blend-mode: screen;
-        }
-
-        .hero::before {
-            background: radial-gradient(circle at 30% 40%, #1a73e8 0%, transparent 50%),
-                        radial-gradient(circle at 70% 60%, #38bdf8 0%, transparent 50%);
-            animation: auroraGlowOne 12s infinite alternate ease-in-out;
-            z-index: 1;
-        }
-
-        .hero::after {
-            background: radial-gradient(circle at 80% 20%, #1e3a8a 0%, transparent 45%),
-                        radial-gradient(circle at 20% 80%, #0284c7 0%, transparent 50%);
-            animation: auroraGlowTwo 16s infinite alternate ease-in-out;
-            z-index: 1;
+            /* Arka planda kaba şekiller yerine renklerin pürüzsüzce yer değiştirdiği efsane bir yapı kurduk */
+            background: linear-gradient(125deg, #0f172a, #1e3a8a, #0284c7, #1e3a8a, #0f172a);
+            background-size: 400% 400%;
+            animation: meshGradientFlow 15s ease infinite;
         }
 
         .hero-content {
@@ -163,7 +139,7 @@
             letter-spacing: 1px;
             max-width: 950px;
             text-transform: uppercase;
-            text-shadow: 0 4px 15px rgba(0, 0, 0, 0.6), 0 0 30px rgba(56, 189, 248, 0.2);
+            text-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
             background: linear-gradient(to bottom, #ffffff 70%, #f1f5f9);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -188,8 +164,7 @@
             text-align: center;
             padding: 50px 35px;
             box-shadow: 0 15px 35px -5px rgba(15, 23, 42, 0.05), 
-                        0 10px 20px -10px rgba(15, 23, 42, 0.03),
-                        0 0 15px rgba(26, 115, 232, 0.02);
+                        0 10px 20px -10px rgba(15, 23, 42, 0.03);
             border: 1px solid rgba(30, 58, 138, 0.05);
             transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
@@ -201,18 +176,36 @@
                         0 0 25px 4px rgba(56, 189, 248, 0.15);
         }
 
-        .card-icon {
-            width: 95px;
-            height: 95px;
+        /* SVG İkon Alanı Tasarımı */
+        .card-icon-wrapper {
+            width: 90px;
+            height: 90px;
             margin: 0 auto 25px;
-            object-fit: contain;
-            filter: drop-shadow(0 4px 8px rgba(26, 115, 232, 0.15));
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(26, 115, 232, 0.05);
+            border-radius: 50%;
+            border: 1px solid rgba(26, 115, 232, 0.1);
+            transition: all 0.4s ease;
         }
 
-        .card:hover .card-icon {
-            transform: scale(1.15) rotate(3deg);
-            filter: drop-shadow(0 8px 16px rgba(56, 189, 248, 0.3));
+        .card:hover .card-icon-wrapper {
+            background: rgba(56, 189, 248, 0.15);
+            border-color: #38bdf8;
+            transform: scale(1.1) rotate(4deg);
+            box-shadow: 0 10px 20px rgba(56, 189, 248, 0.15);
+        }
+
+        .card-icon-svg {
+            width: 45px;
+            height: 45px;
+            fill: #1a73e8;
+            transition: fill 0.4s ease;
+        }
+
+        .card:hover .card-icon-svg {
+            fill: #1e3a8a;
         }
 
         .card h3 {
@@ -354,15 +347,11 @@
             margin-top: 10px;
         }
 
-        /* YENİ: Akıcı Aurora Sıvı Hareket Animasyonları */
-        @keyframes auroraGlowOne {
-            0% { transform: translate(0, 0) scale(1); rotate: 0deg; }
-            100% { transform: translate(8%, 12%) scale(1.1); rotate: 10deg; }
-        }
-
-        @keyframes auroraGlowTwo {
-            0% { transform: translate(0, 0) scale(1.1); rotate: 0deg; }
-            100% { transform: translate(-10%, -5%) scale(0.95); rotate: -15deg; }
+        /* Tüm Animasyon Tanımlamaları */
+        @keyframes meshGradientFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         @keyframes textShine {
@@ -413,19 +402,24 @@
         </ul>
     </nav>
 
-    <!-- Yeni Akıcı Aurora Sıvı Dalgalı Modern Banner Alanı -->
+    <!-- Akıcı Lüks Renk Geçişli Modern Banner Alanı (Mesh Gradient) -->
     <header class="hero">
         <div class="hero-content">
             <h1>Lüleburgaz Anadolu Lisesi Çalıştayı Sizleri Bekliyor!</h1>
         </div>
     </header>
 
-    <!-- İKİLİ KART ALANI -->
+    <!-- İKİLİ KART ALANI (Tamamen Güvenli SVG İkonlarla Güncellendi) -->
     <main class="main-content">
         
         <!-- Kart 1: Çalıştay Bilgileri -->
         <div class="card">
-            <img src="https://cdn-icons-png.flaticon.com/512/2666/2666505.png" alt="Çalıştay Bilgileri" class="card-icon">
+            <div class="card-icon-wrapper">
+                <!-- Bilgilendirme / Doküman SVG İkonu -->
+                <svg class="card-icon-svg" viewBox="0 0 24 24">
+                    <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/>
+                </svg>
+            </div>
             <h3>Çalıştay Bilgileri</h3>
             <p>Program hakkında tüm bilgilere ulaş.</p>
             <a href="calistay-nedir.html" class="btn">Sayfaya Git</a>
@@ -433,9 +427,14 @@
 
         <!-- Kart 2: Komitelerimiz -->
         <div class="card">
-            <img src="https://cdn-icons-png.flaticon.com/512/1435/1435181.png" alt="Komitelerimiz" class="card-icon">
+            <div class="card-icon-wrapper">
+                <!-- Topluluk / Komite / Organizasyon SVG İkonu -->
+                <svg class="card-icon-svg" viewBox="0 0 24 24">
+                    <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 1.34 5 4s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
+                </svg>
+            </div>
             <h3>Komitelerimiz</h3>
-            <p>Çalıştayımızda yer alan aktif tartışma alanlarını incele.</p>
+            <p>Çrawlayımızda yer alan aktif tartışma alanlarını incele.</p>
             <a href="komitelerimiz.html" class="btn">Sayfaya Git</a>
         </div>
 
