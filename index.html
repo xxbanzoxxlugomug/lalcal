@@ -21,7 +21,7 @@
 
         /* Sayfa Geçişi İçin İlk Başta Gövdeyi Gizliyoruz */
         body {
-            background-color: #f1f5f9; /* Asil grimsi/platin arka plan */
+            background-color: #f1f5f9; 
             color: #1e293b;
             line-height: 1.6;
             overflow-x: hidden;
@@ -34,7 +34,7 @@
             opacity: 1;
         }
 
-        /* İÇERİK SÜZÜLME EFEKTİ: Body yerine alt elemanlara verdik ki Fixed bozulmasın */
+        /* İçerik Süzülme Efekti */
         .navbar, .hero, .main-content, .activities-section, .main-footer {
             transform: translateY(15px);
             transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
@@ -48,7 +48,6 @@
             transform: translateY(0);
         }
 
-        /* Sayfadan Çıkarken Süzülerek Kapanma Sınıfı */
         body.page-exit {
             opacity: 0;
         }
@@ -92,7 +91,6 @@
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.15);
         }
 
-        /* Logo ve Başlık Alanı Konteyneri */
         .logo-container {
             display: flex;
             align-items: center;
@@ -108,7 +106,6 @@
             filter: drop-shadow(0 2px 8px rgba(56, 189, 248, 0.3));
         }
 
-        /* Animasyonlu Canlı Renk Geçişli Yazı */
         .logo {
             font-weight: 700;
             font-size: 1.3rem;
@@ -121,7 +118,6 @@
             animation: textShine 7s linear infinite;
         }
 
-        /* Menü Link Grubu */
         .nav-links {
             list-style: none;
             display: flex;
@@ -161,7 +157,7 @@
             color: #fff;
         }
 
-        /* basliyoruz.png Destekli Görsel Arka Planlı Premium Banner */
+        /* Banner Alanı */
         .hero {
             position: relative;
             height: 450px;
@@ -179,10 +175,9 @@
 
         .hero-content {
             position: relative;
-            z-index: 5;
+ z-index: 5;
         }
 
-        /* Tatlı ve Hafif Parlayan Glow Efektli Başlık */
         .hero h1 {
             font-size: 3rem;
             font-weight: 700;
@@ -207,7 +202,6 @@
             gap: 40px;
         }
 
-        /* Beyaz Cam Efektli Kartlar */
         .card {
             background: rgba(255, 255, 255, 0.8);
             backdrop-filter: blur(12px);
@@ -215,8 +209,7 @@
             border-radius: 24px;
             text-align: center;
             padding: 50px 35px;
-            box-shadow: 0 15px 35px -5px rgba(15, 23, 42, 0.05), 
-                        0 10px 20px -10px rgba(15, 23, 42, 0.03);
+            box-shadow: 0 15px 35px -5px rgba(15, 23, 42, 0.05);
             transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
 
@@ -224,11 +217,9 @@
             transform: translateY(-12px);
             background: #ffffff;
             border-color: rgba(56, 189, 248, 0.5);
-            box-shadow: 0 25px 50px -12px rgba(26, 115, 232, 0.2), 
-                        0 0 25px 4px rgba(56, 189, 248, 0.15);
+            box-shadow: 0 25px 50px -12px rgba(26, 115, 232, 0.2);
         }
 
-        /* SVG İkon Alanı Tasarımı */
         .card-icon-wrapper {
             width: 90px;
             height: 90px;
@@ -255,10 +246,6 @@
             transition: fill 0.4s ease;
         }
 
-        .card:hover .card-icon-svg {
-            fill: #1e3a8a;
-        }
-
         .card h3 {
             color: #0f172a;
             margin-bottom: 15px;
@@ -273,7 +260,6 @@
             min-height: 50px;
         }
 
-        /* Ortak Buton Tasarımı */
         .btn {
             display: inline-block;
             background: linear-gradient(135deg, #1a73e8, #1e3a8a);
@@ -290,7 +276,6 @@
 
         .btn:hover {
             background: linear-gradient(135deg, #1e40af, #0f172a);
-            box-shadow: 0 6px 20px rgba(30, 58, 138, 0.4);
             transform: translateY(-2px);
         }
 
@@ -304,13 +289,6 @@
             text-align: center;
             padding: 60px 40px;
             border-radius: 24px;
-            box-shadow: 0 20px 40px -15px rgba(15, 23, 42, 0.05);
-        }
-
-        .activities-section:hover {
-            background: #ffffff;
-            border-color: rgba(56, 189, 248, 0.3);
-            box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.08);
         }
 
         .activities-section h2 {
@@ -324,33 +302,28 @@
             color: #64748b;
             font-size: 1.05rem;
             margin-bottom: 35px;
-            max-width: 720px;
-            margin-left: auto;
-            margin-right: auto;
         }
 
         .activities-section .btn {
             width: auto;
             padding: 14px 60px;
-            font-size: 1rem;
             animation: pulseBtn 2s infinite ease-in-out;
         }
 
-        /* KESİN ÇÖZÜM: Gerçekten Ekrana Yapışan Saf Fixed Maskot Alanı */
+        /* GÜNCELLENDİ: Gecikmeli/Smooth Süzülen Efsanevi Stitch Alanı */
         .stitch-container {
-            position: fixed !important; 
-            top: 50% !important;
-            left: 0 !important;
-            transform: translateY(-50%) !important; 
+            position: fixed; 
+            top: 0; /* JS ile dikey konumu anlık ve yumuşakça hesaplanacak */
+            left: 0;
             z-index: 9995;
             display: flex;
             align-items: center;
             text-decoration: none;
             cursor: pointer;
             padding-left: 5px;
+            will-change: transform; /* Tarayıcıya performans optimizasyonu yaptırır */
         }
 
-        /* Baloncuğa da 2.5 Saniyede Bir Tetiklenen Titreme (BubbleShake) Verildi */
         .stitch-bubble {
             background: #ffffff;
             color: #0f172a;
@@ -360,16 +333,13 @@
             font-weight: 600;
             width: 220px;
             text-align: center;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
             border: 2px solid #1a73e8;
             position: relative;
             margin-left: 15px; 
-            /* Stitch ile tam senkronize titreme animasyonu */
             animation: bubbleSlideFloat 4s ease-in-out infinite, bubbleShake 2.5s cubic-bezier(.36,.07,.19,.97) infinite;
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.3s ease;
         }
 
-        /* Baloncuğun Solundaki Ok Süsü */
         .stitch-bubble::after {
             content: '';
             position: absolute;
@@ -379,8 +349,6 @@
             border-width: 10px 10px 10px 0;
             border-style: solid;
             border-color: transparent #ffffff transparent transparent;
-            display: block;
-            width: 0;
         }
 
         .stitch-bubble::before {
@@ -392,30 +360,25 @@
             border-width: 11px 11px 11px 0;
             border-style: solid;
             border-color: transparent #1a73e8 transparent transparent;
-            display: block;
-            width: 0;
             z-index: -1;
         }
 
-        /* 2.5 Saniyede Bir Tetiklenen Titreme (StitchShake) Animasyonu */
         .stitch-img {
             width: 85px;
             height: 85px;
             border-radius: 50%;
             object-fit: cover;
             border: 3px solid #1a73e8;
-            box-shadow: 5px 5px 20px rgba(0,0,0,0.2);
+            box-shadow: 5px 5px 20px rgba(0,0,0,0.15);
             background-color: #ffffff;
             animation: stitchShake 2.5s cubic-bezier(.36,.07,.19,.97) infinite;
             transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        /* Hover Etkileşimi (Kullanıcı üzerine gelince titremeler dursun) */
         .stitch-container:hover .stitch-img {
             animation-play-state: paused; 
             transform: scale(1.08) rotate(5deg);
             border-color: #38bdf8;
-            box-shadow: 8px 8px 25px rgba(56, 189, 248, 0.4);
         }
 
         .stitch-container:hover .stitch-bubble {
@@ -423,7 +386,7 @@
             border-color: #38bdf8;
         }
 
-        /* Modern Alt İletişim Bölümü (Footer) */
+        /* Modern Footer */
         .main-footer {
             background: linear-gradient(135deg, #0f172a, #111827);
             color: #94a3b8;
@@ -441,14 +404,6 @@
             gap: 20px;
         }
 
-        .footer-logo {
-            font-weight: 700;
-            color: white;
-            font-size: 1.1rem;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-
         .footer-socials {
             display: flex;
             justify-content: center;
@@ -463,7 +418,6 @@
             color: #cbd5e1;
             text-decoration: none;
             font-size: 0.95rem;
-            font-weight: 500;
             padding: 8px 16px;
             background: rgba(255, 255, 255, 0.02);
             border-radius: 30px;
@@ -474,68 +428,49 @@
         .social-link img {
             width: 20px;
             height: 20px;
-            object-fit: contain;
         }
 
         .social-link:hover {
             color: white;
             background: rgba(56, 189, 248, 0.1);
-            border-color: rgba(56, 189, 248, 0.3);
             transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(56, 189, 248, 0.1);
         }
 
-        .footer-copy {
-            font-size: 0.85rem;
-            color: #64748b;
-            margin-top: 10px;
-        }
-
-        /* Tüm Animasyon Tanımlamaları */
+        /* Animasyonlar */
         @keyframes textShine {
             0% { background-position: 0% 50%; }
             100% { background-position: 300% 50%; }
         }
 
         @keyframes pulseBtn {
-            0% { transform: scale(1); box-shadow: 0 4px 12px rgba(26, 115, 232, 0.25); }
-            50% { transform: scale(1.04); box-shadow: 0 10px 25px rgba(26, 115, 232, 0.4), 0 0 15px rgba(56, 189, 248, 0.3); }
-            100% { transform: scale(1); box-shadow: 0 4px 12px rgba(26, 115, 232, 0.25); }
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.04); }
         }
 
         @keyframes bubbleSlideFloat {
-            0%, 100% { top: 0; }
-            50% { top: -4px; }
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-4px); }
         }
 
-        /* Stitch Titreme Efekti */
         @keyframes stitchShake {
             0%, 80%, 100% { transform: rotate(0deg); }
             82%, 86%, 94% { transform: rotate(-5deg); }
             84%, 90%, 96% { transform: rotate(5deg); }
-            88% { transform: rotate(-3deg); }
-            92% { transform: rotate(3deg); }
         }
 
-        /* Baloncuğun Stitch İle Senkronize Titreme Efekti */
         @keyframes bubbleShake {
             0%, 80%, 100% { transform: translateX(0); }
             82%, 86%, 94% { transform: translateX(4px); }
             84%, 90%, 96% { transform: translateX(-4px); }
-            88% { transform: translateX(2px); }
-            92% { transform: translateX(-2px); }
         }
 
-        /* Mobil Cihazlar İçin Uyumluluk */
+        /* Mobil Tasarım */
         @media (max-width: 768px) {
             .navbar { flex-direction: column; gap: 15px; padding: 20px; }
-            .nav-links { gap: 15px; flex-wrap: wrap; justify-content: center; margin-left: 0; }
+            .nav-links { gap: 15px; flex-wrap: wrap; justify-content: center; }
             .hero { height: 300px; }
             .hero h1 { font-size: 1.8rem; }
             .main-content { margin: -30px auto 40px; gap: 25px; }
-            .activities-section { margin: 20px; padding: 40px 20px; }
-            .footer-socials { gap: 15px; }
-            .stitch-container { top: 50% !important; left: -5px !important; transform: translateY(-50%) scale(0.85) !important; } /* Mobilde ekranı çok kapatmasın diye hafif küçülttük */
             .stitch-img { width: 65px; height: 65px; }
             .stitch-bubble { width: 150px; font-size: 0.7rem; margin-left: 8px; }
         }
@@ -565,7 +500,6 @@
     </header>
 
     <main class="main-content">
-        
         <div class="card">
             <div class="card-icon-wrapper">
                 <svg class="card-icon-svg" viewBox="0 0 24 24">
@@ -587,16 +521,15 @@
             <p>Çalıştayımızda yer alan aktif tartışma alanlarını incele.</p>
             <a href="komitelerimiz.html" class="btn">Sayfaya Git</a>
         </div>
-
     </main>
 
     <section class="activities-section">
         <h2>Bizimle İletişime Geçin</h2>
-        <p>Çalıştay kayıtları, sponsorluk anlaşmaları veya aklınıza takılan tüm sorular için ekibimize anında ulaşabilirsiniz. Sizi bilgilendirmek için sabırsızlanıyoruz!</p>
+        <p>Çalıştay kayıtları, sponsorluk anlaşmaları veya aklınıza takılan tüm sorular için ekibimize anında ulaşabilirsiniz.</p>
         <a href="iletisim.html" class="btn">İletişime Geç</a>
     </section>
 
-    <a href="iletisim.html" class="stitch-container">
+    <a href="iletisim.html" id="smoothStitch" class="stitch-container">
         <img src="stitch.jpg" alt="Stitch Maskot" class="stitch-img">
         <div class="stitch-bubble">Başvurularımız başladı! Hemen sen de gel başvur. 🚀</div>
     </a>
@@ -604,7 +537,6 @@
     <footer class="main-footer">
         <div class="footer-content">
             <div class="footer-logo">Lüleburgaz Anadolu Lisesi Çalıştayı</div>
-            
             <div class="footer-socials">
                 <a href="https://www.instagram.com/lalcalistay" target="_blank" class="social-link">
                     <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram">
@@ -619,14 +551,12 @@
                     <span>lalcalistay@gmail.com</span>
                 </a>
             </div>
-
-            <div class="footer-copy">
-                &copy; 2026 Lal Çalıştay. Tüm Hakları Saklıdır.
-            </div>
+            <div class="footer-copy">&copy; 2026 Lal Çalıştay. Tüm Hakları Saklıdır.</div>
         </div>
     </footer>
 
     <script>
+        // Sayfa Giriş Animasyonu
         window.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
                 document.documentElement.classList.add('page-loaded');
@@ -634,24 +564,41 @@
             }, 100);
         });
 
+        // GÜNCELLENDİ: Stitch İçin Gecikmeli (Smooth Spring) Takip Motoru
+        const stitch = document.getElementById('smoothStitch');
+        let currentY = window.innerHeight / 2; // Mevcut konum
+        let targetY = window.innerHeight / 2;  // Gitmesi gereken hedef konum
+        const speed = 0.07; // Yumuşaklık derecesi (0.01 ile 0.1 arası, küçüldükçe gecikme artar)
+
+        function smoothScrollStitch() {
+            // Hedef her zaman ekranın dikey olarak tam ortası
+            targetY = window.innerHeight / 2;
+            
+            // Aradaki farkı yumuşatarak mevcut konumu hedefe yaklaştırıyoruz (Linear Interpolation)
+            currentY += (targetY - currentY) * speed;
+            
+            // Konumu elemana yansıtıyoruz (Gecikmeli akış efekti)
+            stitch.style.transform = `translateY(${currentY - (stitch.offsetHeight / 2)}px)`;
+            
+            // Animasyonu her karede akıcı şekilde tekrarla
+            requestAnimationFrame(smoothScrollStitch);
+        }
+        
+        // Motoru başlat
+        requestAnimationFrame(smoothScrollStitch);
+
+        // Sayfa Çıkış Animasyonları
         document.querySelectorAll('.nav-links a, .logo-container, .btn, .stitch-container').forEach(link => {
             link.addEventListener('click', function(e) {
                 const targetUrl = this.getAttribute('href');
-                
                 if (targetUrl && !targetUrl.startsWith('http') && !targetUrl.startsWith('mailto:') && targetUrl !== '#') {
                     e.preventDefault(); 
                     document.body.classList.remove('page-ready');
                     document.body.classList.add('page-exit'); 
-                    
-                    setTimeout(() => {
-                        window.location.href = targetUrl;
-                    }, 400);
+                    setTimeout(() => { window.location.href = targetUrl; }, 400);
                 }
             });
         });
     </script>
-
 </body>
 </html>
-
-```
