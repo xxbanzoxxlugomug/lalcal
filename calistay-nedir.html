@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Çalıştay Nedir? - Lal Çalıştay</title>
-    <!-- Tarayıcı Sekme Logosu (Favicon) -->
     <link rel="icon" type="image/png" href="lal.png">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
@@ -177,7 +176,7 @@
             padding: 0 20px;
         }
 
-        /* Bölüm 1: Çalıştay Nedir? Blok Tasarımı */
+        /* Bölüm 1: Çalıştay Nedir? */
         .intro-box {
             background: #ffffff;
             border-radius: 16px;
@@ -207,7 +206,7 @@
             margin-bottom: 15px;
         }
 
-        /* Bölüm 2: Çalıştayın İşleyişi (Zaman Tüneli / Kartlı Düzen) */
+        /* Bölüm 2: Çalıştayın İşleyişi */
         .flow-section-title {
             text-align: center;
             color: #0f172a;
@@ -297,6 +296,90 @@
             color: #cbd5e1;
         }
 
+        /* Süzülerek Takip Eden Mutlak Yerleşimli Maskot Alanı */
+        .stitch-container {
+            position: absolute; 
+            top: 50%;
+            left: 0;
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            cursor: pointer;
+            padding-left: 5px;
+            transition: border-color 0.3s ease; 
+            will-change: transform; 
+        }
+
+        .stitch-bubble {
+            background: #ffffff;
+            color: #0f172a;
+            padding: 12px 18px;
+            border-radius: 18px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            width: 220px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            border: 2px solid #1a73e8;
+            position: relative;
+            margin-left: 15px; 
+            animation: bubbleSlideFloat 4s ease-in-out infinite, bubbleShake 2.5s cubic-bezier(.36,.07,.19,.97) infinite;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.3s ease;
+        }
+
+        .stitch-bubble::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: -10px;
+            transform: translateY(-50%);
+            border-width: 10px 10px 10px 0;
+            border-style: solid;
+            border-color: transparent #ffffff transparent transparent;
+            display: block;
+            width: 0;
+        }
+
+        .stitch-bubble::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: -13px;
+            transform: translateY(-50%);
+            border-width: 11px 11px 11px 0;
+            border-style: solid;
+            border-color: transparent #1a73e8 transparent transparent;
+            display: block;
+            width: 0;
+            z-index: -1;
+        }
+
+        /* 2.5 Saniyede Bir Tetiklenen Titreme Animasyonu */
+        .stitch-img {
+            width: 85px;
+            height: 85px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #1a73e8;
+            box-shadow: 5px 5px 20px rgba(0,0,0,0.2);
+            background-color: #ffffff;
+            animation: stitchShake 2.5s cubic-bezier(.36,.07,.19,.97) infinite;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .stitch-container:hover .stitch-img {
+            animation-play-state: paused; 
+            transform: scale(1.08) rotate(5deg);
+            border-color: #38bdf8;
+            box-shadow: 8px 8px 25px rgba(56, 189, 248, 0.4);
+        }
+
+        .stitch-container:hover .stitch-bubble {
+            animation-play-state: paused;
+            border-color: #38bdf8;
+        }
+
         /* Modern Alt İletişim Bölümü (Footer) */
         .main-footer {
             background: linear-gradient(135deg, #0f172a, #111827);
@@ -365,10 +448,31 @@
             margin-top: 10px;
         }
 
-        /* Tüm Animasyon Tanımlamaları */
+        /* Klonlanan Animasyon Kalıpları */
         @keyframes textShine {
             0% { background-position: 0% 50%; }
             100% { background-position: 300% 50%; }
+        }
+
+        @keyframes bubbleSlideFloat {
+            0%, 100% { top: 0; }
+            50% { top: -4px; }
+        }
+
+        @keyframes stitchShake {
+            0%, 80%, 100% { transform: rotate(0deg); }
+            82%, 86%, 94% { transform: rotate(-5deg); }
+            84%, 90%, 96% { transform: rotate(5deg); }
+            88% { transform: rotate(-3deg); }
+            92% { transform: rotate(3deg); }
+        }
+
+        @keyframes bubbleShake {
+            0%, 80%, 100% { transform: translateX(0); }
+            82%, 86%, 94% { transform: translateX(4px); }
+            84%, 90%, 96% { transform: translateX(-4px); }
+            88% { transform: translateX(2px); }
+            92% { transform: translateX(-2px); }
         }
 
         /* Mobil Cihazlar İçin Uyumluluk */
@@ -380,15 +484,15 @@
             .flow-grid { grid-template-columns: 1fr; }
             .summary-box { padding: 35px 20px; }
             .footer-socials { gap: 15px; }
+            .stitch-img { width: 65px; height: 65px; }
+            .stitch-bubble { width: 150px; font-size: 0.7rem; margin-left: 8px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Sayfa Geçiş Örtüsü -->
     <div class="page-transition-overlay"></div>
 
-    <!-- ÜST MENÜ BARINIZ (Tıklanabilir Logo, Canlı Renk Animasyonu ve Yenilenen Linkler) -->
     <nav class="navbar">
         <a href="index.html" class="logo-container">
             <img src="lal.png" alt="Lal Logo" class="navbar-logo-img">
@@ -397,86 +501,74 @@
         <ul class="nav-links">
             <li><a href="index.html">Ana Sayfa</a></li>
             <li><a href="iletisim.html">İletişim</a></li>
-            <li><a href="komitelerimiz.html">Komitelerimiz</a></li> <!-- Galeri yerine Komitelerimiz bağlandı -->
+            <li><a href="komitelerimiz.html">Komitelerimiz</a></li> 
             <li><a href="calistay-nedir.html" class="active">Çalıştay Nedir?</a></li>
         </ul>
     </nav>
 
-    <!-- SAYFA BAŞLIĞI ALANI -->
     <header class="page-header">
         <h1>Çalıştay Nedir ve İşleyişi Nasıldır?</h1>
         <p>Geleceğin fikirleri bu platformda şekilleniyor.</p>
     </header>
 
-    <!-- ANA İÇERİK -->
     <div class="container">
         
-        <!-- BÖLÜM 1: ÇALISTAY NEDİR -->
         <div class="intro-box">
             <h2>
                 <img src="https://cdn-icons-png.flaticon.com/512/3208/3208742.png" alt="Çalıştay">
                 Çalıştay Nedir?
             </h2>
             <p>Çalıştay, birçok katılımcının bir araya gelerek bazı belirtilmiş konular hakkında birbirleri ile görüş alışverişinde bulunup çözümler getirmeye çalıştığı eğitsel bir etkinliktir.</p>
-            <p>Kişiler bir sınıftaymışçasına tartışmalara katılır ve söz hakkı alır. Komite başkanları ise bir öğretmen gibi düşünülebilir. Komite konuları hakkında ışık tutar ogün komiteyi yönlendirir!</p>
+            <p>Kişiler bir sınıftaymışçasına tartışmalara katılır ve söz hakkı alır. Komite başkanları ise bir öğretmen gibi düşünülebilir. Komite konuları hakkında ışık tutar o gün komiteyi yönlendirir!</p>
             <p>Genellikle lise ve üniversite çağındaki öğrenciler tarafından düzenlenir ve yine bu yaş grubundan katılımcılara hitap eden, katılımcıların bilim, toplum, tarih, sanat ve benzeri alanlarda fikir alışverişi yapabildiği dinamik bir platformdur.</p>
         </div>
 
-        <!-- BÖLÜM 2: ÇALIŞTAYIN İŞLEYİŞİ -->
         <h2 class="flow-section-title">Çalıştayın İşleyiş Süreci</h2>
         
         <div class="flow-grid">
             
-            <!-- Kart 1 -->
             <div class="flow-card">
                 <div class="flow-num">01</div>
                 <h3>Başvuru ve Motivasyon</h3>
                 <p>Başvuru sürecinde adaylar, internet sitesi üzerinden gerekli bilgileri doldurur ve bir motivasyon mektubu yazar. Bu mektupta; çalıştaya neden katılmak istedikleri, seçtikleri komiteye olan ilgileri ve hedefleri kısaca ifade edilir.</p>
             </div>
 
-            <!-- Kart 2 -->
             <div class="flow-card">
                 <div class="flow-num">02</div>
                 <h3>Komitelerin Belirlenmesi</h3>
                 <p>Komiteler; tarih, biyoloji, edebiyat, felsefe gibi farklı alanlara ayrılarak katılımcıların tam olarak kendi ilgi duydukları bilimsel ve sosyal konularda yer almalarını sağlar.</p>
             </div>
 
-            <!-- Kart 3 -->
             <div class="flow-card">
                 <div class="flow-num">03</div>
                 <h3>Çalışma Rehberi</h3>
                 <p>Başvurusu kabul edilen katılımcılara, oturum öncesinde komitelerine ait özel bir çalışma rehberi gönderilir. Böylece çalıştay boyunca ele alınacak konular hakkında ön bilgi edinmeleri sağlanır.</p>
             </div>
 
-            <!-- Kart 4 -->
             <div class="flow-card">
                 <div class="flow-num">04</div>
                 <h3>İlk Gün ve Seminerler</h3>
                 <p>Çalıştay günü genellikle sabah saatlerinde başlar. İlk oturumun süresi değişiklik gösterebilir; bazı durumlarda akademisyenlerin katılımıyla konferans salonunda ufak seminerler düzenlenir.</p>
             </div>
 
-            <!-- Kart 5 -->
             <div class="flow-card">
                 <div class="flow-num">05</div>
                 <h3>Tanışma ve Tartışmalar</h3>
                 <p>Oturumlar "fun session" adı verilen kaynaşma etkinlikleriyle başlayabilir veya akademisyen eşliğinde ilerleyebilir. Gün boyunca belirlenen konular üzerine tartışmalar yapılır ve katılımcılar fikirlerini özgürce ifade eder.</p>
             </div>
 
-            <!-- Kart 6 -->
             <div class="flow-card">
                 <div class="flow-num">06</div>
-                <h3>Molar ve Sosyalleşme</h3>
-                <p>Oturumların arasında “coffee break” adı verilen kısa molalar verilir. Bu molalarda katılımcılar dinlenir, ikramlardan yararlanır ogün diğer komitelerdeki insanlarla sosyalleşme fırsatı bulur.</p>
+                <h3>Molar ogün Sosyalleşme</h3>
+                <p>Oturumların arasında “coffee break” adı verilen kısa molalar verilir. Bu molalarda katılımcılar dinlenir, ikramlardan yararlanır o gün diğer komitelerdeki insanlarla sosyalleşme fırsatı bulur.</p>
             </div>
 
-            <!-- Kart 7 -->
             <div class="flow-card">
                 <div class="flow-num">07</div>
                 <h3>Bildirgeler ve Sunum</h3>
-                <p>Çalıştayın sonunda, komitelerde ele alınan konular doğrultusunda resmi bildirgeler hazırlanır ogün tüm katılımcıların önünde konferans salonunda jüriye/dinleyicilere sunulur.</p>
+                <p>Çalıştayın sonunda, komitelerde ele alınan konular doğrultusunda resmi bildirgeler hazırlanır o gün tüm katılımcıların önünde konferans salonunda jüriye/dinleyicilere sunulur.</p>
             </div>
 
-            <!-- Kart 8 -->
             <div class="flow-card">
                 <div class="flow-num">08</div>
                 <h3>Sertifika ve Ödüller</h3>
@@ -485,15 +577,18 @@
 
         </div>
 
-        <!-- BÖLÜM 3: ÖZET DEĞERLENDİRME -->
         <div class="summary-box">
             <h3>Unutulmaz Bir Deneyim</h3>
-            <p>Çalıştaylar; sadece akademik bilgi edinmenin yanı sıra sosyalleşme, yeni bakış açıları keşfetme, topluluk önünde konuşma becerilerini geliştirme ogün ömür boyu sürecek kalıcı dostluklar kurma açısından benzersiz bir lise deneyimi sunar.</p>
+            <p>Çalıştaylar; sadece akademik bilgi edinmenin yanı sıra sosyalleşme, yeni bakış açıları keşfetme, topluluk önünde konuşma becerilerini geliştirme o gün ömür boyu sürecek kalıcı dostluklar kurma açısından benzersiz bir lise deneyimi sunar.</p>
         </div>
 
     </div>
 
-    <!-- FOOTER BÖLÜMÜ -->
+    <a href="iletisim.html" class="stitch-container">
+        <img src="stitch.jpg" alt="Stitch Maskot" class="stitch-img">
+        <div class="stitch-bubble">Başvurularımız başladı! Hemen sen de gel başvur. 🚀</div>
+    </a>
+
     <footer class="main-footer">
         <div class="footer-content">
             <div class="footer-logo">Lüleburgaz Anadolu Lisesi Çalıştayı</div>
@@ -519,22 +614,36 @@
         </div>
     </footer>
 
-    <!-- SİHRİ GERÇEKLEŞTİREN SAYFA GEÇİŞ JAVASCRIPT KODU -->
     <script>
-        // Sayfa açılış animasyonu yönetimi
         window.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
                 document.documentElement.classList.add('page-loaded');
                 document.body.classList.add('page-ready');
             }, 100);
+            
+            updateStitchPosition();
         });
 
-        // Menüdeki ve sayfa içindeki linklere tıklayınca yumuşak kapanış animasyonu
-        document.querySelectorAll('.nav-links a, .logo-container, .btn').forEach(link => {
+        const stitch = document.querySelector('.stitch-container');
+        let currentY = window.innerHeight / 2; 
+        let targetY = window.innerHeight / 2;
+        const speed = 0.08; 
+
+        function updateStitchPosition() {
+            const scrollY = window.pageYOffset || document.documentElement.scrollTop;
+            targetY = scrollY + (window.innerHeight / 2);
+
+            currentY += (targetY - currentY) * speed;
+
+            stitch.style.transform = `translateY(${currentY - (window.innerHeight / 2) - 42}px)`;
+
+            requestAnimationFrame(updateStitchPosition);
+        }
+
+        document.querySelectorAll('.nav-links a, .logo-container, .btn, .stitch-container').forEach(link => {
             link.addEventListener('click', function(e) {
                 const targetUrl = this.getAttribute('href');
                 
-                // mailto linkleri, harici linkler veya boş linkler hariç yumuşak geçişi tetikle
                 if (targetUrl && !targetUrl.startsWith('http') && !targetUrl.startsWith('mailto:') && targetUrl !== '#') {
                     e.preventDefault(); 
                     document.body.classList.remove('page-ready');
