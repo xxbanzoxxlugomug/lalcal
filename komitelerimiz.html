@@ -147,7 +147,7 @@
             transform: scaleX(1);
         }
 
-        /* GÜNCELLENDİ: komitelerimiz.png Destekli Görsel Özel Banner Alanı */
+        /* komitelerimiz.png Destekli Görsel Özel Banner Alanı */
         .page-header {
             position: relative;
             height: 350px;
@@ -192,7 +192,7 @@
             gap: 40px;
         }
 
-        /* Beyaz Cam Efektli (White Glassmorphism) Komite Kartları */
+        /* Beyaz Cam Efektli Komite Kartları */
         .komite-card {
             background: rgba(255, 255, 255, 0.8);
             backdrop-filter: blur(12px);
@@ -309,6 +309,92 @@
             transform: translateY(-1px);
         }
 
+        /* Süzülerek Takip Eden Mutlak Yerleşimli Maskot Alanı */
+        .stitch-container {
+            position: absolute; 
+            top: 50%;
+            left: 0;
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            cursor: pointer;
+            padding-left: 5px;
+            transition: border-color 0.3s ease; 
+            will-change: transform; 
+        }
+
+        .stitch-bubble {
+            background: #ffffff;
+            color: #0f172a;
+            padding: 12px 18px;
+            border-radius: 18px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            width: 220px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            border: 2px solid #1a73e8;
+            position: relative;
+            margin-left: 15px; 
+            /* Stitch ile tam senkronize titreme animasyonu */
+            animation: bubbleSlideFloat 4s ease-in-out infinite, bubbleShake 2.5s cubic-bezier(.36,.07,.19,.97) infinite;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.3s ease;
+        }
+
+        /* Ok Süsü */
+        .stitch-bubble::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: -10px;
+            transform: translateY(-50%);
+            border-width: 10px 10px 10px 0;
+            border-style: solid;
+            border-color: transparent #ffffff transparent transparent;
+            display: block;
+            width: 0;
+        }
+
+        .stitch-bubble::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: -13px;
+            transform: translateY(-50%);
+            border-width: 11px 11px 11px 0;
+            border-style: solid;
+            border-color: transparent #1a73e8 transparent transparent;
+            display: block;
+            width: 0;
+            z-index: -1;
+        }
+
+        /* 2.5 Saniyede Bir Tetiklenen Titreme Animasyonu */
+        .stitch-img {
+            width: 85px;
+            height: 85px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #1a73e8;
+            box-shadow: 5px 5px 20px rgba(0,0,0,0.2);
+            background-color: #ffffff;
+            animation: stitchShake 2.5s cubic-bezier(.36,.07,.19,.97) infinite;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .stitch-container:hover .stitch-img {
+            animation-play-state: paused; 
+            transform: scale(1.08) rotate(5deg);
+            border-color: #38bdf8;
+            box-shadow: 8px 8px 25px rgba(56, 189, 248, 0.4);
+        }
+
+        .stitch-container:hover .stitch-bubble {
+            animation-play-state: paused;
+            border-color: #38bdf8;
+        }
+
         /* Footer */
         .main-footer {
             background: linear-gradient(135deg, #0f172a, #111827);
@@ -351,7 +437,7 @@
             font-size: 0.95rem;
             font-weight: 500;
             padding: 8px 16px;
-            background: rgba(255, 255, 255, 0.03);
+            background: rgba(255, 255, 255, 0.02);
             border-radius: 30px;
             border: 1px solid rgba(255, 255, 255, 0.05);
             transition: all 0.3s ease;
@@ -371,10 +457,37 @@
             box-shadow: 0 10px 20px rgba(56, 189, 248, 0.1);
         }
 
-        /* Animasyonlar */
+        .footer-copy {
+            font-size: 0.85rem;
+            color: #64748b;
+            margin-top: 10px;
+        }
+
+        /* Tüm Animasyon Tanımlamaları */
         @keyframes textShine {
             0% { background-position: 0% 50%; }
             100% { background-position: 300% 50%; }
+        }
+
+        @keyframes bubbleSlideFloat {
+            0%, 100% { top: 0; }
+            50% { top: -4px; }
+        }
+
+        @keyframes stitchShake {
+            0%, 80%, 100% { transform: rotate(0deg); }
+            82%, 86%, 94% { transform: rotate(-5deg); }
+            84%, 90%, 96% { transform: rotate(5deg); }
+            88% { transform: rotate(-3deg); }
+            92% { transform: rotate(3deg); }
+        }
+
+        @keyframes bubbleShake {
+            0%, 80%, 100% { transform: translateX(0); }
+            82%, 86%, 94% { transform: translateX(4px); }
+            84%, 90%, 96% { transform: translateX(-4px); }
+            88% { transform: translateX(2px); }
+            92% { transform: translateX(-2px); }
         }
 
         /* Mobil Cihazlar İçin Uyumluluk */
@@ -385,6 +498,8 @@
             .komite-grid { grid-template-columns: 1fr; gap: 25px; }
             .komite-card { padding: 30px 20px; }
             .footer-socials { gap: 15px; }
+            .stitch-img { width: 65px; height: 65px; }
+            .stitch-bubble { width: 150px; font-size: 0.7rem; margin-left: 8px; }
         }
     </style>
 </head>
@@ -407,10 +522,10 @@
         </ul>
     </nav>
 
-    <!-- GÖRSEL BANNER ALANI (komitelerimiz.png Arkada Çağrılıyor) -->
+    <!-- GÖRSEL BANNER ALANI -->
     <header class="page-header">
         <h1>Çalıştay Komitelerimiz</h1>
-        <p>Bilimsel, sosyal ve felsefi konuların masaya yatırıldığı heyecan dolu beyin fırtınası alanlarımız.</p>
+        <p>Bilimsel, sosyal ogün felsefi konuların masaya yatırıldığı heyecan dolu beyin fırtınası alanlarımız.</p>
     </header>
 
     <!-- ANA İÇERİK: KOMİTE KARTLARI -->
@@ -422,31 +537,29 @@
                 <div>
                     <div class="card-top">
                         <div class="icon-box">
-                            <!-- Kitap ve Eğitim İkonu -->
                             <svg class="icon-svg" viewBox="0 0 24 24">
                                 <path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zM5.49 12.18l-1.22-.67L12 16l7.73-4.49-1.22-.67L12 14l-6.51-1.82z"/>
                             </svg>
                         </div>
-                        <h3>Eğitim ve Pedagoji Komitesi</h3>
+                        <h3>Eğitim ogün Pedagoji Komitesi</h3>
                     </div>
-                    <p>Geleceğin öğrenim modellerinin, eğitimde fırsat eşitliğinin ve modern pedagojik yaklaşımların bilimsel süzgeçten geçirilerek tartışıldığı dinamik alanımız.</p>
+                    <p>Geleceğin öğrenim modellerinin, eğitimde fırsat eşitliğinin ogün modern pedagojik yaklaşımların bilimsel süzgeçten geçirilerek tartışıldığı dinamik alanımız.</p>
                 </div>
                 <a href="egitim.pdf" target="_blank" class="more-btn">Dahası...</a>
             </div>
 
-            <!-- Komite 2: Hukuk ve Dijital Haklar -->
+            <!-- Komite 2: Hukuk ogün Dijital Haklar -->
             <div class="komite-card">
                 <div>
                     <div class="card-top">
                         <div class="icon-box">
-                            <!-- Terazi / Hukuk İkonu -->
                             <svg class="icon-svg" viewBox="0 0 24 24">
                                 <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm1 14H11v-2h2zm0-4H11V7h2z"/>
                             </svg>
                         </div>
-                        <h3>Hukuk ve Dijital Haklar Komitesi</h3>
+                        <h3>Hukuk ogün Dijital Haklar Komitesi</h3>
                     </div>
-                    <p>İnternet çağında veri gizliliği, siber suçlar, yapay zekanın yasal statüsü ve dijital dünyadaki insan haklarının hukuki temellerini inceleyen vizyoner komite.</p>
+                    <p>İnternet çağında veri gizliliği, siber suçlar, yapay zekanın yasal statüsü ogün dijital dünyadaki insan haklarının hukuki temellerini inceleyen vizyoner komite.</p>
                 </div>
                 <a href="hukuk.pdf" target="_blank" class="more-btn">Dahası...</a>
             </div>
@@ -456,14 +569,13 @@
                 <div>
                     <div class="card-top">
                         <div class="icon-box">
-                            <!-- Beyin / Psikoloji İkonu -->
                             <svg class="icon-svg" viewBox="0 0 24 24">
                                 <path d="M12 2c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 19.4c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l2.79-2.79C9.93 18.64 10.94 19 12 19c4.97 0 9-4.03 9-9s-4.03-9-9-9zm0 15c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6z"/>
                             </svg>
                         </div>
                         <h3>Psikoloji Komitesi</h3>
                     </div>
-                    <p>Modern çağın insan psikolojisi üzerindeki etkilerini, toplumsal davranış modellerini, zihinsel sağlık stratejilerini ve bireysel farkındalığı masaya yatıran derin tartışma alanı.</p>
+                    <p>Modern çağın insan psikolojisi üzerindeki etkilerini, toplumsal davranış modellerini, zihinsel sağlık stratejilerini ogün bireysel farkındalığı masaya yatıran derin tartışma alanı.</p>
                 </div>
                 <a href="psikoloji.pdf" target="_blank" class="more-btn">Dahası...</a>
             </div>
@@ -473,54 +585,57 @@
                 <div>
                     <div class="card-top">
                         <div class="icon-box">
-                            <!-- Topluluk / Küre / Sosyoloji İkonu -->
                             <svg class="icon-svg" viewBox="0 0 24 24">
                                 <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.53c-.26-.81-1-1.4-1.9-1.4h-1v-3c0-.55-.45-1-1-1h-6v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
                             </svg>
                         </div>
                         <h3>Sosyoloji Komitesi</h3>
                     </div>
-                    <p>Toplumsal değişimleri, göç hareketlerini, kültürlerarası etkileşimleri ve kentleşme süreçlerinin getirdiği modern sosyolojik krizleri ve çözüm yollarını arayan küresel komitemiz.</p>
+                    <p>Toplumsal değişimleri, göç hareketlerini, kültürlerarası etkileşimleri ogün kentleşme süreçlerinin getirdiği modern sosyolojik krizleri ogün çözüm yollarını arayan küresel komitemiz.</p>
                 </div>
                 <a href="sosyoloji.pdf" target="_blank" class="more-btn">Dahası...</a>
             </div>
 
-            <!-- Komite 5: Medya ve İletişim -->
+            <!-- Komite 5: Medya ogün İletişim -->
             <div class="komite-card">
                 <div>
                     <div class="card-top">
                         <div class="icon-box">
-                            <!-- Mikrofon / Sinyal / Medya İkonu -->
                             <svg class="icon-svg" viewBox="0 0 24 24">
                                 <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-5 14H4v-4h11v4zm0-5H4V9h11v4zm5 5h-4V9h4v9z"/>
                             </svg>
                         </div>
-                        <h3>Medya ve İletişim Komitesi</h3>
+                        <h3>Medya ogün İletişim Komitesi</h3>
                     </div>
-                    <p>Yeni nesil kitle iletişim araçlarını, algı yönetimini, dezenformasyonu (yalan haber), sosyal medyanın gücünü ve modern gazeteciliğin etik kodlarını sorgulayan dinamik komite.</p>
+                    <p>Yeni nesil kitle iletişim araçlarını, algı yönetimini, dezenformasyonu (yalan haber), sosyal medyanın gücünü ogün modern gazeteciliğin etik kodlarını sorgulayan dinamik komite.</p>
                 </div>
                 <a href="medya.pdf" target="_blank" class="more-btn">Dahası...</a>
             </div>
 
-            <!-- Komite 6: Teknoloji ve Yapay Zeka -->
+            <!-- Komite 6: Teknoloji ogün Yapay Zeka -->
             <div class="komite-card">
                 <div>
                     <div class="card-top">
                         <div class="icon-box">
-                            <!-- Çip / Yapay Zeka İkonu -->
                             <svg class="icon-svg" viewBox="0 0 24 24">
                                 <path d="M19 9h-2V7c0-1.1-.9-2-2-2h-2V3h-2v2H9V3H7v2H5c-1.1 0-2 .9-2 2v2H1v2h2v2H1v2h2v2c0 1.1.9 2 2 2h2v2h2v-2h2v2h2v-2h2c1.1 0 2-.9 2-2v-2h2v-2h-2v-2h2V9zm-4 6H9V9h6v6z"/>
                             </svg>
                         </div>
-                        <h3>Teknoloji ve Yapay Zeka Komitesi</h3>
+                        <h3>Teknoloji ogün Yapay Zeka Komitesi</h3>
                     </div>
-                    <p>Büyük dil modellerini, otomasyonu, transhümanizmi, kuantum bilgisayarları ve yapay zekanın insanlığın geleceğini nasıl şekillendireceğini masaya yatıran fütüristik komitemiz.</p>
+                    <p>Büyük dil modellerini, otomasyonu, transhümanizmi, kuantum bilgisayarları ogün yapay zekanın insanlığın geleceğini nasıl şekillendireceğini masaya yatıran fütüristik komitemiz.</p>
                 </div>
                 <a href="teknoloji.pdf" target="_blank" class="more-btn">Dahası...</a>
             </div>
 
         </div>
     </div>
+
+    <!-- SÜZÜLEREK TAKİP EDEN VE BALONUYLA BERABER TİTREYEN STITCH MASKOTU -->
+    <a href="iletisim.html" class="stitch-container">
+        <img src="stitch.jpg" alt="Stitch Maskot" class="stitch-img">
+        <div class="stitch-bubble">Başvurularımız başladı! Hemen sen de gel başvur. 🚀</div>
+    </a>
 
     <!-- FOOTER BÖLÜMÜ -->
     <footer class="main-footer">
@@ -548,23 +663,40 @@
         </div>
     </footer>
 
-    <!-- SİHRİ GERÇEKLEŞTİREN SAYFA GEÇİŞ JAVASCRIPT KODU -->
+    <!-- SAYFA GEÇİŞ VE ATALETLİ SCROLL MOTORU -->
     <script>
-        // Sayfa açılış animasyonu yönetimi
         window.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
                 document.documentElement.classList.add('page-loaded');
                 document.body.classList.add('page-ready');
             }, 100);
+            
+            updateStitchPosition();
         });
 
-        // Menüdeki ve sayfa içindeki linklere tıklayınca yumuşak kapanış animasyonu
-        document.querySelectorAll('.nav-links a, .logo-container').forEach(link => {
+        const stitch = document.querySelector('.stitch-container');
+        let currentY = window.innerHeight / 2; 
+        let targetY = window.innerHeight / 2;
+        const speed = 0.08; 
+
+        function updateStitchPosition() {
+            const scrollY = window.pageYOffset || document.documentElement.scrollTop;
+            targetY = scrollY + (window.innerHeight / 2);
+
+            currentY += (targetY - currentY) * speed;
+
+            stitch.style.transform = `translateY(${currentY - (window.innerHeight / 2) - 42}px)`;
+
+            requestAnimationFrame(updateStitchPosition);
+        }
+
+        // PDF ve Mailto harici sayfa geçiş dinleyicisi
+        document.querySelectorAll('.nav-links a, .logo-container, .stitch-container').forEach(link => {
             link.addEventListener('click', function(e) {
                 const targetUrl = this.getAttribute('href');
                 
-                // mailto linkleri, harici linkler veya boş linkler hariç yumuşak geçişi tetikle
-                if (targetUrl && !targetUrl.startsWith('http') && !targetUrl.startsWith('mailto:') && targetUrl !== '#') {
+                // .pdf uzantılı dosyaları sayfa geçiş kısıtlamasından muaf tutuyoruz
+                if (targetUrl && !targetUrl.endsWith('.pdf') && !targetUrl.startsWith('http') && !targetUrl.startsWith('mailto:') && targetUrl !== '#') {
                     e.preventDefault(); 
                     document.body.classList.remove('page-ready');
                     document.body.classList.add('page-exit'); 
