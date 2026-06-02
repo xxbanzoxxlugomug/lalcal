@@ -319,20 +319,21 @@
             animation: pulseBtn 2s infinite ease-in-out;
         }
 
-        /* YENİ: Ekrana Sabitlenmiş Akıllı Konuşan Stitch Alanı */
+        /* GÜNCELLENDİ: Ekranda Sürekli Sol Ortada Çivili Duran Maskot Alanı */
         .stitch-container {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
             z-index: 2000;
             display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            text-decoration: none; /* Tıklama alanı çizgilerini kaldırır */
+            align-items: center;
+            text-decoration: none;
             cursor: pointer;
+            padding-left: 5px;
         }
 
-        /* HTML/CSS Canlı Konuşma Baloncuğu */
+        /* Yandan Açılan Canlı Baloncuğumuz */
         .stitch-bubble {
             background: #ffffff;
             color: #0f172a;
@@ -340,24 +341,25 @@
             border-radius: 18px;
             font-size: 0.85rem;
             font-weight: 600;
-            max-width: 220px;
+            width: 220px;
             text-align: center;
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
             border: 2px solid #1a73e8;
             position: relative;
-            margin-bottom: 12px;
-            animation: bubbleFloat 4s ease-in-out infinite;
+            margin-left: 15px; /* Resmin sağında dursun diye boşluk */
+            animation: bubbleSlideFloat 4s ease-in-out infinite;
         }
 
-        /* Baloncuğun Altındaki Minik Ok Süsü */
+        /* Baloncuğun Solundaki Minik Ok Süsü */
         .stitch-bubble::after {
             content: '';
             position: absolute;
-            bottom: -10px;
-            right: 35px;
-            border-width: 10px 10px 0;
+            top: 50%;
+            left: -10px;
+            transform: translateY(-50%);
+            border-width: 10px 10px 10px 0;
             border-style: solid;
-            border-color: #ffffff transparent;
+            border-color: transparent #ffffff transparent transparent;
             display: block;
             width: 0;
         }
@@ -365,38 +367,39 @@
         .stitch-bubble::before {
             content: '';
             position: absolute;
-            bottom: -13px;
-            right: 34px;
-            border-width: 11px 11px 0;
+            top: 50%;
+            left: -13px;
+            transform: translateY(-50%);
+            border-width: 11px 11px 11px 0;
             border-style: solid;
-            border-color: #1a73e8 transparent;
+            border-color: transparent #1a73e8 transparent transparent;
             display: block;
             width: 0;
             z-index: -1;
         }
 
-        /* Sabit Stitch Görsel Ayarları */
+        /* Sol Duvara Yaslanmış Stitch Ayarları */
         .stitch-img {
-            width: 90px;
-            height: 90px;
+            width: 85px;
+            height: 85px;
             border-radius: 50%;
             object-fit: cover;
             border: 3px solid #1a73e8;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            box-shadow: 5px 5px 20px rgba(0,0,0,0.2);
             background-color: #ffffff;
             transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        /* Üzerine Gelince Stitch Tepki Versin */
+        /* Üzerine Gelince Stitch Sola Doğru Tatlı Bi' Esneme Yapsın */
         .stitch-container:hover .stitch-img {
-            transform: scale(1.1) rotate(-5deg);
+            transform: scale(1.08) rotate(5deg);
             border-color: #38bdf8;
-            box-shadow: 0 15px 30px rgba(56, 189, 248, 0.4);
+            box-shadow: 8px 8px 25px rgba(56, 189, 248, 0.4);
         }
 
         .stitch-container:hover .stitch-bubble {
             border-color: #38bdf8;
-            transform: translateY(-3px);
+            transform: scale(1.02);
         }
 
         /* Modern Alt İletişim Bölümü (Footer) */
@@ -485,10 +488,10 @@
             100% { transform: scale(1); box-shadow: 0 4px 12px rgba(26, 115, 232, 0.25); }
         }
 
-        /* Baloncuğun Havada Tatlı Uçma Hareketi */
-        @keyframes bubbleFloat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-6px); }
+        /* Sol Baloncuğun Havada Titreme/Yüzme Animasyonu */
+        @keyframes bubbleSlideFloat {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-5px) scale(0.99); }
         }
 
         /* Mobil Cihazlar İçin Uyumluluk */
@@ -499,9 +502,10 @@
             .main-content { margin: -30px auto 40px; gap: 25px; }
             .activities-section { margin: 20px; padding: 40px 20px; }
             .footer-socials { gap: 15px; }
-            .stitch-container { bottom: 15px; right: 15px; }
-            .stitch-img { width: 75px; height: 75px; }
-            .stitch-bubble { max-width: 160px; font-size: 0.75rem; }
+            /* Mobilde ekran dar olduğu için çok az küçültüyoruz */
+            .stitch-container { top: 75%; }
+            .stitch-img { width: 65px; height: 65px; }
+            .stitch-bubble { width: 150px; font-size: 0.7rem; margin-left: 8px; }
         }
     </style>
 </head>
@@ -567,10 +571,10 @@
         <a href="iletisim.html" class="btn">İletişime Geç</a>
     </section>
 
-    <!-- CANLI KONUŞAN STITCH MASKOTU (Tıklayınca İletişime Fırlatır) -->
+    <!-- GÜNCELLENDİ: SÜREKLİ EKRANIN SOL ORTASINDA SABİT DURAN STITCH VE SAĞINDAKİ BALONCUK -->
     <a href="iletisim.html" class="stitch-container">
-        <div class="stitch-bubble">Başvurularımız başladı! Hemen sen de gel başvur. 🚀</div>
         <img src="stitch.jpg" alt="Stitch Maskot" class="stitch-img">
+        <div class="stitch-bubble">Başvurularımız başladı! Hemen sen de gel başvur. 🚀</div>
     </a>
 
     <!-- FOOTER BÖLÜMÜ -->
@@ -608,7 +612,6 @@
             }, 100);
         });
 
-        // Stitch container'ı da dahil ettik ki pürüzsüz geçiş bozulmasın
         document.querySelectorAll('.nav-links a, .logo-container, .btn, .stitch-container').forEach(link => {
             link.addEventListener('click', function(e) {
                 const targetUrl = this.getAttribute('href');
