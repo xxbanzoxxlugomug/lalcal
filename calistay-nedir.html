@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Çalıştay Nedir? - Lal Çalıştay</title>
+    <!-- Tarayıcı Sekme Logosu (Favicon) -->
+    <link rel="icon" type="image/png" href="lal.png">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         /* Genel Sayfa Ayarları */
@@ -24,7 +26,7 @@
         .navbar {
             background: linear-gradient(135deg, #0f172a, #1e3a8a);
             color: white;
-            padding: 18px 5%;
+            padding: 15px 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -34,14 +36,33 @@
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.15);
         }
 
+        /* Logo ve Başlık Alanı Konteyneri */
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .navbar-logo-img {
+            width: 38px;
+            height: 38px;
+            object-fit: contain;
+            filter: drop-shadow(0 2px 8px rgba(56, 189, 248, 0.3));
+        }
+
+        /* Animasyonlu Canlı Renk Geçişli Yazı */
         .logo {
             font-weight: 700;
             font-size: 1.3rem;
             letter-spacing: 1px;
             text-transform: uppercase;
-            background: linear-gradient(to right, #ffffff, #38bdf8);
+            background: linear-gradient(to right, #ffffff, #38bdf8, #1a73e8, #ffffff);
+            background-size: 300% auto;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            animation: textShine 7s linear infinite;
         }
 
         .nav-links {
@@ -145,16 +166,6 @@
             color: #475569;
             font-size: 1.05rem;
             margin-bottom: 15px;
-        }
-
-        .highlight-text {
-            background-color: #f0fdf4;
-            border: 1px dashed #bbf7d0;
-            padding: 15px 20px;
-            border-radius: 8px;
-            color: #166534;
-            font-weight: 500;
-            margin-top: 20px;
         }
 
         /* Bölüm 2: Çalıştayın İşleyişi (Zaman Tüneli / Kartlı Düzen) */
@@ -315,6 +326,12 @@
             margin-top: 10px;
         }
 
+        /* Tüm Animasyon Tanımlamaları */
+        @keyframes textShine {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 300% 50%; }
+        }
+
         /* Mobil Cihazlar İçin Uyumluluk */
         @media (max-width: 768px) {
             .navbar { flex-direction: column; gap: 15px; padding: 20px; }
@@ -329,9 +346,12 @@
 </head>
 <body>
 
-    <!-- ÜST MENÜ BARINIZ -->
+    <!-- ÜST MENÜ BARINIZ (Tıklanabilir Logo ve Canlı Renk Animasyonu Eklendi) -->
     <nav class="navbar">
-        <div class="logo">Lal Çalıştay</div>
+        <a href="index.html" class="logo-container">
+            <img src="lal.png" alt="Lal Logo" class="navbar-logo-img">
+            <div class="logo">Lal Çalıştay</div>
+        </a>
         <ul class="nav-links">
             <li><a href="index.html">Ana Sayfa</a></li>
             <li><a href="iletisim.html">İletişim</a></li>
@@ -356,7 +376,7 @@
                 Çalıştay Nedir?
             </h2>
             <p>Çalıştay, birçok katılımcının bir araya gelerek bazı belirtilmiş konular hakkında birbirleri ile görüş alışverişinde bulunup çözümler getirmeye çalıştığı eğitsel bir etkinliktir.</p>
-            <p>Kişiler bir sınıftaymışçasına tartışmalara katılır ve söz hakkı alır. Komite başkanları ise bir öğretmen gibi düşünülebilir. Komite konuları hakkında ışık tutar ve komiteyi yönlendirir!</p>
+            <p>Kişiler bir sınıftaymışçasına tartışmalara katılır ve söz hakkı alır. Komite başkanları ise bir öğretmen gibi düşünülebilir. Komite konuları hakkında ışık tutar ogün komiteyi yönlendirir!</p>
             <p>Genellikle lise ve üniversite çağındaki öğrenciler tarafından düzenlenir ve yine bu yaş grubundan katılımcılara hitap eden, katılımcıların bilim, toplum, tarih, sanat ve benzeri alanlarda fikir alışverişi yapabildiği dinamik bir platformdur.</p>
         </div>
 
@@ -431,20 +451,25 @@
 
     </div>
 
-    <!-- FOOTER BÖLÜMÜ (Ana sayfa ile birebir aynı) -->
+    <!-- FOOTER BÖLÜMÜ -->
     <footer class="main-footer">
         <div class="footer-content">
             <div class="footer-logo">Lüleburgaz Anadolu Lisesi Çalıştayı</div>
             
             <div class="footer-socials">
+                <!-- Instagram -->
                 <a href="https://www.instagram.com/lalcalistay" target="_blank" class="social-link">
                     <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram">
                     <span>@lalcalistay</span>
                 </a>
+                
+                <!-- TikTok -->
                 <a href="https://www.tiktok.com/@lalcalistay" target="_blank" class="social-link">
                     <img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" alt="TikTok">
                     <span>@lalcalistay</span>
                 </a>
+                
+                <!-- Gmail -->
                 <a href="mailto:lalcalistay@gmail.com" class="social-link">
                     <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Gmail">
                     <span>lalcalistay@gmail.com</span>
