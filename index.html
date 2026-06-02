@@ -321,17 +321,17 @@
 
         /* Süzülerek Takip Eden Mutlak Yerleşimli Maskot Alanı */
         .stitch-container {
-            position: absolute; 
+            position: fixed;
             top: 50%;
             left: 0;
+            transform: translateY(-50%);
             z-index: 2000;
             display: flex;
             align-items: center;
             text-decoration: none;
             cursor: pointer;
             padding-left: 5px;
-            transition: border-color 0.3s ease; 
-            will-change: transform; 
+            transition: border-color 0.3s ease;
         }
 
         /* GÜNCELLENDİ: Baloncuğa da 2.5 Saniyede Bir Tetiklenen Titreme (BubbleShake) Verildi */
@@ -616,24 +616,7 @@
                 document.body.classList.add('page-ready');
             }, 100);
             
-            updateStitchPosition();
         });
-
-        const stitch = document.querySelector('.stitch-container');
-        let currentY = window.innerHeight / 2; 
-        let targetY = window.innerHeight / 2;
-        const speed = 0.08; 
-
-        function updateStitchPosition() {
-            const scrollY = window.pageYOffset || document.documentElement.scrollTop;
-            targetY = scrollY + (window.innerHeight / 2);
-
-            currentY += (targetY - currentY) * speed;
-
-            stitch.style.transform = `translateY(${currentY - (window.innerHeight / 2) - 42}px)`;
-
-            requestAnimationFrame(updateStitchPosition);
-        }
 
         document.querySelectorAll('.nav-links a, .logo-container, .btn, .stitch-container').forEach(link => {
             link.addEventListener('click', function(e) {
