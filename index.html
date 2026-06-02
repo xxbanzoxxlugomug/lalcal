@@ -21,15 +21,15 @@
         }
 
         body {
-            background-color: #0b1329; /* Çiğ beyazlık tamamen bitti, asil koyu tema */
-            color: #f8fafc;
+            background-color: #f1f5f9; /* İsteğin üzerine: Çok karanlık hava bitti, asil grimsi/platin arka plan geldi */
+            color: #1e293b;
             line-height: 1.6;
             overflow-x: hidden;
         }
 
         /* Üst Menü Barı (Navbar) */
         .navbar {
-            background: linear-gradient(135deg, #090d16, #1e3a8a);
+            background: linear-gradient(135deg, #0f172a, #1e3a8a);
             color: white;
             padding: 15px 5%;
             display: flex;
@@ -38,7 +38,7 @@
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.15);
         }
 
         /* Logo ve Başlık Alanı Konteyneri */
@@ -110,7 +110,7 @@
             color: #fff;
         }
 
-        /* GÜNCELLENDİ: Daha Koyu, Derin ve Akıcı Siber Uzay Arka Planı (Hero Section) */
+        /* GÜNCELLENDİ: Kasveti Kırılmış, Asil Lacivert ve Gece Mavisi Akışlı Banner (Hero Section) */
         .hero {
             position: relative;
             height: 450px;
@@ -121,9 +121,9 @@
             color: white;
             padding: 20px;
             overflow: hidden;
-            background: linear-gradient(135deg, #090d16, #0f172a, #1e293b, #0f172a, #090d16);
+            background: linear-gradient(135deg, #0f172a, #1e3a8a, #1d4ed8, #1e3a8a, #0f172a);
             background-size: 400% 400%;
-            animation: siberFlow 12s ease infinite;
+            animation: modernFlow 12s ease infinite;
         }
 
         .hero-content {
@@ -142,7 +142,7 @@
             background: linear-gradient(to bottom, #ffffff 70%, #f1f5f9);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 0 15px rgba(56, 189, 248, 0.5)) drop-shadow(0 4px 10px rgba(0, 0, 0, 0.8));
+            filter: drop-shadow(0 0 15px rgba(56, 189, 248, 0.5)) drop-shadow(0 4px 10px rgba(0, 0, 0, 0.5));
         }
 
         /* Kartlar Bölümü - Aşağıdan süzülme animasyonlu */
@@ -158,24 +158,26 @@
             animation: cardListUp 1s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
 
-        /* GÜNCELLENDİ: Beyazlıklar Gitti, Koyu Cam Efektli (Glassmorphism) Kartlar Geldi */
+        /* GÜNCELLENDİ: Grimsi Arka Planda Efsane Duracak Beyaz Cam Efektli (White Glassmorphism) Kartlar */
         .card {
-            background: rgba(22, 32, 51, 0.75);
+            background: rgba(255, 255, 255, 0.8);
             backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.5);
             border-radius: 24px;
             text-align: center;
             padding: 50px 35px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 15px 35px -5px rgba(15, 23, 42, 0.05), 
+                        0 10px 20px -10px rgba(15, 23, 42, 0.03);
             transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
 
         .card:hover {
             transform: translateY(-12px);
-            border-color: rgba(56, 189, 248, 0.4);
-            /* Siyah Temada Harika Duracak Parlama Glow Efekti */
-            box-shadow: 0 30px 50px rgba(26, 115, 232, 0.25), 
-                        0 0 25px 4px rgba(56, 189, 248, 0.2);
+            background: #ffffff;
+            border-color: rgba(56, 189, 248, 0.5);
+            /* Premium Parlama Glow Efekti */
+            box-shadow: 0 25px 50px -12px rgba(26, 115, 232, 0.2), 
+                        0 0 25px 4px rgba(56, 189, 248, 0.15);
         }
 
         /* SVG İkon Alanı Tasarımı */
@@ -186,9 +188,9 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: rgba(255, 255, 255, 0.02);
+            background: #f1f5f9;
             border-radius: 50%;
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(26, 115, 232, 0.1);
             transition: all 0.4s ease;
         }
 
@@ -196,29 +198,28 @@
             background: rgba(56, 189, 248, 0.15);
             border-color: #38bdf8;
             transform: scale(1.1) rotate(4deg);
-            box-shadow: 0 10px 20px rgba(56, 189, 248, 0.15);
         }
 
         .card-icon-svg {
             width: 45px;
             height: 45px;
-            fill: #38bdf8; /* Koyu temaya tam uyan parlayan açık mavi */
+            fill: #1a73e8; 
             transition: fill 0.4s ease;
         }
 
         .card:hover .card-icon-svg {
-            fill: #ffffff;
+            fill: #1e3a8a;
         }
 
         .card h3 {
-            color: white;
+            color: #0f172a;
             margin-bottom: 15px;
             font-size: 1.5rem;
             font-weight: 700;
         }
 
         .card p {
-            color: #94a3b8;
+            color: #64748b;
             font-size: 0.95rem;
             margin-bottom: 35px;
             min-height: 50px;
@@ -240,34 +241,40 @@
         }
 
         .btn:hover {
-            background: linear-gradient(135deg, #38bdf8, #1a73e8);
-            box-shadow: 0 6px 20px rgba(56, 189, 248, 0.4);
+            background: linear-gradient(135deg, #1e40af, #0f172a);
+            box-shadow: 0 6px 20px rgba(30, 58, 138, 0.4);
             transform: translateY(-2px);
         }
 
-        /* GÜNCELLENDİ: Alt İletişim Davet Alanı da Cam Efektine Geçti */
+        /* GÜNCELLENDİ: Alt İletişim Davet Alanı da Yeni Platin-Cam Uyuyor */
         .activities-section {
-            background: rgba(22, 32, 51, 0.75);
+            background: rgba(255, 255, 255, 0.8);
             backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.5);
             max-width: 950px;
             margin: 40px auto 100px;
             text-align: center;
             padding: 60px 40px;
             border-radius: 24px;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 20px 40px -15px rgba(15, 23, 42, 0.05);
             animation: cardListUp 1.2s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
 
+        .activities-section:hover {
+            background: #ffffff;
+            border-color: rgba(56, 189, 248, 0.3);
+            box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.08);
+        }
+
         .activities-section h2 {
-            color: white;
+            color: #0f172a;
             font-size: 2.3rem;
             margin-bottom: 20px;
             font-weight: 700;
         }
 
         .activities-section p {
-            color: #94a3b8;
+            color: #64748b;
             font-size: 1.05rem;
             margin-bottom: 35px;
             max-width: 720px;
@@ -284,11 +291,11 @@
 
         /* Modern Alt İletişim Bölümü (Footer) */
         .main-footer {
-            background: #090d16;
-            color: #64748b;
+            background: linear-gradient(135deg, #0f172a, #111827);
+            color: #94a3b8;
             padding: 40px 5%;
             text-align: center;
-            border-top: 1px solid rgba(255, 255, 255, 0.02);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .footer-content {
@@ -324,7 +331,7 @@
             font-size: 0.95rem;
             font-weight: 500;
             padding: 8px 16px;
-            background: rgba(255, 255, 255, 0.02);
+            background: rgba(255, 255, 255, 0.03);
             border-radius: 30px;
             border: 1px solid rgba(255, 255, 255, 0.05);
             transition: all 0.3s ease;
@@ -346,12 +353,12 @@
 
         .footer-copy {
             font-size: 0.85rem;
-            color: #475569;
+            color: #64748b;
             margin-top: 10px;
         }
 
         /* Tüm Animasyon Tanımlamaları */
-        @keyframes siberFlow {
+        @keyframes modernFlow {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
@@ -405,14 +412,14 @@
         </ul>
     </nav>
 
-    <!-- Yenilenen Derin Gece Mavisi Akışlı Banner Alanı -->
+    <!-- Yenilenen Lüks Lacivert-Gece Mavisi Akışlı Banner -->
     <header class="hero">
         <div class="hero-content">
             <h1>Lüleburgaz Anadolu Lisesi Çalıştayı Sizleri Bekliyor!</h1>
         </div>
     </header>
 
-    <!-- İKİLİ KART ALANI (Cam Efektli & Koyu Tema Uyumlu) -->
+    <!-- İKİLİ KART ALANI (Beyaz Cam Efektli) -->
     <main class="main-content">
         
         <!-- Kart 1: Çalıştay Bilgileri -->
@@ -441,7 +448,7 @@
 
     </main>
 
-    <!-- ORTA KISIM: İLETİŞİM DAVETİ (Cam Efektli) -->
+    <!-- ORTA KISIM: İLETİŞİM DAVETİ (Beyaz Cam Efektli) -->
     <section class="activities-section">
         <h2>Bizimle İletişime Geçin</h2>
         <p>Çalıştay kayıtları, sponsorluk anlaşmaları veya aklınıza takılan tüm sorular için ekibimize anında ulaşabilirsiniz. Sizi bilgilendirmek için sabırsızlanıyoruz!</p>
