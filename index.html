@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lal Çalıştay</title>
+    <!-- Tarayıcı Sekme Logosu (Favicon) -->
+    <link rel="icon" type="image/png" href="lal.png">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         /* Genel Sayfa Ayarları */
@@ -24,11 +26,11 @@
             line-height: 1.6;
         }
 
-        /* Üst Menü Barı (Navbar) - Menü En Sağa Alındı */
+        /* Üst Menü Barı (Navbar) */
         .navbar {
             background: linear-gradient(135deg, #0f172a, #1e3a8a);
             color: white;
-            padding: 18px 5%;
+            padding: 15px 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -38,21 +40,41 @@
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.15);
         }
 
+        /* Logo ve Başlık Alanı Konteyneri */
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none; /* Link çizgisini kaldırır */
+            cursor: pointer;
+        }
+
+        .navbar-logo-img {
+            width: 38px;
+            height: 38px;
+            object-fit: contain;
+            filter: drop-shadow(0 2px 8px rgba(56, 189, 248, 0.3));
+        }
+
+        /* Animasyonlu Canlı Renk Geçişli Yazı */
         .logo {
             font-weight: 700;
             font-size: 1.3rem;
             letter-spacing: 1px;
             text-transform: uppercase;
-            background: linear-gradient(to right, #ffffff, #38bdf8);
+            background: linear-gradient(to right, #ffffff, #38bdf8, #1a73e8, #ffffff);
+            background-size: 300% auto;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            animation: textShine 7s linear infinite;
         }
 
+        /* Menü Link Grubu */
         .nav-links {
             list-style: none;
             display: flex;
             gap: 25px;
-            margin-left: auto; /* Menüyü tamamen sağa iten kısım */
+            margin-left: auto;
         }
 
         .nav-links a {
@@ -314,7 +336,12 @@
             margin-top: 10px;
         }
 
-        /* Animasyon Tanımlamaları */
+        /* Tüm Animasyon Tanımlamaları */
+        @keyframes textShine {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 300% 50%; }
+        }
+
         @keyframes rotateLoop {
             0% { transform: rotate(0deg) scale(1); }
             50% { transform: rotate(180deg) scale(1.1); }
@@ -345,12 +372,15 @@
 </head>
 <body>
 
-    <!-- ÜST MENÜ BARINIZ (Güncellendi ve Sağa yaslandı) -->
+    <!-- ÜST MENÜ BARINIZ (Tıklanabilir Logo ve Canlı Renk Animasyonu Eklendi) -->
     <nav class="navbar">
-        <div class="logo">Lal Çalıştay</div>
+        <a href="index.html" class="logo-container">
+            <img src="lal.png" alt="Lal Logo" class="navbar-logo-img">
+            <div class="logo">Lal Çalıştay</div>
+        </a>
         <ul class="nav-links">
             <li><a href="index.html">Ana Sayfa</a></li>
-            <li><a href="iletisim.html">İletişim</a></li> <!-- Etkinlikler, İletişim yapıldı ve iletisim.html bağlandı -->
+            <li><a href="iletisim.html">İletişim</a></li> 
             <li><a href="galeri.html">Galeri</a></li>
             <li><a href="calistay-nedir.html">Çalıştay Nedir?</a></li>
         </ul>
@@ -384,7 +414,7 @@
 
     </main>
 
-    <!-- ORTA KISIM: İLETİŞİM DAVETİ (iletisim.html bağlandı) -->
+    <!-- ORTA KISIM: İLETİŞİM DAVETİ -->
     <section class="activities-section">
         <h2>Bizimle İletişime Geçin</h2>
         <p>Çalıştay kayıtları, sponsorluk anlaşmaları veya aklınıza takılan tüm sorular için ekibimize anında ulaşabilirsiniz. Sizi bilgilendirmek için sabırsızlanıyoruz!</p>
