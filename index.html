@@ -52,7 +52,7 @@
             list-style: none;
             display: flex;
             gap: 25px;
-            margin-left: auto; /* Menüyü tamamen sağa iten sihirli dokunuş */
+            margin-left: auto; /* Menüyü tamamen sağa iten kısım */
         }
 
         .nav-links a {
@@ -135,7 +135,7 @@
         /* Kartlar Bölümü */
         .main-content {
             max-width: 1200px;
-            margin: -50px auto 80px;
+            margin: -50px auto 60px;
             position: relative;
             z-index: 10;
             padding: 0 20px;
@@ -150,8 +150,7 @@
             text-align: center;
             padding: 45px 35px;
             box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.08), 
-                        0 8px 16px -6px rgba(15, 23, 42, 0.04),
-                        inset 0 -4px 0px rgba(30, 58, 138, 0.04);
+                        0 8px 16px -6px rgba(15, 23, 42, 0.04);
             border: 1px solid rgba(255, 255, 255, 0.8);
             transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
@@ -208,15 +207,15 @@
 
         .btn:hover {
             background: linear-gradient(135deg, #1e40af, #0f172a);
-            box-shadow: 0 6px 20px rgba(30, 58, 138, 0.4), 0 0 10px rgba(56, 189, 248, 0.2);
+            box-shadow: 0 6px 20px rgba(30, 58, 138, 0.4);
             transform: translateY(-2px);
         }
 
-        /* Alt Kısım: İletişim Bölümü */
+        /* Alt Kısım: İletişim Davet Alanı */
         .activities-section {
             background-color: #ffffff;
             max-width: 950px;
-            margin: 40px auto 100px;
+            margin: 20px auto 80px;
             text-align: center;
             padding: 60px 40px;
             border-radius: 20px;
@@ -244,8 +243,75 @@
             width: auto;
             padding: 14px 60px;
             font-size: 1rem;
-            /* Sürekli dönen nabız animasyonu eklendi */
             animation: pulseBtn 2s infinite ease-in-out;
+        }
+
+        /* Modern Alt İletişim Bölümü (Footer) */
+        .main-footer {
+            background: linear-gradient(135deg, #0f172a, #111827);
+            color: #94a3b8;
+            padding: 40px 5%;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .footer-logo {
+            font-weight: 700;
+            color: white;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .footer-socials {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #cbd5e1;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .social-link img {
+            width: 20px;
+            height: 20px;
+            object-fit: contain;
+        }
+
+        .social-link:hover {
+            color: white;
+            background: rgba(56, 189, 248, 0.1);
+            border-color: rgba(56, 189, 248, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(56, 189, 248, 0.1);
+        }
+
+        .footer-copy {
+            font-size: 0.85rem;
+            color: #64748b;
+            margin-top: 10px;
         }
 
         /* Animasyon Tanımlamaları */
@@ -260,72 +326,47 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Buton İçin Yumuşak Nabız (Pulse) Animasyonu */
         @keyframes pulseBtn {
-            0% {
-                transform: scale(1);
-                box-shadow: 0 4px 12px rgba(26, 115, 232, 0.25);
-            }
-            50% {
-                transform: scale(1.04);
-                box-shadow: 0 10px 25px rgba(26, 115, 232, 0.4), 0 0 15px rgba(56, 189, 248, 0.3);
-            }
-            100% {
-                transform: scale(1);
-                box-shadow: 0 4px 12px rgba(26, 115, 232, 0.25);
-            }
+            0% { transform: scale(1); box-shadow: 0 4px 12px rgba(26, 115, 232, 0.25); }
+            50% { transform: scale(1.04); box-shadow: 0 10px 25px rgba(26, 115, 232, 0.4), 0 0 15px rgba(56, 189, 248, 0.3); }
+            100% { transform: scale(1); box-shadow: 0 4px 12px rgba(26, 115, 232, 0.25); }
         }
 
-        /* Mobil Cihazlar İçin Uyumluluk (Responsive) */
+        /* Mobil Cihazlar İçin Uyumluluk */
         @media (max-width: 768px) {
-            .navbar {
-                flex-direction: column;
-                gap: 15px;
-                padding: 20px;
-            }
-            .nav-links {
-                gap: 15px;
-                flex-wrap: wrap;
-                justify-content: center;
-                margin-left: 0; /* Mobilde ortalansın diye resetledik */
-            }
-            .hero {
-                height: 380px;
-            }
-            .hero h1 {
-                font-size: 2rem;
-            }
-            .main-content {
-                margin: -30px auto 40px;
-                gap: 25px;
-            }
-            .activities-section {
-                margin: 20px;
-                padding: 40px 20px;
-            }
+            .navbar { flex-direction: column; gap: 15px; padding: 20px; }
+            .nav-links { gap: 15px; flex-wrap: wrap; justify-content: center; margin-left: 0; }
+            .hero h1 { font-size: 2rem; }
+            .main-content { margin: -30px auto 40px; gap: 25px; }
+            .activities-section { margin: 20px; padding: 40px 20px; }
+            .footer-socials { gap: 15px; }
         }
     </style>
 </head>
 <body>
 
+    <!-- ÜST MENÜ BARINIZ (Güncellendi ve Sağa yaslandı) -->
     <nav class="navbar">
         <div class="logo">Lal Çalıştay</div>
         <ul class="nav-links">
             <li><a href="index.html">Ana Sayfa</a></li>
-            <li><a href="etkinlikler.html">Etkinlikler</a></li>
+            <li><a href="iletisim.html">İletişim</a></li> <!-- Etkinlikler, İletişim yapıldı ve iletisim.html bağlandı -->
             <li><a href="galeri.html">Galeri</a></li>
             <li><a href="calistay-nedir.html">Çalıştay Nedir?</a></li>
         </ul>
     </nav>
 
+    <!-- Animasyonlu Banner Alanı -->
     <header class="hero">
         <div class="hero-content">
             <h1>Lüleburgaz Anadolu Lisesi Çalıştayı Sizleri Bekliyor!</h1>
         </div>
     </header>
 
+    <!-- İKİLİ KART ALANI -->
     <main class="main-content">
         
+        <!-- Kart 1: Çalıştay Bilgileri -->
         <div class="card">
             <img src="https://cdn-icons-png.flaticon.com/512/2666/2666505.png" alt="Çalıştay Bilgileri" class="card-icon">
             <h3>Çalıştay Bilgileri</h3>
@@ -333,6 +374,7 @@
             <a href="calistay-nedir.html" class="btn">Sayfaya Git</a>
         </div>
 
+        <!-- Kart 2: Galeri -->
         <div class="card">
             <img src="https://cdn-icons-png.flaticon.com/512/3342/3342137.png" alt="Galeri" class="card-icon">
             <h3>Galeri</h3>
@@ -342,11 +384,43 @@
 
     </main>
 
+    <!-- ORTA KISIM: İLETİŞİM DAVETİ (iletisim.html bağlandı) -->
     <section class="activities-section">
         <h2>Bizimle İletişime Geçin</h2>
         <p>Çalıştay kayıtları, sponsorluk anlaşmaları veya aklınıza takılan tüm sorular için ekibimize anında ulaşabilirsiniz. Sizi bilgilendirmek için sabırsızlanıyoruz!</p>
-        <a href="mailto:iletisim@lalcalistay.net" class="btn">İletişime Geç</a> 
-        </section>
+        <a href="iletisim.html" class="btn">İletişime Geç</a>
+    </section>
+
+    <!-- FOOTER BÖLÜMÜ -->
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="footer-logo">Lüleburgaz Anadolu Lisesi Çalıştayı</div>
+            
+            <div class="footer-socials">
+                <!-- Instagram -->
+                <a href="https://www.instagram.com/lalcalistay" target="_blank" class="social-link">
+                    <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram">
+                    <span>@lalcalistay</span>
+                </a>
+                
+                <!-- TikTok -->
+                <a href="https://www.tiktok.com/@lalcalistay" target="_blank" class="social-link">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" alt="TikTok">
+                    <span>@lalcalistay</span>
+                </a>
+                
+                <!-- Gmail -->
+                <a href="mailto:lalcalistay@gmail.com" class="social-link">
+                    <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Gmail">
+                    <span>lalcalistay@gmail.com</span>
+                </a>
+            </div>
+
+            <div class="footer-copy">
+                &copy; 2026 Lal Çalıştay. Tüm Hakları Saklıdır.
+            </div>
+        </div>
+    </footer>
 
 </body>
 </html>
