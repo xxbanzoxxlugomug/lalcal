@@ -1,1 +1,461 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Çalıştay Nedir? - Lal Çalıştay</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Genel Sayfa Ayarları */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
 
+        body {
+            background-color: #f1f5f9;
+            color: #1e293b;
+            line-height: 1.6;
+        }
+
+        /* Üst Menü Barı (Navbar) */
+        .navbar {
+            background: linear-gradient(135deg, #0f172a, #1e3a8a);
+            color: white;
+            padding: 18px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.3rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            background: linear-gradient(to right, #ffffff, #38bdf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+            margin-left: auto;
+        }
+
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            position: relative;
+            padding: 5px 0;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            transform: scaleX(0);
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #38bdf8;
+            transform-origin: bottom right;
+            transition: transform 0.25s ease-out;
+        }
+
+        .nav-links a:hover::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+
+        .nav-links a:hover, .nav-links .active {
+            color: #fff;
+        }
+
+        .nav-links .active::after {
+            transform: scaleX(1);
+        }
+
+        /* Sayfa Başlığı Alanı (Header Bölümü) */
+        .page-header {
+            background: linear-gradient(135deg, #0f172a, #1e3a8a);
+            color: white;
+            text-align: center;
+            padding: 60px 20px;
+            box-shadow: inset 0 -10px 20px rgba(0,0,0,0.1);
+        }
+
+        .page-header h1 {
+            font-size: 2.3rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            margin-bottom: 10px;
+        }
+
+        .page-header p {
+            color: #94a3b8;
+            font-size: 1rem;
+        }
+
+        /* Ana İçerik Konteyneri */
+        .container {
+            max-width: 1000px;
+            margin: 50px auto 100px;
+            padding: 0 20px;
+        }
+
+        /* Bölüm 1: Çalıştay Nedir? Blok Tasarımı */
+        .intro-box {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.05);
+            margin-bottom: 50px;
+            border-left: 6px solid #1a73e8;
+        }
+
+        .intro-box h2 {
+            color: #0f172a;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .intro-box h2 img {
+            width: 32px;
+            height: 32px;
+        }
+
+        .intro-box p {
+            color: #475569;
+            font-size: 1.05rem;
+            margin-bottom: 15px;
+        }
+
+        .highlight-text {
+            background-color: #f0fdf4;
+            border: 1px dashed #bbf7d0;
+            padding: 15px 20px;
+            border-radius: 8px;
+            color: #166534;
+            font-weight: 500;
+            margin-top: 20px;
+        }
+
+        /* Bölüm 2: Çalıştayın İşleyişi (Zaman Tüneli / Kartlı Düzen) */
+        .flow-section-title {
+            text-align: center;
+            color: #0f172a;
+            font-size: 2rem;
+            margin-bottom: 40px;
+            font-weight: 700;
+            position: relative;
+        }
+
+        .flow-section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background-color: #1a73e8;
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        .flow-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .flow-card {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            border-top: 4px solid #1e3a8a;
+            position: relative;
+        }
+
+        .flow-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px -10px rgba(26, 115, 232, 0.2);
+            border-top-color: #38bdf8;
+        }
+
+        .flow-num {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #f1f5f9;
+            user-select: none;
+            line-height: 1;
+        }
+
+        .flow-card h3 {
+            color: #0f172a;
+            font-size: 1.25rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+            padding-right: 30px;
+        }
+
+        .flow-card p {
+            color: #64748b;
+            font-size: 0.95rem;
+        }
+
+        /* Sonuç Değerlendirme Bloğu */
+        .summary-box {
+            background: linear-gradient(135deg, #1e3a8a, #0f172a);
+            color: #e2e8f0;
+            border-radius: 16px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 15px 35px -10px rgba(15, 23, 42, 0.3);
+        }
+
+        .summary-box h3 {
+            color: #ffffff;
+            font-size: 1.6rem;
+            margin-bottom: 15px;
+        }
+
+        .summary-box p {
+            font-size: 1.05rem;
+            max-width: 800px;
+            margin: 0 auto;
+            color: #cbd5e1;
+        }
+
+        /* Modern Alt İletişim Bölümü (Footer) */
+        .main-footer {
+            background: linear-gradient(135deg, #0f172a, #111827);
+            color: #94a3b8;
+            padding: 40px 5%;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .footer-logo {
+            font-weight: 700;
+            color: white;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .footer-socials {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #cbd5e1;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .social-link img {
+            width: 20px;
+            height: 20px;
+            object-fit: contain;
+        }
+
+        .social-link:hover {
+            color: white;
+            background: rgba(56, 189, 248, 0.1);
+            border-color: rgba(56, 189, 248, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(56, 189, 248, 0.1);
+        }
+
+        .footer-copy {
+            font-size: 0.85rem;
+            color: #64748b;
+            margin-top: 10px;
+        }
+
+        /* Mobil Cihazlar İçin Uyumluluk */
+        @media (max-width: 768px) {
+            .navbar { flex-direction: column; gap: 15px; padding: 20px; }
+            .nav-links { gap: 15px; flex-wrap: wrap; justify-content: center; margin-left: 0; }
+            .page-header h1 { font-size: 1.8rem; }
+            .intro-box { padding: 25px; }
+            .flow-grid { grid-template-columns: 1fr; }
+            .summary-box { padding: 35px 20px; }
+            .footer-socials { gap: 15px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ÜST MENÜ BARINIZ -->
+    <nav class="navbar">
+        <div class="logo">Lal Çalıştay</div>
+        <ul class="nav-links">
+            <li><a href="index.html">Ana Sayfa</a></li>
+            <li><a href="iletisim.html">İletişim</a></li>
+            <li><a href="galeri.html">Galeri</a></li>
+            <li><a href="calistay-nedir.html" class="active">Çalıştay Nedir?</a></li>
+        </ul>
+    </nav>
+
+    <!-- SAYFA BAŞLIĞI ALANI -->
+    <header class="page-header">
+        <h1>Çalıştay Nedir ve İşleyişi Nasıldır?</h1>
+        <p>Geleceğin fikirleri bu platformda şekilleniyor.</p>
+    </header>
+
+    <!-- ANA İÇERİK -->
+    <div class="container">
+        
+        <!-- BÖLÜM 1: ÇALISTAY NEDİR -->
+        <div class="intro-box">
+            <h2>
+                <img src="https://cdn-icons-png.flaticon.com/512/3208/3208742.png" alt="Çalıştay">
+                Çalıştay Nedir?
+            </h2>
+            <p>Çalıştay, birçok katılımcının bir araya gelerek bazı belirtilmiş konular hakkında birbirleri ile görüş alışverişinde bulunup çözümler getirmeye çalıştığı eğitsel bir etkinliktir.</p>
+            <p>Kişiler bir sınıftaymışçasına tartışmalara katılır ve söz hakkı alır. Komite başkanları ise bir öğretmen gibi düşünülebilir. Komite konuları hakkında ışık tutar ve komiteyi yönlendirir!</p>
+            <p>Genellikle lise ve üniversite çağındaki öğrenciler tarafından düzenlenir ve yine bu yaş grubundan katılımcılara hitap eden, katılımcıların bilim, toplum, tarih, sanat ve benzeri alanlarda fikir alışverişi yapabildiği dinamik bir platformdur.</p>
+        </div>
+
+        <!-- BÖLÜM 2: ÇALIŞTAYIN İŞLEYİŞİ -->
+        <h2 class="flow-section-title">Çalıştayın İşleyiş Süreci</h2>
+        
+        <div class="flow-grid">
+            
+            <!-- Kart 1 -->
+            <div class="flow-card">
+                <div class="flow-num">01</div>
+                <h3>Başvuru ve Motivasyon</h3>
+                <p>Başvuru sürecinde adaylar, internet sitesi üzerinden gerekli bilgileri doldurur ve bir motivasyon mektubu yazar. Bu mektupta; çalıştaya neden katılmak istedikleri, seçtikleri komiteye olan ilgileri ve hedefleri kısaca ifade edilir.</p>
+            </div>
+
+            <!-- Kart 2 -->
+            <div class="flow-card">
+                <div class="flow-num">02</div>
+                <h3>Komitelerin Belirlenmesi</h3>
+                <p>Komiteler; tarih, biyoloji, edebiyat, felsefe gibi farklı alanlara ayrılarak katılımcıların tam olarak kendi ilgi duydukları bilimsel ve sosyal konularda yer almalarını sağlar.</p>
+            </div>
+
+            <!-- Kart 3 -->
+            <div class="flow-card">
+                <div class="flow-num">03</div>
+                <h3>Çalışma Rehberi</h3>
+                <p>Başvurusu kabul edilen katılımcılara, oturum öncesinde komitelerine ait özel bir çalışma rehberi gönderilir. Böylece çalıştay boyunca ele alınacak konular hakkında ön bilgi edinmeleri sağlanır.</p>
+            </div>
+
+            <!-- Kart 4 -->
+            <div class="flow-card">
+                <div class="flow-num">04</div>
+                <h3>İlk Gün ve Seminerler</h3>
+                <p>Çalıştay günü genellikle sabah saatlerinde başlar. İlk oturumun süresi değişiklik gösterebilir; bazı durumlarda akademisyenlerin katılımıyla konferans salonunda ufak seminerler düzenlenir.</p>
+            </div>
+
+            <!-- Kart 5 -->
+            <div class="flow-card">
+                <div class="flow-num">05</div>
+                <h3>Tanışma ve Tartışmalar</h3>
+                <p>Oturumlar "fun session" adı verilen kaynaşma etkinlikleriyle başlayabilir veya akademisyen eşliğinde ilerleyebilir. Gün boyunca belirlenen konular üzerine tartışmalar yapılır ve katılımcılar fikirlerini özgürce ifade eder.</p>
+            </div>
+
+            <!-- Kart 6 -->
+            <div class="flow-card">
+                <div class="flow-num">06</div>
+                <h3>Molar ve Sosyalleşme</h3>
+                <p>Oturumların arasında “coffee break” adı verilen kısa molalar verilir. Bu molalarda katılımcılar dinlenir, ikramlardan yararlanır ve diğer komitelerdeki insanlarla sosyalleşme fırsatı bulur.</p>
+            </div>
+
+            <!-- Kart 7 -->
+            <div class="flow-card">
+                <div class="flow-num">07</div>
+                <h3>Bildirgeler ve Sunum</h3>
+                <p>Çalıştayın sonunda, komitelerde ele alınan konular doğrultusunda resmi bildirgeler hazırlanır ve tüm katılımcıların önünde konferans salonunda jüriye/dinleyicilere sunulur.</p>
+            </div>
+
+            <!-- Kart 8 -->
+            <div class="flow-card">
+                <div class="flow-num">08</div>
+                <h3>Sertifika ve Ödüller</h3>
+                <p>Kapanış töreninde tüm katılımcılara emekleri için resmi bir katılım sertifikası verilir; ayrıca komite içinde en aktif performans gösteren katılımcılar ödüllendirilir.</p>
+            </div>
+
+        </div>
+
+        <!-- BÖLÜM 3: ÖZET DEĞERLENDİRME -->
+        <div class="summary-box">
+            <h3>Unutulmaz Bir Deneyim</h3>
+            <p>Çalıştaylar; sadece akademik bilgi edinmenin yanı sıra sosyalleşme, yeni bakış açıları keşfetme, topluluk önünde konuşma becerilerini geliştirme ve ömür boyu sürecek kalıcı dostluklar kurma açısından benzersiz bir lise deneyimi sunar.</p>
+        </div>
+
+    </div>
+
+    <!-- FOOTER BÖLÜMÜ (Ana sayfa ile birebir aynı) -->
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="footer-logo">Lüleburgaz Anadolu Lisesi Çalıştayı</div>
+            
+            <div class="footer-socials">
+                <a href="https://www.instagram.com/lalcalistay" target="_blank" class="social-link">
+                    <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram">
+                    <span>@lalcalistay</span>
+                </a>
+                <a href="https://www.tiktok.com/@lalcalistay" target="_blank" class="social-link">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" alt="TikTok">
+                    <span>@lalcalistay</span>
+                </a>
+                <a href="mailto:lalcalistay@gmail.com" class="social-link">
+                    <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Gmail">
+                    <span>lalcalistay@gmail.com</span>
+                </a>
+            </div>
+
+            <div class="footer-copy">
+                &copy; 2026 Lal Çalıştay. Tüm Hakları Saklıdır.
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
