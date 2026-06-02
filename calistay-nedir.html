@@ -289,18 +289,18 @@
             color: #cbd5e1;
         }
 
-        /* STITCH MASCOT (FIXED LEFT) */
+        /* STITCH MASCOT (GÜNCELLENDİ) */
         .stitch-container {
-            position: fixed;
-            top: 50%;
+            position: absolute;
+            top: 0;
             left: 0;
-            transform: translateY(-50%);
-            z-index: 2000;
+            z-index: 9995;
             display: flex;
             align-items: center;
             text-decoration: none;
             cursor: pointer;
             padding-left: 5px;
+            will-change: transform;
         }
 
         .stitch-bubble {
@@ -312,12 +312,11 @@
             font-weight: 600;
             width: 220px;
             text-align: center;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
             border: 2px solid #1a73e8;
             position: relative;
             margin-left: 15px;
-            animation: bubbleFloat 4s ease-in-out infinite;
-            transition: border-color 0.3s ease;
+            animation: bubbleSlideFloat 4s ease-in-out infinite, bubbleShake 2.5s cubic-bezier(.36,.07,.19,.97) infinite;
         }
 
         .stitch-bubble::after {
@@ -329,8 +328,6 @@
             border-width: 10px 10px 10px 0;
             border-style: solid;
             border-color: transparent #ffffff transparent transparent;
-            display: block;
-            width: 0;
         }
 
         .stitch-bubble::before {
@@ -342,8 +339,6 @@
             border-width: 11px 11px 11px 0;
             border-style: solid;
             border-color: transparent #1a73e8 transparent transparent;
-            display: block;
-            width: 0;
             z-index: -1;
         }
 
@@ -353,7 +348,7 @@
             border-radius: 50%;
             object-fit: cover;
             border: 3px solid #1a73e8;
-            box-shadow: 5px 5px 20px rgba(0,0,0,0.2);
+            box-shadow: 5px 5px 20px rgba(0,0,0,0.15);
             background-color: #ffffff;
             animation: stitchShake 2.5s cubic-bezier(.36,.07,.19,.97) infinite;
             transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -445,7 +440,7 @@
             100% { background-position: 300% 50%; }
         }
 
-        @keyframes bubbleFloat {
+        @keyframes bubbleSlideFloat {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-4px); }
         }
@@ -456,6 +451,12 @@
             84%, 90%, 96% { transform: rotate(5deg); }
             88% { transform: rotate(-3deg); }
             92% { transform: rotate(3deg); }
+        }
+
+        @keyframes bubbleShake {
+            0%, 80%, 100% { transform: translateX(0); }
+            82%, 86%, 94% { transform: translateX(4px); }
+            84%, 90%, 96% { transform: translateX(-4px); }
         }
 
         /* RESPONSIVE DESIGN */
@@ -567,7 +568,7 @@
 
     </div>
 
-    <a href="iletisim.html" class="stitch-container">
+    <a href="iletisim.html" id="smoothStitch" class="stitch-container">
         <img src="stitch.jpg" alt="Stitch Maskot" class="stitch-img">
         <div class="stitch-bubble">Başvurularımız başladı! Hemen sen de gel başvur. 🚀</div>
     </a>
@@ -604,6 +605,22 @@
                 document.body.classList.add('page-ready');
             }, 100);
         });
+
+        // GÜNCELLENDİ: Kaydırmaya Duyarlı Gecikmeli Takip Motoru
+        const stitch = document.getElementById('smoothStitch');
+        
+        let currentY = window.scrollY + (window.innerHeight / 2); 
+        let targetY = currentY; 
+        const speed = 0.07; 
+
+        function smoothScrollStitch() {
+            targetY = window.scrollY + (window.innerHeight / 2);
+            currentY += (targetY - currentY) * speed;
+            stitch.style.transform = `translateY(${currentY - (stitch.offsetHeight / 2)}px)`;
+            requestAnimationFrame(smoothScrollStitch);
+        }
+        
+        requestAnimationFrame(smoothScrollStitch);
 
         document.querySelectorAll('.nav-links a, .logo-container, .btn, .stitch-container').forEach(link => {
             link.addEventListener('click', function(e) {
