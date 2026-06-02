@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Komitelerimiz - Lal Çalıştay</title>
     <!-- Tarayıcı Sekme Logosu (Favicon) -->
-    <link rel="icon" type="image/png" href="lal.png">
+    <link class="favicon" rel="icon" type="image/png" href="lal.png">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         /* Genel Sayfa Ayarları */
@@ -309,18 +309,16 @@
             transform: translateY(-1px);
         }
 
-        /* Süzülerek Takip Eden Mutlak Yerleşimli Maskot Alanı */
+        /* FIXED (SABİT) YAPILAN ATALETLİ STITCH MASKOTU ALANI */
         .stitch-container {
-            position: absolute; 
-            top: 50%;
-            left: 0;
+            position: fixed; 
+            top: 0; /* JS Motoru Y eksenini sıfırdan hesaplayarak pürüzsüz takip ettirecek */
+            left: 20px;
             z-index: 2000;
             display: flex;
             align-items: center;
             text-decoration: none;
             cursor: pointer;
-            padding-left: 5px;
-            transition: border-color 0.3s ease; 
             will-change: transform; 
         }
 
@@ -337,12 +335,12 @@
             border: 2px solid #1a73e8;
             position: relative;
             margin-left: 15px; 
-            /* Stitch ile tam senkronize titreme animasyonu */
+            /* Stitch ile senkronize dinamik float ve shake animasyonları */
             animation: bubbleSlideFloat 4s ease-in-out infinite, bubbleShake 2.5s cubic-bezier(.36,.07,.19,.97) infinite;
             transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.3s ease;
         }
 
-        /* Ok Süsü */
+        /* Konuşma Balonu Oku */
         .stitch-bubble::after {
             content: '';
             position: absolute;
@@ -370,7 +368,6 @@
             z-index: -1;
         }
 
-        /* 2.5 Saniyede Bir Tetiklenen Titreme Animasyonu */
         .stitch-img {
             width: 85px;
             height: 85px;
@@ -498,6 +495,7 @@
             .komite-grid { grid-template-columns: 1fr; gap: 25px; }
             .komite-card { padding: 30px 20px; }
             .footer-socials { gap: 15px; }
+            .stitch-container { left: 10px; }
             .stitch-img { width: 65px; height: 65px; }
             .stitch-bubble { width: 150px; font-size: 0.7rem; margin-left: 8px; }
         }
@@ -631,7 +629,7 @@
         </div>
     </div>
 
-    <!-- SÜZÜLEREK TAKİP EDEN VE BALONUYLA BERABER TİTREYEN STITCH MASKOTU -->
+    <!-- PÜRÜZSÜZ LERP MOTORUYLA PENCEREDE YÜZEN STITCH MASKOTU -->
     <a href="iletisim.html" class="stitch-container">
         <img src="stitch.jpg" alt="Stitch Maskot" class="stitch-img">
         <div class="stitch-bubble">Başvurularımız başladı! Hemen sen de gel başvur. 🚀</div>
@@ -665,27 +663,32 @@
 
     <!-- SAYFA GEÇİŞ VE ATALETLİ SCROLL MOTORU -->
     <script>
+        // Sayfa süzülerek açılma efekti
         window.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
                 document.documentElement.classList.add('page-loaded');
                 document.body.classList.add('page-ready');
             }, 100);
             
+            // İlk açılışta Stitch yerini alsın
             updateStitchPosition();
         });
 
+        // FIXED ENTEGRASYONLU ATALETLİ TAKİP SİSTEMİ
         const stitch = document.querySelector('.stitch-container');
         let currentY = window.innerHeight / 2; 
         let targetY = window.innerHeight / 2;
-        const speed = 0.08; 
+        const speed = 0.08; // Yumuşaklık (lerp katsayısı)
 
         function updateStitchPosition() {
-            const scrollY = window.pageYOffset || document.documentElement.scrollTop;
-            targetY = scrollY + (window.innerHeight / 2);
+            // Element fixed pozisyonda olduğu için doğrudan görünür pencerenin dikey ortası hedeflenir
+            targetY = window.innerHeight / 2;
 
+            // Aradaki farkı yumuşatarak kapatan LERP algoritması
             currentY += (targetY - currentY) * speed;
 
-            stitch.style.transform = `translateY(${currentY - (window.innerHeight / 2) - 42}px)`;
+            // Maskotun tam ortalanması için kendi yüksekliğinin yarısı kadar (-42px) ofset verilir
+            stitch.style.transform = `translateY(${currentY - 42}px)`;
 
             requestAnimationFrame(updateStitchPosition);
         }
@@ -695,7 +698,7 @@
             link.addEventListener('click', function(e) {
                 const targetUrl = this.getAttribute('href');
                 
-                // .pdf uzantılı dosyaları sayfa geçiş kısıtlamasından muaf tutuyoruz
+                // .pdf uzantılı dosyaları ve özel linkleri geçiş kısıtlamasından muaf tutuyoruz
                 if (targetUrl && !targetUrl.endsWith('.pdf') && !targetUrl.startsWith('http') && !targetUrl.startsWith('mailto:') && targetUrl !== '#') {
                     e.preventDefault(); 
                     document.body.classList.remove('page-ready');
