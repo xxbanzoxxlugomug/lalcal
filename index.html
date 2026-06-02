@@ -20,11 +20,45 @@
             scroll-behavior: smooth;
         }
 
+        /* Sayfa Geçişi İçin İlk Başta Gövdeyi Gizliyoruz */
         body {
-            background-color: #f1f5f9; /* İsteğin üzerine: Çok karanlık hava bitti, asil grimsi/platin arka plan geldi */
+            background-color: #f1f5f9; /* İstediğin asil grimsi/platin arka plan */
             color: #1e293b;
             line-height: 1.6;
             overflow-x: hidden;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
+        }
+
+        /* Sayfa Hazır Olduğunda Süzülerek Açılma Sınıfı */
+        body.page-ready {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Sayfadan Çıkarken Süzülerek Kapanma Sınıfı */
+        body.page-exit {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+
+        /* Sayfa Geçiş Perdesi */
+        .page-transition-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #0f172a; /* Geçiş esnasındaki asil siber ton */
+            z-index: 9999;
+            opacity: 1;
+            pointer-events: none;
+            transition: opacity 0.4s ease-in-out;
+        }
+
+        html.page-loaded .page-transition-overlay {
+            opacity: 0;
         }
 
         /* Üst Menü Barı (Navbar) */
@@ -110,7 +144,7 @@
             color: #fff;
         }
 
-        /* GÜNCELLENDİ: Kasveti Kırılmış, Asil Lacivert ve Gece Mavisi Akışlı Banner (Hero Section) */
+        /* Lüks Gece Mavisi Akışlı Banner (Hero Section) */
         .hero {
             position: relative;
             height: 450px;
@@ -129,7 +163,6 @@
         .hero-content {
             position: relative;
             z-index: 5;
-            animation: fadeInUp 1s ease-in-out;
         }
 
         /* Tatlı ve Hafif Parlayan Glow Efektli Başlık */
@@ -145,7 +178,7 @@
             filter: drop-shadow(0 0 15px rgba(56, 189, 248, 0.5)) drop-shadow(0 4px 10px rgba(0, 0, 0, 0.5));
         }
 
-        /* Kartlar Bölümü - Aşağıdan süzülme animasyonlu */
+        /* Kartlar Bölümü */
         .main-content {
             max-width: 1200px;
             margin: -50px auto 60px;
@@ -155,10 +188,9 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 40px;
-            animation: cardListUp 1s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
 
-        /* GÜNCELLENDİ: Grimsi Arka Planda Efsane Duracak Beyaz Cam Efektli (White Glassmorphism) Kartlar */
+        /* Beyaz Cam Efektli (White Glassmorphism) Kartlar */
         .card {
             background: rgba(255, 255, 255, 0.8);
             backdrop-filter: blur(12px);
@@ -175,7 +207,6 @@
             transform: translateY(-12px);
             background: #ffffff;
             border-color: rgba(56, 189, 248, 0.5);
-            /* Premium Parlama Glow Efekti */
             box-shadow: 0 25px 50px -12px rgba(26, 115, 232, 0.2), 
                         0 0 25px 4px rgba(56, 189, 248, 0.15);
         }
@@ -246,7 +277,7 @@
             transform: translateY(-2px);
         }
 
-        /* GÜNCELLENDİ: Alt İletişim Davet Alanı da Yeni Platin-Cam Uyuyor */
+        /* Alt İletişim Davet Alanı da Yeni Platin-Cam Uyuyor */
         .activities-section {
             background: rgba(255, 255, 255, 0.8);
             backdrop-filter: blur(12px);
@@ -257,7 +288,6 @@
             padding: 60px 40px;
             border-radius: 24px;
             box-shadow: 0 20px 40px -15px rgba(15, 23, 42, 0.05);
-            animation: cardListUp 1.2s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
 
         .activities-section:hover {
@@ -369,16 +399,6 @@
             100% { background-position: 300% 50%; }
         }
 
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes cardListUp {
-            from { opacity: 0; transform: translateY(40px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
         @keyframes pulseBtn {
             0% { transform: scale(1); box-shadow: 0 4px 12px rgba(26, 115, 232, 0.25); }
             50% { transform: scale(1.04); box-shadow: 0 10px 25px rgba(26, 115, 232, 0.4), 0 0 15px rgba(56, 189, 248, 0.3); }
@@ -397,6 +417,9 @@
     </style>
 </head>
 <body>
+
+    <!-- Sayfa Geçiş Örtüsü -->
+    <div class="page-transition-overlay"></div>
 
     <!-- ÜST MENÜ BARINIZ -->
     <nav class="navbar">
@@ -419,7 +442,7 @@
         </div>
     </header>
 
-    <!-- İKİLİ KART ALANI (Beyaz Cam Efektli) -->
+    <!-- İKİLİ KART ALANI -->
     <main class="main-content">
         
         <!-- Kart 1: Çalıştay Bilgileri -->
@@ -448,7 +471,7 @@
 
     </main>
 
-    <!-- ORTA KISIM: İLETİŞİM DAVETİ (Beyaz Cam Efektli) -->
+    <!-- ORTA KISIM: İLETİŞİM DAVETİ -->
     <section class="activities-section">
         <h2>Bizimle İletişime Geçin</h2>
         <p>Çalıştay kayıtları, sponsorluk anlaşmaları veya aklınıza takılan tüm sorular için ekibimize anında ulaşabilirsiniz. Sizi bilgilendirmek için sabırsızlanıyoruz!</p>
@@ -480,6 +503,35 @@
             </div>
         </div>
     </footer>
+
+    <!-- SİHRİ GERÇEKLEŞTİREN SAYFA GEÇİŞ JAVASCRIPT KODU -->
+    <script>
+        // Sayfa açılış animasyonu yönetimi
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                document.documentElement.classList.add('page-loaded');
+                document.body.classList.add('page-ready');
+            }, 100);
+        });
+
+        // Menüdeki ve sayfa içindeki linklere tıklayınca yumuşak kapanış animasyonu
+        document.querySelectorAll('.nav-links a, .logo-container, .btn').forEach(link => {
+            link.addEventListener('click', function(e) {
+                const targetUrl = this.getAttribute('href');
+                
+                // mailto linkleri, harici linkler veya boş linkler hariç yumuşak geçişi tetikle
+                if (targetUrl && !targetUrl.startsWith('http') && !targetUrl.startsWith('mailto:') && targetUrl !== '#') {
+                    e.preventDefault(); 
+                    document.body.classList.remove('page-ready');
+                    document.body.classList.add('page-exit'); 
+                    
+                    setTimeout(() => {
+                        window.location.href = targetUrl;
+                    }, 400);
+                }
+            });
+        });
+    </script>
 
 </body>
 </html>
