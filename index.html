@@ -143,7 +143,7 @@
             color: #fff;
         }
 
-        /* Lüks Gece Mavisi Akışlı Banner (Hero Section) */
+        /* GÜNCELLENDİ: basliyoruz.png Destekli Görsel Arka Planlı Premium Banner */
         .hero {
             position: relative;
             height: 450px;
@@ -154,9 +154,10 @@
             color: white;
             padding: 20px;
             overflow: hidden;
-            background: linear-gradient(135deg, #0f172a, #1e3a8a, #1d4ed8, #1e3a8a, #0f172a);
-            background-size: 400% 400%;
-            animation: modernFlow 12s ease infinite;
+            /* basliyoruz.png dosyasını arkaya karartmalı lüks bir şekilde yerleştirdik */
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.85), rgba(30, 58, 138, 0.75)), url('basliyoruz.png') no-repeat center center;
+            background-size: cover;
+            box-shadow: inset 0 0 100px rgba(0,0,0,0.6);
         }
 
         .hero-content {
@@ -174,7 +175,7 @@
             background: linear-gradient(to bottom, #ffffff 70%, #f1f5f9);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 0 15px rgba(56, 189, 248, 0.5)) drop-shadow(0 4px 10px rgba(0, 0, 0, 0.5));
+            filter: drop-shadow(0 0 15px rgba(56, 189, 248, 0.5)) drop-shadow(0 4px 10px rgba(0, 0, 0, 0.6));
         }
 
         /* Kartlar Bölümü */
@@ -333,6 +334,7 @@
             will-change: transform; 
         }
 
+        /* GÜNCELLENDİ: Baloncuğa da 2.5 Saniyede Bir Tetiklenen Titreme (BubbleShake) Verildi */
         .stitch-bubble {
             background: #ffffff;
             color: #0f172a;
@@ -346,7 +348,9 @@
             border: 2px solid #1a73e8;
             position: relative;
             margin-left: 15px; 
-            animation: bubbleSlideFloat 4s ease-in-out infinite;
+            /* Stitch ile tam senkronize titreme animasyonu */
+            animation: bubbleSlideFloat 4s ease-in-out infinite, bubbleShake 2.5s cubic-bezier(.36,.07,.19,.97) infinite;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.3s ease;
         }
 
         /* Baloncuğun Solundaki Ok Süsü */
@@ -377,7 +381,7 @@
             z-index: -1;
         }
 
-        /* GÜNCELLENDİ: 2.5 Saniyede Bir Tetiklenen Titreme (StitchShake) Animasyonu Eklendi */
+        /* 2.5 Saniyede Bir Tetiklenen Titreme (StitchShake) Animasyonu */
         .stitch-img {
             width: 85px;
             height: 85px;
@@ -386,20 +390,20 @@
             border: 3px solid #1a73e8;
             box-shadow: 5px 5px 20px rgba(0,0,0,0.2);
             background-color: #ffffff;
-            /* 2.5 saniyede bir dönen, dikkat çekici titreme efekti */
             animation: stitchShake 2.5s cubic-bezier(.36,.07,.19,.97) infinite;
             transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        /* Hover Etkileşimi (Kullanıcı üzerine gelince titreme dursun, esneme devreye girsin) */
+        /* Hover Etkileşimi (Kullanıcı üzerine gelince titremeler dursun) */
         .stitch-container:hover .stitch-img {
-            animation-play-state: paused; /* Titremeyi durdurur */
+            animation-play-state: paused; 
             transform: scale(1.08) rotate(5deg);
             border-color: #38bdf8;
             box-shadow: 8px 8px 25px rgba(56, 189, 248, 0.4);
         }
 
         .stitch-container:hover .stitch-bubble {
+            animation-play-state: paused;
             border-color: #38bdf8;
         }
 
@@ -472,12 +476,6 @@
         }
 
         /* Tüm Animasyon Tanımlamaları */
-        @keyframes modernFlow {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
         @keyframes textShine {
             0% { background-position: 0% 50%; }
             100% { background-position: 300% 50%; }
@@ -490,24 +488,34 @@
         }
 
         @keyframes bubbleSlideFloat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-4px); }
+            0%, 100% { top: 0; }
+            50% { top: -4px; }
         }
 
-        /* YENİ: 2.5 Saniyede Bir Tetiklenen Şık Titreme Algoritması (İlk 20% zamanda titrer, kalan zamanda durur) */
+        /* Stitch Titreme Efekti */
         @keyframes stitchShake {
             0%, 80%, 100% { transform: rotate(0deg); }
-            82%, 86%, 94zm { transform: rotate(-6deg); }
-            84%, 90%, 96% { transform: rotate(6deg); }
-            88% { transform: rotate(-4deg); }
-            92% { transform: rotate(4deg); }
+            82%, 86%, 94% { transform: rotate(-5deg); }
+            84%, 90%, 96% { transform: rotate(5deg); }
+            88% { transform: rotate(-3deg); }
+            92% { transform: rotate(3deg); }
+        }
+
+        /* YENİ: Baloncuğun Stitch İle Senkronize Titreme Efekti */
+        @keyframes bubbleShake {
+            0%, 80%, 100% { transform: translateX(0); }
+            82%, 86%, 94% { transform: translateX(4px); }
+            84%, 90%, 96% { transform: translateX(-4px); }
+            88% { transform: translateX(2px); }
+            92% { transform: translateX(-2px); }
         }
 
         /* Mobil Cihazlar İçin Uyumluluk */
         @media (max-width: 768px) {
             .navbar { flex-direction: column; gap: 15px; padding: 20px; }
             .nav-links { gap: 15px; flex-wrap: wrap; justify-content: center; margin-left: 0; }
-            .hero h1 { font-size: 2rem; }
+            .hero { height: 300px; }
+            .hero h1 { font-size: 1.8rem; }
             .main-content { margin: -30px auto 40px; gap: 25px; }
             .activities-section { margin: 20px; padding: 40px 20px; }
             .footer-socials { gap: 15px; }
@@ -611,7 +619,6 @@
             updateStitchPosition();
         });
 
-        // PÜRÜZSÜZ SÜZÜLEREK TAKİP ETME MOTORU (Yumuşak Atalet)
         const stitch = document.querySelector('.stitch-container');
         let currentY = window.innerHeight / 2; 
         let targetY = window.innerHeight / 2;
@@ -623,13 +630,11 @@
 
             currentY += (targetY - currentY) * speed;
 
-            // Stitch'i dikeyde yumuşak takip ettiren asıl fonksiyon
             stitch.style.transform = `translateY(${currentY - (window.innerHeight / 2) - 42}px)`;
 
             requestAnimationFrame(updateStitchPosition);
         }
 
-        // Sayfalar arası pürüzsüz geçiş dinleyicisi
         document.querySelectorAll('.nav-links a, .logo-container, .btn, .stitch-container').forEach(link => {
             link.addEventListener('click', function(e) {
                 const targetUrl = this.getAttribute('href');
