@@ -1,12 +1,3 @@
-Kanka çok haklısın, gözden kaçan aşırı saçma bir CSS kuralı yüzünden gelmiyor: **`body` etiketindeki `transform` özelliği.**
-
-CSS kurallarına göre, bir elemente `position: fixed` versen bile, eğer onun üst kapsayıcılarından birinde (bu kodda `body` üzerinde) `transform` veya `transition` varsa, o sabit element `fixed` gibi değil `absolute` gibi davranmaya başlar. Bizim sayfa açılışındaki süzülme animasyonu (`transform: translateY(10px)`) Stitch'i sayfaya çivilemiş, bu yüzden seninle aşağı gelmiyor.
-
-Sorunu kökten çözmek için **Stitch'i `body` dışına taşımak yerine, açılış animasyonunu doğrudan `main` ve `header` elementlerine böldüm.** Böylece `body` temiz kaldı ve Stitch artık ekranın sol ortasına mühürlendi, sen kaydırdıkça tıkır tıkır seninle gelecek.
-
-İşte tamamen düzeltilmiş, mobilde canavar gibi çalışan eksiksiz kod:
-
-```html
 <!DOCTYPE html>
 <html lang="tr">
 <head>
