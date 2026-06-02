@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>İletişim & Başvuru - Lal Çalıştay</title>
+    <!-- Tarayıcı Sekme Logosu (Favicon) -->
+    <link rel="icon" type="image/png" href="lal.png">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         /* Genel Sayfa Ayarları */
@@ -25,7 +27,7 @@
         .navbar {
             background: linear-gradient(135deg, #090d16, #1e3a8a);
             color: white;
-            padding: 18px 5%;
+            padding: 15px 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -35,14 +37,33 @@
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
         }
 
+        /* Logo ve Başlık Alanı Konteyneri */
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .navbar-logo-img {
+            width: 38px;
+            height: 38px;
+            object-fit: contain;
+            filter: drop-shadow(0 2px 8px rgba(56, 189, 248, 0.3));
+        }
+
+        /* Animasyonlu Canlı Renk Geçişli Yazı */
         .logo {
             font-weight: 700;
             font-size: 1.3rem;
             letter-spacing: 1px;
             text-transform: uppercase;
-            background: linear-gradient(to right, #ffffff, #38bdf8);
+            background: linear-gradient(to right, #ffffff, #38bdf8, #1a73e8, #ffffff);
+            background-size: 300% auto;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            animation: textShine 7s linear infinite;
         }
 
         .nav-links {
@@ -323,7 +344,12 @@
             border-top: 1px solid rgba(255, 255, 255, 0.02);
         }
 
-        /* Akıcı Animasyon Tanımlamaları */
+        /* Tüm Animasyon Tanımlamaları */
+        @keyframes textShine {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 300% 50%; }
+        }
+
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(40px); }
             to { opacity: 1; transform: translateY(0); }
@@ -349,9 +375,12 @@
 </head>
 <body>
 
-    <!-- ÜST MENÜ BARINIZ -->
+    <!-- ÜST MENÜ BARINIZ (Tıklanabilir Logo ve Canlı Renk Animasyonu Eklendi) -->
     <nav class="navbar">
-        <div class="logo">Lal Çalıştay</div>
+        <a href="index.html" class="logo-container">
+            <img src="lal.png" alt="Lal Logo" class="navbar-logo-img">
+            <div class="logo">Lal Çalıştay</div>
+        </a>
         <ul class="nav-links">
             <li><a href="index.html">Ana Sayfa</a></li>
             <li><a href="iletisim.html" class="active">İletişim</a></li>
@@ -415,19 +444,19 @@
             <form onsubmit="sendMail(event)">
                 <div class="form-row">
                     
-                    <!-- Ad Soyad (İsteğine göre placeholder güncellendi) -->
+                    <!-- Ad Soyad -->
                     <div class="input-box">
                         <label for="name">Adınız ve Soyadınız</label>
                         <input type="text" id="name" class="form-input" placeholder="Adınızı yazın" required>
                     </div>
 
-                    <!-- E-Posta (İsteğine göre placeholder güncellendi) -->
+                    <!-- E-Posta -->
                     <div class="input-box">
                         <label for="email">E-Posta Adresiniz</label>
                         <input type="email" id="email" class="form-input" placeholder="email@example.com" required>
                     </div>
 
-                    <!-- Mesaj (İsteğine göre placeholder güncellendi) -->
+                    <!-- Mesaj -->
                     <div class="input-box full-width">
                         <label for="message">Mesajınız veya Motivasyon Mektubunuz</label>
                         <textarea id="message" class="form-input" placeholder="Mesajınız" required></textarea>
@@ -435,7 +464,7 @@
 
                 </div>
 
-                <!-- Gönder Butonu (İsteğine göre güncellendi) -->
+                <!-- Gönder Butonu -->
                 <button type="submit" class="action-btn">Mesajı Gönder</button>
             </form>
         </section>
