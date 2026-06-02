@@ -1,1 +1,416 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>İletişim & Başvuru - Lal Çalıştay</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Genel Sayfa Ayarları */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
 
+        body {
+            background-color: #f1f5f9;
+            color: #1e293b;
+            line-height: 1.6;
+        }
+
+        /* Üst Menü Barı (Navbar) */
+        .navbar {
+            background: linear-gradient(135deg, #0f172a, #1e3a8a);
+            color: white;
+            padding: 18px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.3rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            background: linear-gradient(to right, #ffffff, #38bdf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+            margin-left: auto;
+        }
+
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            position: relative;
+            padding: 5px 0;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            transform: scaleX(0);
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #38bdf8;
+            transform-origin: bottom right;
+            transition: transform 0.25s ease-out;
+        }
+
+        .nav-links a:hover::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+
+        .nav-links a:hover, .nav-links .active {
+            color: #fff;
+        }
+
+        .nav-links .active::after {
+            transform: scaleX(1);
+        }
+
+        /* Sayfa Başlığı Alanı */
+        .page-header {
+            background: linear-gradient(135deg, #0f172a, #1e3a8a);
+            color: white;
+            text-align: center;
+            padding: 50px 20px;
+            box-shadow: inset 0 -10px 20px rgba(0,0,0,0.1);
+        }
+
+        .page-header h1 {
+            font-size: 2.3rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            margin-bottom: 10px;
+        }
+
+        .page-header p {
+            color: #94a3b8;
+            font-size: 1rem;
+        }
+
+        /* Ana Form Alanı Konteyneri */
+        .form-container {
+            max-width: 650px;
+            margin: 60px auto 100px;
+            padding: 0 20px;
+            animation: fadeInUp 0.8s ease-in-out;
+        }
+
+        /* Cam Efektli Form Kutusu */
+        .contact-form-box {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 45px 40px;
+            box-shadow: 0 20px 40px -15px rgba(15, 23, 42, 0.1),
+                        0 0 0 1px rgba(15, 23, 42, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-form-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, #1a73e8, #38bdf8);
+        }
+
+        .form-title {
+            color: #0f172a;
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .form-subtitle {
+            color: #64748b;
+            font-size: 0.95rem;
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        /* Giriş Grupları */
+        .input-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .input-group label {
+            display: block;
+            color: #334155;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        /* Input ve Textarea Ortak Tasarımı */
+        .form-control {
+            width: 100%;
+            padding: 14px 16px;
+            background-color: #f8fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            color: #1e293b;
+            font-size: 0.95rem;
+            font-weight: 400;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            background-color: #ffffff;
+            border-color: #1a73e8;
+            /* Parlama Glow Efekti */
+            box-shadow: 0 0 15px rgba(26, 115, 232, 0.15), 0 0 0 1px rgba(26, 115, 232, 0.1);
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 140px;
+        }
+
+        /* Animasyonlu Gönder Butonu */
+        .submit-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #1a73e8, #1e3a8a);
+            color: white;
+            border: none;
+            padding: 16px 30px;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(26, 115, 232, 0.25);
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .submit-btn:hover {
+            background: linear-gradient(135deg, #1e40af, #0f172a);
+            box-shadow: 0 6px 20px rgba(30, 58, 138, 0.4), 0 0 10px rgba(56, 189, 248, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Modern Alt İletişim Bölümü (Footer) */
+        .main-footer {
+            background: linear-gradient(135deg, #0f172a, #111827);
+            color: #94a3b8;
+            padding: 40px 5%;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .footer-logo {
+            font-weight: 700;
+            color: white;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .footer-socials {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #cbd5e1;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .social-link img {
+            width: 20px;
+            height: 20px;
+            object-fit: contain;
+        }
+
+        .social-link:hover {
+            color: white;
+            background: rgba(56, 189, 248, 0.1);
+            border-color: rgba(56, 189, 248, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(56, 189, 248, 0.1);
+        }
+
+        .footer-copy {
+            font-size: 0.85rem;
+            color: #64748b;
+            margin-top: 10px;
+        }
+
+        /* Giriş Animasyonu */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Mobil Uyum */
+        @media (max-width: 768px) {
+            .navbar { flex-direction: column; gap: 15px; padding: 20px; }
+            .nav-links { gap: 15px; flex-wrap: wrap; justify-content: center; margin-left: 0; }
+            .page-header h1 { font-size: 1.8rem; }
+            .contact-form-box { padding: 30px 20px; }
+            .footer-socials { gap: 15px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ÜST MENÜ BARINIZ -->
+    <nav class="navbar">
+        <div class="logo">Lal Çalıştay</div>
+        <ul class="nav-links">
+            <li><a href="index.html">Ana Sayfa</a></li>
+            <li><a href="iletisim.html" class="active">İletişim</a></li>
+            <li><a href="galeri.html">Galeri</a></li>
+            <li><a href="calistay-nedir.html">Çalıştay Nedir?</a></li>
+        </ul>
+    </nav>
+
+    <!-- SAYFA BAŞLIĞI ALANI -->
+    <header class="page-header">
+        <h1>Başvuru & İletişim Formu</h1>
+        <p>Ekibimize mesaj gönderin veya çalıştaya başvurunuzu iletin.</p>
+    </header>
+
+    <!-- FORM ALANI -->
+    <div class="form-container">
+        <div class="contact-form-box">
+            <h2 class="form-title">İletişim Formu</h2>
+            <p class="form-subtitle">Lütfen aşağıdaki alanları eksiksiz doldurunuz.</p>
+            
+            <!-- Mailto mekanizmalı JavaScript tetikleyicili form yapısı -->
+            <form onsubmit="sendMail(event)">
+                
+                <!-- Ad Soyad -->
+                <div class="input-group">
+                    <label for="name">Adınız ve Soyadınız</label>
+                    <input type="text" id="name" class="form-control" placeholder="Örn: Ahmet Yılmaz" required>
+                </div>
+
+                <!-- E-Posta -->
+                <div class="input-group">
+                    <label for="email">E-Posta Adresiniz</label>
+                    <input type="email" id="email" class="form-control" placeholder="Örn: ahmet@example.com" required>
+                </div>
+
+                <!-- Mesaj / Motivasyon Mektubu -->
+                <div class="input-group">
+                    <label for="message">Mesajınız veya Motivasyon Mektubunuz</label>
+                    <textarea id="message" class="form-control" placeholder="Çalıştaya katılma amacınızı veya sorularınızı buraya yazabilirsiniz..." required></textarea>
+                </div>
+
+                <!-- Gönder Butonu -->
+                <button type="submit" class="submit-btn">
+                    <span>Başvuruyu / Mesajı Gönder</span>
+                </button>
+
+            </form>
+        </div>
+    </div>
+
+    <!-- SİHRİ GERÇEKLEŞTİREN JAVASCRIPT KODU -->
+    <script>
+        function sendMail(event) {
+            event.preventDefault(); // Sayfanın yeniden yüklenmesini engeller.
+            
+            // Form verilerini alıyoruz
+            var name = document.getElementById('name').value;
+            var email = document.getElementById('email').value;
+            var message = document.getElementById('message').value;
+            
+            // Mail detaylarını hazırlıyoruz
+            var subject = encodeURIComponent("Lal Calistay Basvuru / Iletisim - " + name);
+            var body = encodeURIComponent(
+                "Ad Soyad: " + name + "\n" +
+                "E-posta: " + email + "\n\n" +
+                "Mesaj / Motivasyon Mektubu:\n" + message
+            );
+            
+            // Mailto linkini tetikliyoruz
+            window.location.href = "mailto:lalcalistay@gmail.com?subject=" + subject + "&body=" + body;
+        }
+    </script>
+
+    <!-- FOOTER BÖLÜMÜ -->
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="footer-logo">Lüleburgaz Anadolu Lisesi Çalıştayı</div>
+            
+            <div class="footer-socials">
+                <a href="https://www.instagram.com/lalcalistay" target="_blank" class="social-link">
+                    <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram">
+                    <span>@lalcalistay</span>
+                </a>
+                <a href="https://www.tiktok.com/@lalcalistay" target="_blank" class="social-link">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" alt="TikTok">
+                    <span>@lalcalistay</span>
+                </a>
+                <a href="mailto:lalcalistay@gmail.com" class="social-link">
+                    <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Gmail">
+                    <span>lalcalistay@gmail.com</span>
+                </a>
+            </div>
+
+            <div class="footer-copy">
+                &copy; 2026 Lal Çalıştay. Tüm Hakları Saklıdır.
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
