@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lal Çalıştay</title>
-    <!-- Tarayıcı Sekme Logosu (Favicon) -->
     <link rel="icon" type="image/png" href="lal.png">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
@@ -319,9 +318,9 @@
             animation: pulseBtn 2s infinite ease-in-out;
         }
 
-        /* GÜNCELLENDİ: Mutlak Yerleşim ve Yumuşak Takip Motoru İçin Temel CSS */
+        /* Süzülerek Takip Eden Mutlak Yerleşimli Maskot Alanı */
         .stitch-container {
-            position: absolute; /* Kaydırma motoru için absolute yapıldı */
+            position: absolute; 
             top: 50%;
             left: 0;
             z-index: 2000;
@@ -330,9 +329,8 @@
             text-decoration: none;
             cursor: pointer;
             padding-left: 5px;
-            /* JavaScript yumuşak takibi engellemesin diye geçiş süresi sıfırlandı */
             transition: border-color 0.3s ease; 
-            will-change: transform; /* Performans optimizasyonu */
+            will-change: transform; 
         }
 
         .stitch-bubble {
@@ -379,6 +377,7 @@
             z-index: -1;
         }
 
+        /* GÜNCELLENDİ: 2.5 Saniyede Bir Tetiklenen Titreme (StitchShake) Animasyonu Eklendi */
         .stitch-img {
             width: 85px;
             height: 85px;
@@ -387,11 +386,14 @@
             border: 3px solid #1a73e8;
             box-shadow: 5px 5px 20px rgba(0,0,0,0.2);
             background-color: #ffffff;
+            /* 2.5 saniyede bir dönen, dikkat çekici titreme efekti */
+            animation: stitchShake 2.5s cubic-bezier(.36,.07,.19,.97) infinite;
             transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        /* Hover Etkileşimi */
+        /* Hover Etkileşimi (Kullanıcı üzerine gelince titreme dursun, esneme devreye girsin) */
         .stitch-container:hover .stitch-img {
+            animation-play-state: paused; /* Titremeyi durdurur */
             transform: scale(1.08) rotate(5deg);
             border-color: #38bdf8;
             box-shadow: 8px 8px 25px rgba(56, 189, 248, 0.4);
@@ -469,7 +471,7 @@
             margin-top: 10px;
         }
 
-        /* Animasyonlar */
+        /* Tüm Animasyon Tanımlamaları */
         @keyframes modernFlow {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
@@ -492,6 +494,15 @@
             50% { transform: translateY(-4px); }
         }
 
+        /* YENİ: 2.5 Saniyede Bir Tetiklenen Şık Titreme Algoritması (İlk 20% zamanda titrer, kalan zamanda durur) */
+        @keyframes stitchShake {
+            0%, 80%, 100% { transform: rotate(0deg); }
+            82%, 86%, 94zm { transform: rotate(-6deg); }
+            84%, 90%, 96% { transform: rotate(6deg); }
+            88% { transform: rotate(-4deg); }
+            92% { transform: rotate(4deg); }
+        }
+
         /* Mobil Cihazlar İçin Uyumluluk */
         @media (max-width: 768px) {
             .navbar { flex-direction: column; gap: 15px; padding: 20px; }
@@ -507,10 +518,8 @@
 </head>
 <body>
 
-    <!-- Sayfa Geçiş Örtüsü -->
     <div class="page-transition-overlay"></div>
 
-    <!-- ÜST MENÜ BARINIZ -->
     <nav class="navbar">
         <a href="index.html" class="logo-container">
             <img src="lal.png" alt="Lal Logo" class="navbar-logo-img">
@@ -524,17 +533,14 @@
         </ul>
     </nav>
 
-    <!-- Banner Alanı -->
     <header class="hero">
         <div class="hero-content">
             <h1>Lüleburgaz Anadolu Lisesi Çalıştayı Sizleri Bekliyor!</h1>
         </div>
     </header>
 
-    <!-- İKİLİ KART ALANI -->
     <main class="main-content">
         
-        <!-- Kart 1: Çalıştay Bilgileri -->
         <div class="card">
             <div class="card-icon-wrapper">
                 <svg class="card-icon-svg" viewBox="0 0 24 24">
@@ -546,7 +552,6 @@
             <a href="calistay-nedir.html" class="btn">Sayfaya Git</a>
         </div>
 
-        <!-- Kart 2: Komitelerimiz -->
         <div class="card">
             <div class="card-icon-wrapper">
                 <svg class="card-icon-svg" viewBox="0 0 24 24">
@@ -560,20 +565,17 @@
 
     </main>
 
-    <!-- ORTA KISIM: İLETİŞİM DAVETİ -->
     <section class="activities-section">
         <h2>Bizimle İletişime Geçin</h2>
         <p>Çalıştay kayıtları, sponsorluk anlaşmaları veya aklınıza takılan tüm sorular için ekibimize anında ulaşabilirsiniz. Sizi bilgilendirmek için sabırsızlanıyoruz!</p>
         <a href="iletisim.html" class="btn">İletişime Geç</a>
     </section>
 
-    <!-- YENİLENEN SÜZÜLEREK TAKİP EDEN DİNAMİK STITCH -->
     <a href="iletisim.html" class="stitch-container">
         <img src="stitch.jpg" alt="Stitch Maskot" class="stitch-img">
         <div class="stitch-bubble">Başvurularımız başladı! Hemen sen de gel başvur. 🚀</div>
     </a>
 
-    <!-- FOOTER BÖLÜMÜ -->
     <footer class="main-footer">
         <div class="footer-content">
             <div class="footer-logo">Lüleburgaz Anadolu Lisesi Çalıştayı</div>
@@ -599,37 +601,31 @@
         </div>
     </footer>
 
-    <!-- SAYFA GEÇİŞ VE ATALETLİ SCROLL MOTORU -->
     <script>
-        // Sayfa açılış animasyonu yönetimi
         window.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
                 document.documentElement.classList.add('page-loaded');
                 document.body.classList.add('page-ready');
             }, 100);
             
-            // İlk açılışta Stitch'i dikey merkeze çekmek için motoru tetikle
             updateStitchPosition();
         });
 
         // PÜRÜZSÜZ SÜZÜLEREK TAKİP ETME MOTORU (Yumuşak Atalet)
         const stitch = document.querySelector('.stitch-container');
-        let currentY = window.innerHeight / 2; // Başlangıç hedefi ekranın tam ortası
+        let currentY = window.innerHeight / 2; 
         let targetY = window.innerHeight / 2;
-        const speed = 0.08; // Süzülme hızı (Ne kadar küçükse o kadar yumuşak ve gecikmeli gelir)
+        const speed = 0.08; 
 
         function updateStitchPosition() {
-            // Kullanıcının kaydırma miktarını al ve ekran ortasını hesapla
             const scrollY = window.pageYOffset || document.documentElement.scrollTop;
             targetY = scrollY + (window.innerHeight / 2);
 
-            // Yumuşak takip formülü (Lerp fiziği)
             currentY += (targetY - currentY) * speed;
 
-            // Stitch konteynerini yeni konumuna pürüzsüzce kaydır
+            // Stitch'i dikeyde yumuşak takip ettiren asıl fonksiyon
             stitch.style.transform = `translateY(${currentY - (window.innerHeight / 2) - 42}px)`;
 
-            // Sürekli akış döngüsü
             requestAnimationFrame(updateStitchPosition);
         }
 
