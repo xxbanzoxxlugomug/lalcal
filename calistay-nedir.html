@@ -7,7 +7,6 @@
     <link rel="icon" type="image/png" href="lal.png">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Genel Sayfa Ayarları */
         * {
             margin: 0;
             padding: 0;
@@ -19,7 +18,6 @@
             scroll-behavior: smooth;
         }
 
-        /* Sayfa Geçişi İçin İlk Başta Gövdeyi Gizliyoruz */
         body {
             background-color: #f1f5f9;
             color: #1e293b;
@@ -30,26 +28,23 @@
             transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
         }
 
-        /* Sayfa Hazır Olduğunda Süzülerek Açılma Sınıfı */
         body.page-ready {
             opacity: 1;
             transform: translateY(0);
         }
 
-        /* Sayfadan Çıkarken Süzülerek Kapanma Sınıfı */
         body.page-exit {
             opacity: 0;
             transform: translateY(-10px);
         }
 
-        /* Sayfa Geçiş Perdesi */
         .page-transition-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: #0f172a; /* Geçiş esnasındaki asil siber ton */
+            background-color: #0f172a;
             z-index: 9999;
             opacity: 1;
             pointer-events: none;
@@ -60,7 +55,6 @@
             opacity: 0;
         }
 
-        /* Üst Menü Barı (Navbar) */
         .navbar {
             background: linear-gradient(135deg, #0f172a, #1e3a8a);
             color: white;
@@ -74,7 +68,6 @@
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.15);
         }
 
-        /* Logo ve Başlık Alanı Konteyneri */
         .logo-container {
             display: flex;
             align-items: center;
@@ -90,7 +83,6 @@
             filter: drop-shadow(0 2px 8px rgba(56, 189, 248, 0.3));
         }
 
-        /* Animasyonlu Canlı Renk Geçişli Yazı */
         .logo {
             font-weight: 700;
             font-size: 1.3rem;
@@ -146,7 +138,6 @@
             transform: scaleX(1);
         }
 
-        /* Sayfa Başlığı Alanı (Header Bölümü) */
         .page-header {
             background: linear-gradient(135deg, #0f172a, #1e3a8a);
             color: white;
@@ -169,14 +160,12 @@
             font-size: 1rem;
         }
 
-        /* Ana İçerik Konteyneri */
         .container {
             max-width: 1000px;
             margin: 50px auto 100px;
             padding: 0 20px;
         }
 
-        /* Bölüm 1: Çalıştay Nedir? */
         .intro-box {
             background: #ffffff;
             border-radius: 16px;
@@ -206,7 +195,6 @@
             margin-bottom: 15px;
         }
 
-        /* Bölüm 2: Çalıştayın İşleyişi */
         .flow-section-title {
             text-align: center;
             color: #0f172a;
@@ -273,7 +261,6 @@
             font-size: 0.95rem;
         }
 
-        /* Sonuç Değerlendirme Bloğu */
         .summary-box {
             background: linear-gradient(135deg, #1e3a8a, #0f172a);
             color: #e2e8f0;
@@ -296,19 +283,18 @@
             color: #cbd5e1;
         }
 
-        /* Süzülerek Takip Eden Mutlak Yerleşimli Maskot Alanı */
+        /* STITCH - fixed, her zaman ekranın solunda ortalı */
         .stitch-container {
-            position: absolute; 
+            position: fixed;
             top: 50%;
             left: 0;
+            transform: translateY(-50%);
             z-index: 2000;
             display: flex;
             align-items: center;
             text-decoration: none;
             cursor: pointer;
             padding-left: 5px;
-            transition: border-color 0.3s ease; 
-            will-change: transform; 
         }
 
         .stitch-bubble {
@@ -323,9 +309,9 @@
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
             border: 2px solid #1a73e8;
             position: relative;
-            margin-left: 15px; 
-            animation: bubbleSlideFloat 4s ease-in-out infinite, bubbleShake 2.5s cubic-bezier(.36,.07,.19,.97) infinite;
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.3s ease;
+            margin-left: 15px;
+            animation: bubbleFloat 4s ease-in-out infinite;
+            transition: border-color 0.3s ease;
         }
 
         .stitch-bubble::after {
@@ -355,7 +341,6 @@
             z-index: -1;
         }
 
-        /* 2.5 Saniyede Bir Tetiklenen Titreme Animasyonu */
         .stitch-img {
             width: 85px;
             height: 85px;
@@ -369,7 +354,7 @@
         }
 
         .stitch-container:hover .stitch-img {
-            animation-play-state: paused; 
+            animation-play-state: paused;
             transform: scale(1.08) rotate(5deg);
             border-color: #38bdf8;
             box-shadow: 8px 8px 25px rgba(56, 189, 248, 0.4);
@@ -380,7 +365,6 @@
             border-color: #38bdf8;
         }
 
-        /* Modern Alt İletişim Bölümü (Footer) */
         .main-footer {
             background: linear-gradient(135deg, #0f172a, #111827);
             color: #94a3b8;
@@ -448,15 +432,14 @@
             margin-top: 10px;
         }
 
-        /* Klonlanan Animasyon Kalıpları */
         @keyframes textShine {
             0% { background-position: 0% 50%; }
             100% { background-position: 300% 50%; }
         }
 
-        @keyframes bubbleSlideFloat {
-            0%, 100% { top: 0; }
-            50% { top: -4px; }
+        @keyframes bubbleFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-4px); }
         }
 
         @keyframes stitchShake {
@@ -467,15 +450,6 @@
             92% { transform: rotate(3deg); }
         }
 
-        @keyframes bubbleShake {
-            0%, 80%, 100% { transform: translateX(0); }
-            82%, 86%, 94% { transform: translateX(4px); }
-            84%, 90%, 96% { transform: translateX(-4px); }
-            88% { transform: translateX(2px); }
-            92% { transform: translateX(-2px); }
-        }
-
-        /* Mobil Cihazlar İçin Uyumluluk */
         @media (max-width: 768px) {
             .navbar { flex-direction: column; gap: 15px; padding: 20px; }
             .nav-links { gap: 15px; flex-wrap: wrap; justify-content: center; margin-left: 0; }
@@ -501,7 +475,7 @@
         <ul class="nav-links">
             <li><a href="index.html">Ana Sayfa</a></li>
             <li><a href="iletisim.html">İletişim</a></li>
-            <li><a href="komitelerimiz.html">Komitelerimiz</a></li> 
+            <li><a href="komitelerimiz.html">Komitelerimiz</a></li>
             <li><a href="calistay-nedir.html" class="active">Çalıştay Nedir?</a></li>
         </ul>
     </nav>
@@ -512,21 +486,21 @@
     </header>
 
     <div class="container">
-        
+
         <div class="intro-box">
             <h2>
                 <img src="https://cdn-icons-png.flaticon.com/512/3208/3208742.png" alt="Çalıştay">
                 Çalıştay Nedir?
             </h2>
             <p>Çalıştay, birçok katılımcının bir araya gelerek bazı belirtilmiş konular hakkında birbirleri ile görüş alışverişinde bulunup çözümler getirmeye çalıştığı eğitsel bir etkinliktir.</p>
-            <p>Kişiler bir sınıftaymışçasına tartışmalara katılır ve söz hakkı alır. Komite başkanları ise bir öğretmen gibi düşünülebilir. Komite konuları hakkında ışık tutar o gün komiteyi yönlendirir!</p>
+            <p>Kişiler bir sınıftaymışçasına tartışmalara katılır ve söz hakkı alır. Komite başkanları ise bir öğretmen gibi düşünülebilir. Komite konuları hakkında ışık tutar ve o gün komiteyi yönlendirir!</p>
             <p>Genellikle lise ve üniversite çağındaki öğrenciler tarafından düzenlenir ve yine bu yaş grubundan katılımcılara hitap eden, katılımcıların bilim, toplum, tarih, sanat ve benzeri alanlarda fikir alışverişi yapabildiği dinamik bir platformdur.</p>
         </div>
 
         <h2 class="flow-section-title">Çalıştayın İşleyiş Süreci</h2>
-        
+
         <div class="flow-grid">
-            
+
             <div class="flow-card">
                 <div class="flow-num">01</div>
                 <h3>Başvuru ve Motivasyon</h3>
@@ -559,14 +533,14 @@
 
             <div class="flow-card">
                 <div class="flow-num">06</div>
-                <h3>Molar ogün Sosyalleşme</h3>
-                <p>Oturumların arasında “coffee break” adı verilen kısa molalar verilir. Bu molalarda katılımcılar dinlenir, ikramlardan yararlanır o gün diğer komitelerdeki insanlarla sosyalleşme fırsatı bulur.</p>
+                <h3>Molalar ve Sosyalleşme</h3>
+                <p>Oturumların arasında "coffee break" adı verilen kısa molalar verilir. Bu molalarda katılımcılar dinlenir, ikramlardan yararlanır ve diğer komitelerdeki insanlarla sosyalleşme fırsatı bulur.</p>
             </div>
 
             <div class="flow-card">
                 <div class="flow-num">07</div>
                 <h3>Bildirgeler ve Sunum</h3>
-                <p>Çalıştayın sonunda, komitelerde ele alınan konular doğrultusunda resmi bildirgeler hazırlanır o gün tüm katılımcıların önünde konferans salonunda jüriye/dinleyicilere sunulur.</p>
+                <p>Çalıştayın sonunda, komitelerde ele alınan konular doğrultusunda resmi bildirgeler hazırlanır ve tüm katılımcıların önünde konferans salonunda jüriye/dinleyicilere sunulur.</p>
             </div>
 
             <div class="flow-card">
@@ -579,7 +553,7 @@
 
         <div class="summary-box">
             <h3>Unutulmaz Bir Deneyim</h3>
-            <p>Çalıştaylar; sadece akademik bilgi edinmenin yanı sıra sosyalleşme, yeni bakış açıları keşfetme, topluluk önünde konuşma becerilerini geliştirme o gün ömür boyu sürecek kalıcı dostluklar kurma açısından benzersiz bir lise deneyimi sunar.</p>
+            <p>Çalıştaylar; sadece akademik bilgi edinmenin yanı sıra sosyalleşme, yeni bakış açıları keşfetme, topluluk önünde konuşma becerilerini geliştirme ve ömür boyu sürecek kalıcı dostluklar kurma açısından benzersiz bir lise deneyimi sunar.</p>
         </div>
 
     </div>
@@ -592,7 +566,7 @@
     <footer class="main-footer">
         <div class="footer-content">
             <div class="footer-logo">Lüleburgaz Anadolu Lisesi Çalıştayı</div>
-            
+
             <div class="footer-socials">
                 <a href="https://www.instagram.com/lalcalistay" target="_blank" class="social-link">
                     <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram">
@@ -620,35 +594,15 @@
                 document.documentElement.classList.add('page-loaded');
                 document.body.classList.add('page-ready');
             }, 100);
-            
-            updateStitchPosition();
         });
-
-        const stitch = document.querySelector('.stitch-container');
-        let currentY = window.innerHeight / 2; 
-        let targetY = window.innerHeight / 2;
-        const speed = 0.08; 
-
-        function updateStitchPosition() {
-            const scrollY = window.pageYOffset || document.documentElement.scrollTop;
-            targetY = scrollY + (window.innerHeight / 2);
-
-            currentY += (targetY - currentY) * speed;
-
-            stitch.style.transform = `translateY(${currentY - (window.innerHeight / 2) - 42}px)`;
-
-            requestAnimationFrame(updateStitchPosition);
-        }
 
         document.querySelectorAll('.nav-links a, .logo-container, .btn, .stitch-container').forEach(link => {
             link.addEventListener('click', function(e) {
                 const targetUrl = this.getAttribute('href');
-                
                 if (targetUrl && !targetUrl.startsWith('http') && !targetUrl.startsWith('mailto:') && targetUrl !== '#') {
-                    e.preventDefault(); 
+                    e.preventDefault();
                     document.body.classList.remove('page-ready');
-                    document.body.classList.add('page-exit'); 
-                    
+                    document.body.classList.add('page-exit');
                     setTimeout(() => {
                         window.location.href = targetUrl;
                     }, 400);
