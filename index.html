@@ -319,7 +319,7 @@
             animation: pulseBtn 2s infinite ease-in-out;
         }
 
-        /* GÜNCELLENDİ: Ekranda Sürekli Sol Ortada Çivili Duran Maskot Alanı */
+        /* Ekranda Sürekli Sol Ortada Duran VE Dinamik Olarak Kaydırmaya Tepki Veren Maskot Alanı */
         .stitch-container {
             position: fixed;
             top: 50%;
@@ -333,7 +333,7 @@
             padding-left: 5px;
         }
 
-        /* Yandan Açılan Canlı Baloncuğumuz */
+        /* Dinamik Esneyen Baloncuğumuz */
         .stitch-bubble {
             background: #ffffff;
             color: #0f172a;
@@ -346,11 +346,13 @@
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
             border: 2px solid #1a73e8;
             position: relative;
-            margin-left: 15px; /* Resmin sağında dursun diye boşluk */
+            margin-left: 15px; 
+            /* JAVASCRIPT HAREKETİ İÇİN HIZLI GEÇİŞ AYARI (cubic-bezier ile çok yumuşak akış) */
+            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.3s ease;
             animation: bubbleSlideFloat 4s ease-in-out infinite;
         }
 
-        /* Baloncuğun Solundaki Minik Ok Süsü */
+        /* Baloncuğun Solundaki Ok Süsü */
         .stitch-bubble::after {
             content: '';
             position: absolute;
@@ -378,7 +380,7 @@
             z-index: -1;
         }
 
-        /* Sol Duvara Yaslanmış Stitch Ayarları */
+        /* Dinamik Tepki Veren Stitch */
         .stitch-img {
             width: 85px;
             height: 85px;
@@ -387,19 +389,18 @@
             border: 3px solid #1a73e8;
             box-shadow: 5px 5px 20px rgba(0,0,0,0.2);
             background-color: #ffffff;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            /* JAVASCRIPT HAREKETİ İÇİN YAYLANMA GEÇİŞİ */
+            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.3s ease;
         }
 
         /* Üzerine Gelince Stitch Sola Doğru Tatlı Bi' Esneme Yapsın */
         .stitch-container:hover .stitch-img {
-            transform: scale(1.08) rotate(5deg);
             border-color: #38bdf8;
             box-shadow: 8px 8px 25px rgba(56, 189, 248, 0.4);
         }
 
         .stitch-container:hover .stitch-bubble {
             border-color: #38bdf8;
-            transform: scale(1.02);
         }
 
         /* Modern Alt İletişim Bölümü (Footer) */
@@ -444,7 +445,7 @@
             font-size: 0.95rem;
             font-weight: 500;
             padding: 8px 16px;
-            background: rgba(255, 255, 255, 0.03);
+            background: rgba(255, 255, 255, 0.02);
             border-radius: 30px;
             border: 1px solid rgba(255, 255, 255, 0.05);
             transition: all 0.3s ease;
@@ -571,7 +572,7 @@
         <a href="iletisim.html" class="btn">İletişime Geç</a>
     </section>
 
-    <!-- GÜNCELLENDİ: SÜREKLİ EKRANIN SOL ORTASINDA SABİT DURAN STITCH VE SAĞINDAKİ BALONCUK -->
+    <!-- SÜREKLİ EKRANIN SOL ORTASINDA SABİT DURAN VE DİNAMİK SCROLL TEPKİLİ STITCH -->
     <a href="iletisim.html" class="stitch-container">
         <img src="stitch.jpg" alt="Stitch Maskot" class="stitch-img">
         <div class="stitch-bubble">Başvurularımız başladı! Hemen sen de gel başvur. 🚀</div>
@@ -603,8 +604,9 @@
         </div>
     </footer>
 
-    <!-- SAYFA GEÇİŞ JAVASCRIPT KODU -->
+    <!-- SAYFA GEÇİŞ VE DİNAMİK SCROLL JAVASCRIPT MOTORU -->
     <script>
+        // Sayfa açılış animasyonu yönetimi
         window.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
                 document.documentElement.classList.add('page-loaded');
@@ -612,6 +614,43 @@
             }, 100);
         });
 
+        // DİNAMİK MASKOT SCROLL FİZİK MOTORU
+        let lastScrollTop = 0;
+        let tick = false;
+        const stitchContainer = document.querySelector('.stitch-container');
+        const stitchImg = document.querySelector('.stitch-img');
+        const stitchBubble = document.querySelector('.stitch-bubble');
+
+        window.addEventListener('scroll', () => {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            let scrollDelta = scrollTop - lastScrollTop;
+            lastScrollTop = scrollTop;
+
+            if (!tick) {
+                window.requestAnimationFrame(() => {
+                    // Kaydırma hızına ve yönüne göre eğilme (rotation) ve esneme (translate) hesaplama
+                    let rotation = Math.max(-14, Math.min(14, scrollDelta * 0.2)); // Sınırlandırılmış eğilme açısı
+                    let bounce = Math.max(-8, Math.min(8, scrollDelta * 0.12));    // Esneme yüksekliği
+                    let scaleX = Math.max(0.92, Math.min(1.08, 1 - Math.abs(scrollDelta) * 0.0015)); // Balon nefes alma efekti
+
+                    // Sol tarafa yaslı olduğu için esneme ve eğilmeyi sol duvara göre uyguluyoruz
+                    stitchImg.style.transform = `scale(1.05) rotate(${rotation}deg) translateY(${bounce}px)`;
+                    stitchBubble.style.transform = `translateY(${bounce * 0.6}px) scale(${scaleX})`;
+
+                    // Kullanıcı kaydırmayı kestiğinde pürüzsüzce sıfırlama (Yarı atalet)
+                    clearTimeout(stitchContainer.scrollTimeout);
+                    stitchContainer.scrollTimeout = setTimeout(() => {
+                        stitchImg.style.transform = '';
+                        stitchBubble.style.transform = '';
+                    }, 180);
+
+                    tick = false;
+                });
+                tick = true;
+            }
+        });
+
+        // Sayfalar arası geçiş dinleyicisi
         document.querySelectorAll('.nav-links a, .logo-container, .btn, .stitch-container').forEach(link => {
             link.addEventListener('click', function(e) {
                 const targetUrl = this.getAttribute('href');
