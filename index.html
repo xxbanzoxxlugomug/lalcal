@@ -175,7 +175,7 @@
 
         .hero-content {
             position: relative;
- z-index: 5;
+            z-index: 5;
         }
 
         .hero h1 {
@@ -312,8 +312,8 @@
 
         /* GÜNCELLENDİ: Gecikmeli/Smooth Süzülen Efsanevi Stitch Alanı */
         .stitch-container {
-            position: fixed; 
-            top: 0; /* JS ile dikey konumu anlık ve yumuşakça hesaplanacak */
+            position: absolute; /* Kaydırma efektinin çalışması için fixed yerine absolute kullanıldı */
+            top: 0;
             left: 0;
             z-index: 9995;
             display: flex;
@@ -321,7 +321,7 @@
             text-decoration: none;
             cursor: pointer;
             padding-left: 5px;
-            will-change: transform; /* Tarayıcıya performans optimizasyonu yaptırır */
+            will-change: transform;
         }
 
         .stitch-bubble {
@@ -564,15 +564,17 @@
             }, 100);
         });
 
-        // GÜNCELLENDİ: Stitch İçin Gecikmeli (Smooth Spring) Takip Motoru
+        // GÜNCELLENDİ: Kaydırmaya Duyarlı (Scroll Aware) Gecikmeli Takip Motoru
         const stitch = document.getElementById('smoothStitch');
-        let currentY = window.innerHeight / 2; // Mevcut konum
-        let targetY = window.innerHeight / 2;  // Gitmesi gereken hedef konum
-        const speed = 0.07; // Yumuşaklık derecesi (0.01 ile 0.1 arası, küçüldükçe gecikme artar)
+        
+        // Başlangıç konumu: Mevcut kaydırma ekseni + ekranın yarısı
+        let currentY = window.scrollY + (window.innerHeight / 2); 
+        let targetY = currentY; 
+        const speed = 0.07; // Yumuşaklık derecesi (küçüldükçe gecikme artar)
 
         function smoothScrollStitch() {
-            // Hedef her zaman ekranın dikey olarak tam ortası
-            targetY = window.innerHeight / 2;
+            // Hedef: Güncel scroll miktarı + ekranın dikey olarak tam ortası
+            targetY = window.scrollY + (window.innerHeight / 2);
             
             // Aradaki farkı yumuşatarak mevcut konumu hedefe yaklaştırıyoruz (Linear Interpolation)
             currentY += (targetY - currentY) * speed;
