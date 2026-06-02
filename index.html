@@ -21,9 +21,10 @@
         }
 
         body {
-            background-color: #f1f5f9;
+            background-color: #f4f7fa; 
             color: #1e293b;
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
         /* Üst Menü Barı (Navbar) */
@@ -45,7 +46,7 @@
             display: flex;
             align-items: center;
             gap: 12px;
-            text-decoration: none; /* Link çizgisini kaldırır */
+            text-decoration: none;
             cursor: pointer;
         }
 
@@ -109,7 +110,7 @@
             color: #fff;
         }
 
-        /* Animasyonlu Canlı Arka Plan (Hero Section) */
+        /* YENİ: Akıcı Modern Aurora/Nebula Banner Alanı (Hero Section) */
         .hero {
             position: relative;
             height: 450px;
@@ -120,25 +121,39 @@
             color: white;
             padding: 20px;
             overflow: hidden;
-            background: linear-gradient(60deg, #0f172a 0%, #1e3a8a 100%);
+            background: #0f172a; /* Temel koyu arka plan */
+        }
+
+        /* Akıcı Aurora Işık Katmanları (Eski kötü dikdörtgen silindi) */
+        .hero::before, .hero::after {
+            content: "";
+            position: absolute;
+            width: 150%;
+            height: 150%;
+            top: -25%;
+            left: -25%;
+            opacity: 0.25;
+            pointer-events: none;
+            mix-blend-mode: screen;
         }
 
         .hero::before {
-            content: "";
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(56, 189, 248, 0.15) 0%, transparent 60%),
-                        radial-gradient(circle, rgba(26, 115, 232, 0.1) 0%, transparent 50%);
-            animation: rotateLoop 20s linear infinite;
+            background: radial-gradient(circle at 30% 40%, #1a73e8 0%, transparent 50%),
+                        radial-gradient(circle at 70% 60%, #38bdf8 0%, transparent 50%);
+            animation: auroraGlowOne 12s infinite alternate ease-in-out;
+            z-index: 1;
+        }
+
+        .hero::after {
+            background: radial-gradient(circle at 80% 20%, #1e3a8a 0%, transparent 45%),
+                        radial-gradient(circle at 20% 80%, #0284c7 0%, transparent 50%);
+            animation: auroraGlowTwo 16s infinite alternate ease-in-out;
             z-index: 1;
         }
 
         .hero-content {
             position: relative;
-            z-index: 2;
+            z-index: 5;
             animation: fadeInUp 1s ease-in-out;
         }
 
@@ -148,8 +163,8 @@
             letter-spacing: 1px;
             max-width: 950px;
             text-transform: uppercase;
-            text-shadow: 0 0 20px rgba(56, 189, 248, 0.4), 0 4px 12px rgba(0,0,0,0.5);
-            background: linear-gradient(to bottom, #ffffff 60%, #e2e8f0);
+            text-shadow: 0 4px 15px rgba(0, 0, 0, 0.6), 0 0 30px rgba(56, 189, 248, 0.2);
+            background: linear-gradient(to bottom, #ffffff 70%, #f1f5f9);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -164,24 +179,26 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 40px;
+            animation: cardListUp 1s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
 
         .card {
             background: #ffffff;
-            border-radius: 16px;
+            border-radius: 20px;
             text-align: center;
-            padding: 45px 35px;
-            box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.08), 
-                        0 8px 16px -6px rgba(15, 23, 42, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.8);
+            padding: 50px 35px;
+            box-shadow: 0 15px 35px -5px rgba(15, 23, 42, 0.05), 
+                        0 10px 20px -10px rgba(15, 23, 42, 0.03),
+                        0 0 15px rgba(26, 115, 232, 0.02);
+            border: 1px solid rgba(30, 58, 138, 0.05);
             transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
 
         .card:hover {
             transform: translateY(-12px);
             border-color: rgba(56, 189, 248, 0.4);
-            box-shadow: 0 20px 40px -10px rgba(26, 115, 232, 0.25), 
-                        0 0 25px 2px rgba(56, 189, 248, 0.2);
+            box-shadow: 0 25px 45px -10px rgba(26, 115, 232, 0.2), 
+                        0 0 25px 4px rgba(56, 189, 248, 0.15);
         }
 
         .card-icon {
@@ -237,12 +254,13 @@
         .activities-section {
             background-color: #ffffff;
             max-width: 950px;
-            margin: 20px auto 80px;
+            margin: 40px auto 100px;
             text-align: center;
             padding: 60px 40px;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px -15px rgba(15, 23, 42, 0.05);
-            border: 1px solid rgba(226, 232, 240, 0.8);
+            border-radius: 24px;
+            box-shadow: 0 20px 40px -15px rgba(15, 23, 42, 0.04);
+            border: 1px solid rgba(30, 58, 138, 0.04);
+            animation: cardListUp 1.2s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
 
         .activities-section h2 {
@@ -336,20 +354,29 @@
             margin-top: 10px;
         }
 
-        /* Tüm Animasyon Tanımlamaları */
+        /* YENİ: Akıcı Aurora Sıvı Hareket Animasyonları */
+        @keyframes auroraGlowOne {
+            0% { transform: translate(0, 0) scale(1); rotate: 0deg; }
+            100% { transform: translate(8%, 12%) scale(1.1); rotate: 10deg; }
+        }
+
+        @keyframes auroraGlowTwo {
+            0% { transform: translate(0, 0) scale(1.1); rotate: 0deg; }
+            100% { transform: translate(-10%, -5%) scale(0.95); rotate: -15deg; }
+        }
+
         @keyframes textShine {
             0% { background-position: 0% 50%; }
             100% { background-position: 300% 50%; }
         }
 
-        @keyframes rotateLoop {
-            0% { transform: rotate(0deg) scale(1); }
-            50% { transform: rotate(180deg) scale(1.1); }
-            100% { transform: rotate(360deg) scale(1); }
-        }
-
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes cardListUp {
+            from { opacity: 0; transform: translateY(40px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
@@ -372,7 +399,7 @@
 </head>
 <body>
 
-    <!-- ÜST MENÜ BARINIZ (Tıklanabilir Logo ve Canlı Renk Animasyonu Eklendi) -->
+    <!-- ÜST MENÜ BARINIZ -->
     <nav class="navbar">
         <a href="index.html" class="logo-container">
             <img src="lal.png" alt="Lal Logo" class="navbar-logo-img">
@@ -381,12 +408,12 @@
         <ul class="nav-links">
             <li><a href="index.html">Ana Sayfa</a></li>
             <li><a href="iletisim.html">İletişim</a></li> 
-            <li><a href="galeri.html">Galeri</a></li>
+            <li><a href="komitelerimiz.html">Komitelerimiz</a></li> 
             <li><a href="calistay-nedir.html">Çalıştay Nedir?</a></li>
         </ul>
     </nav>
 
-    <!-- Animasyonlu Banner Alanı -->
+    <!-- Yeni Akıcı Aurora Sıvı Dalgalı Modern Banner Alanı -->
     <header class="hero">
         <div class="hero-content">
             <h1>Lüleburgaz Anadolu Lisesi Çalıştayı Sizleri Bekliyor!</h1>
@@ -404,12 +431,12 @@
             <a href="calistay-nedir.html" class="btn">Sayfaya Git</a>
         </div>
 
-        <!-- Kart 2: Galeri -->
+        <!-- Kart 2: Komitelerimiz -->
         <div class="card">
-            <img src="https://cdn-icons-png.flaticon.com/512/3342/3342137.png" alt="Galeri" class="card-icon">
-            <h3>Galeri</h3>
-            <p>Etkinliklerden karelere göz at.</p>
-            <a href="galeri.html" class="btn">Sayfaya Git</a>
+            <img src="https://cdn-icons-png.flaticon.com/512/1435/1435181.png" alt="Komitelerimiz" class="card-icon">
+            <h3>Komitelerimiz</h3>
+            <p>Çalıştayımızda yer alan aktif tartışma alanlarını incele.</p>
+            <a href="komitelerimiz.html" class="btn">Sayfaya Git</a>
         </div>
 
     </main>
@@ -427,19 +454,14 @@
             <div class="footer-logo">Lüleburgaz Anadolu Lisesi Çalıştayı</div>
             
             <div class="footer-socials">
-                <!-- Instagram -->
                 <a href="https://www.instagram.com/lalcalistay" target="_blank" class="social-link">
                     <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram">
                     <span>@lalcalistay</span>
                 </a>
-                
-                <!-- TikTok -->
                 <a href="https://www.tiktok.com/@lalcalistay" target="_blank" class="social-link">
                     <img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" alt="TikTok">
                     <span>@lalcalistay</span>
                 </a>
-                
-                <!-- Gmail -->
                 <a href="mailto:lalcalistay@gmail.com" class="social-link">
                     <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Gmail">
                     <span>lalcalistay@gmail.com</span>
