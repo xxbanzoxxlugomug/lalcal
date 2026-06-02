@@ -24,7 +24,7 @@
             line-height: 1.6;
         }
 
-        /* Üst Menü Barı (Navbar) */
+        /* Üst Menü Barı (Navbar) - Menü En Sağa Alındı */
         .navbar {
             background: linear-gradient(135deg, #0f172a, #1e3a8a);
             color: white;
@@ -52,6 +52,7 @@
             list-style: none;
             display: flex;
             gap: 25px;
+            margin-left: auto; /* Menüyü tamamen sağa iten sihirli dokunuş */
         }
 
         .nav-links a {
@@ -100,7 +101,6 @@
             background: linear-gradient(60deg, #0f172a 0%, #1e3a8a 100%);
         }
 
-        /* Arka Plandaki Loop Animasyon Dalgaları */
         .hero::before {
             content: "";
             position: absolute;
@@ -132,10 +132,10 @@
             -webkit-text-fill-color: transparent;
         }
 
-        /* Kartlar Bölümü (Gelişmiş Gölgeli ve Glow Efektli) */
+        /* Kartlar Bölümü */
         .main-content {
             max-width: 1200px;
-            margin: -50px auto 80px; /* Hero'nun üzerine hafif bindirme yaptık, çok modern duruyor */
+            margin: -50px auto 80px;
             position: relative;
             z-index: 10;
             padding: 0 20px;
@@ -149,7 +149,6 @@
             border-radius: 16px;
             text-align: center;
             padding: 45px 35px;
-            /* Premium Çok Katmanlı Gölge */
             box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.08), 
                         0 8px 16px -6px rgba(15, 23, 42, 0.04),
                         inset 0 -4px 0px rgba(30, 58, 138, 0.04);
@@ -157,11 +156,9 @@
             transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
 
-        /* Kart Üzerine Gelince Glow ve Fırlama Efekti */
         .card:hover {
             transform: translateY(-12px);
             border-color: rgba(56, 189, 248, 0.4);
-            /* Parlama (Glow) Efekti */
             box-shadow: 0 20px 40px -10px rgba(26, 115, 232, 0.25), 
                         0 0 25px 2px rgba(56, 189, 248, 0.2);
         }
@@ -194,7 +191,7 @@
             min-height: 50px;
         }
 
-        /* Gelişmiş Dinamik Buton Tasarımı */
+        /* Ortak Buton Tasarımı */
         .btn {
             display: inline-block;
             background: linear-gradient(135deg, #1a73e8, #1e3a8a);
@@ -215,7 +212,7 @@
             transform: translateY(-2px);
         }
 
-        /* Alt Kısım: Etkinlikler Bölümü */
+        /* Alt Kısım: İletişim Bölümü */
         .activities-section {
             background-color: #ffffff;
             max-width: 950px;
@@ -247,6 +244,8 @@
             width: auto;
             padding: 14px 60px;
             font-size: 1rem;
+            /* Sürekli dönen nabız animasyonu eklendi */
+            animation: pulseBtn 2s infinite ease-in-out;
         }
 
         /* Animasyon Tanımlamaları */
@@ -261,6 +260,22 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
+        /* Buton İçin Yumuşak Nabız (Pulse) Animasyonu */
+        @keyframes pulseBtn {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 4px 12px rgba(26, 115, 232, 0.25);
+            }
+            50% {
+                transform: scale(1.04);
+                box-shadow: 0 10px 25px rgba(26, 115, 232, 0.4), 0 0 15px rgba(56, 189, 248, 0.3);
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 4px 12px rgba(26, 115, 232, 0.25);
+            }
+        }
+
         /* Mobil Cihazlar İçin Uyumluluk (Responsive) */
         @media (max-width: 768px) {
             .navbar {
@@ -272,6 +287,7 @@
                 gap: 15px;
                 flex-wrap: wrap;
                 justify-content: center;
+                margin-left: 0; /* Mobilde ortalansın diye resetledik */
             }
             .hero {
                 height: 380px;
@@ -327,10 +343,10 @@
     </main>
 
     <section class="activities-section">
-        <h2>Etkinlikler</h2>
-        <p>Fikirlerin paylaşıldığı, yeni dostlukların kurulduğu ve öğrenmenin eğlenceli hale geldiği farklı etkinliklerle dolu bir program seni bekliyor!</p>
-        <a href="etkinlikler.html" class="btn">Etkinliklere Git</a>
-    </section>
+        <h2>Bizimle İletişime Geçin</h2>
+        <p>Çalıştay kayıtları, sponsorluk anlaşmaları veya aklınıza takılan tüm sorular için ekibimize anında ulaşabilirsiniz. Sizi bilgilendirmek için sabırsızlanıyoruz!</p>
+        <a href="mailto:iletisim@lalcalistay.net" class="btn">İletişime Geç</a> 
+        </section>
 
 </body>
 </html>
