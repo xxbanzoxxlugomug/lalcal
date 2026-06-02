@@ -19,14 +19,14 @@
         }
 
         body {
-            background-color: #f8fafc;
-            color: #334155;
+            background-color: #f1f5f9;
+            color: #1e293b;
             line-height: 1.6;
         }
 
         /* Üst Menü Barı (Navbar) */
         .navbar {
-            background: linear-gradient(135deg, #1e3a8a, #1a73e8);
+            background: linear-gradient(135deg, #0f172a, #1e3a8a);
             color: white;
             padding: 18px 5%;
             display: flex;
@@ -35,14 +35,17 @@
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.15);
         }
 
         .logo {
             font-weight: 700;
             font-size: 1.3rem;
-            letter-spacing: 0.5px;
+            letter-spacing: 1px;
             text-transform: uppercase;
+            background: linear-gradient(to right, #ffffff, #38bdf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .nav-links {
@@ -52,7 +55,7 @@
         }
 
         .nav-links a {
-            color: rgba(255, 255, 255, 0.9);
+            color: rgba(255, 255, 255, 0.85);
             text-decoration: none;
             font-size: 0.95rem;
             font-weight: 500;
@@ -61,7 +64,6 @@
             transition: color 0.3s ease;
         }
 
-        /* Menü Linkleri Alt Çizgi Efekti */
         .nav-links a::after {
             content: '';
             position: absolute;
@@ -84,10 +86,9 @@
             color: #fff;
         }
 
-        /* Büyük Kapak Görseli Bölümü (Hero Section) */
+        /* Animasyonlu Canlı Arka Plan (Hero Section) */
         .hero {
-            background: linear-gradient(rgba(15, 23, 42, 0.65), rgba(15, 23, 42, 0.65)), 
-                        url('https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=1200') no-repeat center center/cover;
+            position: relative;
             height: 450px;
             display: flex;
             justify-content: center;
@@ -95,22 +96,48 @@
             text-align: center;
             color: white;
             padding: 20px;
-            animation: fadeIn 1s ease-in-out;
+            overflow: hidden;
+            background: linear-gradient(60deg, #0f172a 0%, #1e3a8a 100%);
+        }
+
+        /* Arka Plandaki Loop Animasyon Dalgaları */
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(56, 189, 248, 0.15) 0%, transparent 60%),
+                        radial-gradient(circle, rgba(26, 115, 232, 0.1) 0%, transparent 50%);
+            animation: rotateLoop 20s linear infinite;
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            animation: fadeInUp 1s ease-in-out;
         }
 
         .hero h1 {
-            font-size: 2.8rem;
+            font-size: 3rem;
             font-weight: 700;
             letter-spacing: 1px;
-            max-width: 900px;
+            max-width: 950px;
             text-transform: uppercase;
-            text-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            text-shadow: 0 0 20px rgba(56, 189, 248, 0.4), 0 4px 12px rgba(0,0,0,0.5);
+            background: linear-gradient(to bottom, #ffffff 60%, #e2e8f0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        /* Kartlar Bölümü (Çalıştay Bilgileri & Galeri) */
+        /* Kartlar Bölümü (Gelişmiş Gölgeli ve Glow Efektli) */
         .main-content {
             max-width: 1200px;
-            margin: 80px auto;
+            margin: -50px auto 80px; /* Hero'nun üzerine hafif bindirme yaptık, çok modern duruyor */
+            position: relative;
+            z-index: 10;
             padding: 0 20px;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -119,97 +146,90 @@
 
         .card {
             background: #ffffff;
-            border-radius: 12px;
+            border-radius: 16px;
             text-align: center;
-            padding: 40px 30px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
+            padding: 45px 35px;
+            /* Premium Çok Katmanlı Gölge */
+            box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.08), 
+                        0 8px 16px -6px rgba(15, 23, 42, 0.04),
+                        inset 0 -4px 0px rgba(30, 58, 138, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
 
-        /* Kart Havada Süzülme Efekti */
+        /* Kart Üzerine Gelince Glow ve Fırlama Efekti */
         .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            transform: translateY(-12px);
+            border-color: rgba(56, 189, 248, 0.4);
+            /* Parlama (Glow) Efekti */
+            box-shadow: 0 20px 40px -10px rgba(26, 115, 232, 0.25), 
+                        0 0 25px 2px rgba(56, 189, 248, 0.2);
         }
 
         .card-icon {
-            width: 90px;
-            height: 90px;
+            width: 95px;
+            height: 95px;
             margin: 0 auto 25px;
             object-fit: contain;
-            transition: transform 0.3s ease;
+            filter: drop-shadow(0 4px 8px rgba(26, 115, 232, 0.15));
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         .card:hover .card-icon {
-            transform: scale(1.1);
-        }
-
-        /* Resim yoksa boşluk düzgün dursun diye modern gri alan */
-        .placeholder-box {
-            width: 90px;
-            height: 90px;
-            background: #f1f5f9;
-            border: 2px dashed #cbd5e1;
-            margin: 0 auto 25px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            transform: scale(1.15) rotate(3deg);
+            filter: drop-shadow(0 8px 16px rgba(56, 189, 248, 0.3));
         }
 
         .card h3 {
-            color: #1e3a8a;
+            color: #0f172a;
             margin-bottom: 15px;
             font-size: 1.5rem;
-            font-weight: 600;
+            font-weight: 700;
         }
 
         .card p {
             color: #64748b;
             font-size: 0.95rem;
-            margin-bottom: 30px;
+            margin-bottom: 35px;
             min-height: 50px;
         }
 
         /* Gelişmiş Dinamik Buton Tasarımı */
         .btn {
             display: inline-block;
-            background: linear-gradient(135deg, #1a73e8, #1557b0);
+            background: linear-gradient(135deg, #1a73e8, #1e3a8a);
             color: white;
             text-decoration: none;
-            padding: 12px 30px;
-            border-radius: 6px;
+            padding: 14px 30px;
+            border-radius: 8px;
             font-weight: 600;
             font-size: 0.95rem;
-            width: 85%;
-            box-shadow: 0 4px 6px rgba(26, 115, 232, 0.2);
+            width: 90%;
+            box-shadow: 0 4px 12px rgba(26, 115, 232, 0.25);
             transition: all 0.3s ease;
         }
 
         .btn:hover {
-            background: linear-gradient(135deg, #1557b0, #114692);
-            box-shadow: 0 6px 15px rgba(21, 87, 176, 0.4);
+            background: linear-gradient(135deg, #1e40af, #0f172a);
+            box-shadow: 0 6px 20px rgba(30, 58, 138, 0.4), 0 0 10px rgba(56, 189, 248, 0.2);
             transform: translateY(-2px);
-        }
-
-        .btn:active {
-            transform: translateY(0);
         }
 
         /* Alt Kısım: Etkinlikler Bölümü */
         .activities-section {
             background-color: #ffffff;
-            max-width: 900px;
+            max-width: 950px;
             margin: 40px auto 100px;
             text-align: center;
-            padding: 50px 40px;
-            border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+            padding: 60px 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px -15px rgba(15, 23, 42, 0.05);
+            border: 1px solid rgba(226, 232, 240, 0.8);
         }
 
         .activities-section h2 {
-            color: #1e3a8a;
-            font-size: 2.2rem;
+            color: #0f172a;
+            font-size: 2.3rem;
             margin-bottom: 20px;
             font-weight: 700;
         }
@@ -218,7 +238,7 @@
             color: #475569;
             font-size: 1.05rem;
             margin-bottom: 35px;
-            max-width: 700px;
+            max-width: 720px;
             margin-left: auto;
             margin-right: auto;
         }
@@ -229,9 +249,15 @@
             font-size: 1rem;
         }
 
-        /* Yumuşak Sayfa Açılış Animasyonu */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+        /* Animasyon Tanımlamaları */
+        @keyframes rotateLoop {
+            0% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(180deg) scale(1.1); }
+            100% { transform: rotate(360deg) scale(1); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
@@ -247,16 +273,19 @@
                 flex-wrap: wrap;
                 justify-content: center;
             }
+            .hero {
+                height: 380px;
+            }
             .hero h1 {
-                font-size: 1.8rem;
+                font-size: 2rem;
             }
             .main-content {
-                margin: 40px auto;
+                margin: -30px auto 40px;
                 gap: 25px;
             }
             .activities-section {
-                margin: 20px 20px 60px;
-                padding: 35px 20px;
+                margin: 20px;
+                padding: 40px 20px;
             }
         }
     </style>
@@ -274,7 +303,9 @@
     </nav>
 
     <header class="hero">
-        <h1>Lüleburgaz Anadolu Lisesi Çalıştayı Sizleri Bekliyor!</h1>
+        <div class="hero-content">
+            <h1>Lüleburgaz Anadolu Lisesi Çalıştayı Sizleri Bekliyor!</h1>
+        </div>
     </header>
 
     <main class="main-content">
@@ -287,9 +318,7 @@
         </div>
 
         <div class="card">
-            <div class="placeholder-box">
-                <img src="https://cdn-icons-png.flaticon.com/512/1040/1040244.png" alt="Galeri" style="width: 45px; height: 45px;">
-            </div>
+            <img src="https://cdn-icons-png.flaticon.com/512/3342/3342137.png" alt="Galeri" class="card-icon">
             <h3>Galeri</h3>
             <p>Etkinliklerden karelere göz at.</p>
             <a href="galeri.html" class="btn">Sayfaya Git</a>
