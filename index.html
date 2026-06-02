@@ -277,7 +277,7 @@
             transform: translateY(-2px);
         }
 
-        /* Alt İletişim Davet Alanı da Yeni Platin-Cam Uyuyor */
+        /* Alt İletişim Davet Alanı */
         .activities-section {
             background: rgba(255, 255, 255, 0.8);
             backdrop-filter: blur(12px);
@@ -317,6 +317,86 @@
             padding: 14px 60px;
             font-size: 1rem;
             animation: pulseBtn 2s infinite ease-in-out;
+        }
+
+        /* YENİ: Ekrana Sabitlenmiş Akıllı Konuşan Stitch Alanı */
+        .stitch-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 2000;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            text-decoration: none; /* Tıklama alanı çizgilerini kaldırır */
+            cursor: pointer;
+        }
+
+        /* HTML/CSS Canlı Konuşma Baloncuğu */
+        .stitch-bubble {
+            background: #ffffff;
+            color: #0f172a;
+            padding: 12px 18px;
+            border-radius: 18px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            max-width: 220px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            border: 2px solid #1a73e8;
+            position: relative;
+            margin-bottom: 12px;
+            animation: bubbleFloat 4s ease-in-out infinite;
+        }
+
+        /* Baloncuğun Altındaki Minik Ok Süsü */
+        .stitch-bubble::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            right: 35px;
+            border-width: 10px 10px 0;
+            border-style: solid;
+            border-color: #ffffff transparent;
+            display: block;
+            width: 0;
+        }
+
+        .stitch-bubble::before {
+            content: '';
+            position: absolute;
+            bottom: -13px;
+            right: 34px;
+            border-width: 11px 11px 0;
+            border-style: solid;
+            border-color: #1a73e8 transparent;
+            display: block;
+            width: 0;
+            z-index: -1;
+        }
+
+        /* Sabit Stitch Görsel Ayarları */
+        .stitch-img {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #1a73e8;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            background-color: #ffffff;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        /* Üzerine Gelince Stitch Tepki Versin */
+        .stitch-container:hover .stitch-img {
+            transform: scale(1.1) rotate(-5deg);
+            border-color: #38bdf8;
+            box-shadow: 0 15px 30px rgba(56, 189, 248, 0.4);
+        }
+
+        .stitch-container:hover .stitch-bubble {
+            border-color: #38bdf8;
+            transform: translateY(-3px);
         }
 
         /* Modern Alt İletişim Bölümü (Footer) */
@@ -405,6 +485,12 @@
             100% { transform: scale(1); box-shadow: 0 4px 12px rgba(26, 115, 232, 0.25); }
         }
 
+        /* Baloncuğun Havada Tatlı Uçma Hareketi */
+        @keyframes bubbleFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+
         /* Mobil Cihazlar İçin Uyumluluk */
         @media (max-width: 768px) {
             .navbar { flex-direction: column; gap: 15px; padding: 20px; }
@@ -413,6 +499,9 @@
             .main-content { margin: -30px auto 40px; gap: 25px; }
             .activities-section { margin: 20px; padding: 40px 20px; }
             .footer-socials { gap: 15px; }
+            .stitch-container { bottom: 15px; right: 15px; }
+            .stitch-img { width: 75px; height: 75px; }
+            .stitch-bubble { max-width: 160px; font-size: 0.75rem; }
         }
     </style>
 </head>
@@ -478,6 +567,12 @@
         <a href="iletisim.html" class="btn">İletişime Geç</a>
     </section>
 
+    <!-- CANLI KONUŞAN STITCH MASKOTU (Tıklayınca İletişime Fırlatır) -->
+    <a href="iletisim.html" class="stitch-container">
+        <div class="stitch-bubble">Başvurularımız başladı! Hemen sen de gel başvur. 🚀</div>
+        <img src="stitch.jpg" alt="Stitch Maskot" class="stitch-img">
+    </a>
+
     <!-- FOOTER BÖLÜMÜ -->
     <footer class="main-footer">
         <div class="footer-content">
@@ -504,9 +599,8 @@
         </div>
     </footer>
 
-    <!-- SİHRİ GERÇEKLEŞTİREN SAYFA GEÇİŞ JAVASCRIPT KODU -->
+    <!-- SAYFA GEÇİŞ JAVASCRIPT KODU -->
     <script>
-        // Sayfa açılış animasyonu yönetimi
         window.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
                 document.documentElement.classList.add('page-loaded');
@@ -514,12 +608,11 @@
             }, 100);
         });
 
-        // Menüdeki ve sayfa içindeki linklere tıklayınca yumuşak kapanış animasyonu
-        document.querySelectorAll('.nav-links a, .logo-container, .btn').forEach(link => {
+        // Stitch container'ı da dahil ettik ki pürüzsüz geçiş bozulmasın
+        document.querySelectorAll('.nav-links a, .logo-container, .btn, .stitch-container').forEach(link => {
             link.addEventListener('click', function(e) {
                 const targetUrl = this.getAttribute('href');
                 
-                // mailto linkleri, harici linkler veya boş linkler hariç yumuşak geçişi tetikle
                 if (targetUrl && !targetUrl.startsWith('http') && !targetUrl.startsWith('mailto:') && targetUrl !== '#') {
                     e.preventDefault(); 
                     document.body.classList.remove('page-ready');
