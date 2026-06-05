@@ -289,7 +289,7 @@
             color: #cbd5e1;
         }
 
-        /* STITCH MASCOT (GÜNCELLENDİ) */
+        /* STITCH MASCOT */
         .stitch-container {
             position: absolute;
             top: 0;
@@ -366,6 +366,85 @@
             border-color: #38bdf8;
         }
 
+        /* SAĞ SQUIRTLE */
+        .squirtle-container {
+            position: absolute;
+            top: 0;
+            right: 0;
+            z-index: 9995;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            cursor: pointer;
+            padding-right: 5px;
+            will-change: transform;
+        }
+
+        .squirtle-bubble {
+            background: #ffffff;
+            color: #0f172a;
+            padding: 12px 18px;
+            border-radius: 18px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            width: 220px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            border: 2px solid #1a73e8;
+            position: relative;
+            margin-right: 15px;
+            order: -1;
+            animation: bubbleSlideFloat 4s ease-in-out infinite 0.8s, bubbleShakeRight 2.5s cubic-bezier(.36,.07,.19,.97) infinite 0.3s;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.3s ease;
+        }
+
+        .squirtle-bubble::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: -10px;
+            transform: translateY(-50%);
+            border-width: 10px 0 10px 10px;
+            border-style: solid;
+            border-color: transparent transparent transparent #ffffff;
+        }
+
+        .squirtle-bubble::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: -13px;
+            transform: translateY(-50%);
+            border-width: 11px 0 11px 11px;
+            border-style: solid;
+            border-color: transparent transparent transparent #1a73e8;
+            z-index: -1;
+        }
+
+        .squirtle-img {
+            width: 85px;
+            height: 85px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #1a73e8;
+            box-shadow: 5px 5px 20px rgba(0,0,0,0.15);
+            background-color: #ffffff;
+            animation: stitchShake 2.5s cubic-bezier(.36,.07,.19,.97) infinite 0.5s;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .squirtle-container:hover .squirtle-img {
+            animation-play-state: paused;
+            transform: scale(1.08) rotate(-5deg);
+            border-color: #38bdf8;
+            box-shadow: 8px 8px 25px rgba(56, 189, 248, 0.4);
+        }
+
+        .squirtle-container:hover .squirtle-bubble {
+            animation-play-state: paused;
+            border-color: #38bdf8;
+        }
+
         /* FOOTER */
         .main-footer {
             background: linear-gradient(135deg, #0f172a, #111827);
@@ -435,31 +514,14 @@
         }
 
         /* ANIMATIONS */
-        @keyframes textShine {
-            0% { background-position: 0% 50%; }
-            100% { background-position: 300% 50%; }
-        }
+        @keyframes textShine { 0% { background-position: 0% 50%; } 100% { background-position: 300% 50%; } }
+        @keyframes pulseBtn { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.04); } }
+        @keyframes bubbleSlideFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+        @keyframes stitchShake { 0%, 80%, 100% { transform: rotate(0deg); } 82%, 86%, 94% { transform: rotate(-5deg); } 84%, 90%, 96% { transform: rotate(5deg); } 88% { transform: rotate(-3deg); } 92% { transform: rotate(3deg); } }
+        @keyframes bubbleShake { 0%, 80%, 100% { transform: translateX(0); } 82%, 86%, 94% { transform: translateX(4px); } 84%, 90%, 96% { transform: translateX(-4px); } }
+        @keyframes bubbleShakeRight { 0%, 80%, 100% { transform: translateX(0); } 82%, 86%, 94% { transform: translateX(-4px); } 84%, 90%, 96% { transform: translateX(4px); } }
 
-        @keyframes bubbleSlideFloat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-4px); }
-        }
-
-        @keyframes stitchShake {
-            0%, 80%, 100% { transform: rotate(0deg); }
-            82%, 86%, 94% { transform: rotate(-5deg); }
-            84%, 90%, 96% { transform: rotate(5deg); }
-            88% { transform: rotate(-3deg); }
-            92% { transform: rotate(3deg); }
-        }
-
-        @keyframes bubbleShake {
-            0%, 80%, 100% { transform: translateX(0); }
-            82%, 86%, 94% { transform: translateX(4px); }
-            84%, 90%, 96% { transform: translateX(-4px); }
-        }
-
-        /* RESPONSIVE DESIGN */
+        /* RESPONSIVE */
         @media (max-width: 768px) {
             .navbar { flex-direction: column; gap: 15px; padding: 20px; }
             .nav-links { gap: 15px; flex-wrap: wrap; justify-content: center; margin-left: 0; }
@@ -470,6 +532,8 @@
             .footer-socials { gap: 15px; }
             .stitch-img { width: 65px; height: 65px; }
             .stitch-bubble { width: 150px; font-size: 0.7rem; margin-left: 8px; }
+            .squirtle-img { width: 65px; height: 65px; }
+            .squirtle-bubble { width: 150px; font-size: 0.7rem; margin-right: 8px; }
         }
     </style>
 </head>
@@ -496,7 +560,6 @@
     </header>
 
     <div class="container">
-
         <div class="intro-box">
             <h2>
                 <img src="https://cdn-icons-png.flaticon.com/512/3208/3208742.png" alt="Çalıştay">
@@ -508,93 +571,43 @@
         </div>
 
         <h2 class="flow-section-title">Çalıştayın İşleyiş Süreci</h2>
-
         <div class="flow-grid">
-
-            <div class="flow-card">
-                <div class="flow-num">01</div>
-                <h3>Başvuru ve Motivasyon</h3>
-                <p>Başvuru sürecinde adaylar, internet sitesi üzerinden gerekli bilgileri doldurur ve bir motivasyon mektubu yazar. Bu mektupta; çalıştaya neden katılmak istedikleri, seçtikleri komiteye olan ilgileri ve hedefleri kısaca ifade edilir.</p>
-            </div>
-
-            <div class="flow-card">
-                <div class="flow-num">02</div>
-                <h3>Komitelerin Belirlenmesi</h3>
-                <p>Komiteler; tarih, biyoloji, edebiyat, felsefe gibi farklı alanlara ayrılarak katılımcıların tam olarak kendi ilgi duydukları bilimsel ve sosyal konularda yer almalarını sağlar.</p>
-            </div>
-
-            <div class="flow-card">
-                <div class="flow-num">03</div>
-                <h3>Çalışma Rehberi</h3>
-                <p>Başvurusu kabul edilen katılımcılara, oturum öncesinde komitelerine ait özel bir çalışma rehberi gönderilir. Böylece çalıştay boyunca ele alınacak konular hakkında ön bilgi edinmeleri sağlanır.</p>
-            </div>
-
-            <div class="flow-card">
-                <div class="flow-num">04</div>
-                <h3>İlk Gün ve Seminerler</h3>
-                <p>Çalıştay günü genellikle sabah saatlerinde başlar. İlk oturumun süresi değişiklik gösterebilir; bazı durumlarda akademisyenlerin katılımıyla konferans salonunda ufak seminerler düzenlenir.</p>
-            </div>
-
-            <div class="flow-card">
-                <div class="flow-num">05</div>
-                <h3>Tanışma ve Tartışmalar</h3>
-                <p>Oturumlar "fun session" adı verilen kaynaşma etkinlikleriyle başlayabilir veya akademisyen eşliğinde ilerleyebilir. Gün boyunca belirlenen konular üzerine tartışmalar yapılır ve katılımcılar fikirlerini özgürce ifade eder.</p>
-            </div>
-
-            <div class="flow-card">
-                <div class="flow-num">06</div>
-                <h3>Molalar ve Sosyalleşme</h3>
-                <p>Oturumların arasında "coffee break" adı verilen kısa molalar verilir. Bu molalarda katılımcılar dinlenir, ikramlardan yararlanır ve diğer komitelerdeki insanlarla sosyalleşme fırsatı bulur.</p>
-            </div>
-
-            <div class="flow-card">
-                <div class="flow-num">07</div>
-                <h3>Bildirgeler ve Sunum</h3>
-                <p>Çalıştayın sonunda, komitelerde ele alınan konular doğrultusunda resmi bildirgeler hazırlanır ve tüm katılımcıların önünde konferans salonunda jüriye/dinleyicilere sunulur.</p>
-            </div>
-
-            <div class="flow-card">
-                <div class="flow-num">08</div>
-                <h3>Sertifika ve Ödüller</h3>
-                <p>Kapanış töreninde tüm katılımcılara emekleri için resmi bir katılım sertifikası verilir; ayrıca komite içinde en aktif performans gösteren katılımcılar ödüllendirilir.</p>
-            </div>
-
+            <div class="flow-card"><div class="flow-num">01</div><h3>Başvuru ve Motivasyon</h3><p>Başvuru sürecinde adaylar, internet sitesi üzerinden gerekli bilgileri doldurur ve bir motivasyon mektubu yazar.</p></div>
+            <div class="flow-card"><div class="flow-num">02</div><h3>Komitelerin Belirlenmesi</h3><p>Komiteler; tarih, biyoloji, edebiyat, felsefe gibi farklı alanlara ayrılarak katılımcıların ilgi duydukları konularda yer almalarını sağlar.</p></div>
+            <div class="flow-card"><div class="flow-num">03</div><h3>Çalışma Rehberi</h3><p>Başvurusu kabul edilen katılımcılara, oturum öncesinde komitelerine ait özel bir çalışma rehberi gönderilir.</p></div>
+            <div class="flow-card"><div class="flow-num">04</div><h3>İlk Gün ve Seminerler</h3><p>Çalıştay günü genellikle sabah saatlerinde başlar ve akademisyenlerin katılımıyla seminerler düzenlenir.</p></div>
+            <div class="flow-card"><div class="flow-num">05</div><h3>Tanışma ve Tartışmalar</h3><p>Oturumlar kaynaşma etkinlikleriyle başlayabilir. Gün boyunca belirlenen konular üzerine tartışmalar yapılır.</p></div>
+            <div class="flow-card"><div class="flow-num">06</div><h3>Molalar ve Sosyalleşme</h3><p>Oturumların arasında "coffee break" molaları verilir. Katılımcılar dinlenir ve diğer komitelerle sosyalleşir.</p></div>
+            <div class="flow-card"><div class="flow-num">07</div><h3>Bildirgeler ve Sunum</h3><p>Çalıştayın sonunda, komitelerde ele alınan konular doğrultusunda resmi bildirgeler hazırlanır ve sunulur.</p></div>
+            <div class="flow-card"><div class="flow-num">08</div><h3>Sertifika ve Ödüller</h3><p>Kapanış töreninde tüm katılımcılara katılım sertifikası verilir; en aktif katılımcılar ödüllendirilir.</p></div>
         </div>
 
         <div class="summary-box">
             <h3>Unutulmaz Bir Deneyim</h3>
-            <p>Çalıştaylar; sadece akademik bilgi edinmenin yanı sıra sosyalleşme, yeni bakış açıları keşfetme, topluluk önünde konuşma becerilerini geliştirme ve ömür boyu sürecek kalıcı dostluklar kurma açısından benzersiz bir lise deneyimi sunar.</p>
+            <p>Çalıştaylar; sadece akademik bilgi edinmenin yanı sıra sosyalleşme, yeni bakış açıları keşfetme ve ömür boyu sürecek dostluklar kurma açısından benzersiz bir deneyim sunar.</p>
         </div>
-
     </div>
 
+    <!-- MASKOTLAR -->
     <a href="iletisim.html" id="smoothStitch" class="stitch-container">
         <img src="stitch.jpg" alt="Stitch Maskot" class="stitch-img">
         <div class="stitch-bubble">Başvurularımız başladı! Hemen sen de gel başvur. 🚀</div>
     </a>
 
+    <a href="komitelerimiz.html" id="smoothSquirtle" class="squirtle-container">
+        <div class="squirtle-bubble">Komitelerimiz ve çalışma rehberleri yayınlandı! 📋✨</div>
+        <img src="squirtle.png" alt="Squirtle Maskot" class="squirtle-img">
+    </a>
+
     <footer class="main-footer">
         <div class="footer-content">
             <div class="footer-logo">Lüleburgaz Anadolu Lisesi Çalıştayı</div>
-
             <div class="footer-socials">
-                <a href="https://www.instagram.com/lalcalistay" target="_blank" class="social-link">
-                    <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram">
-                    <span>@lalcalistay</span>
-                </a>
-                <a href="https://www.tiktok.com/@lalcalistay" target="_blank" class="social-link">
-                    <img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" alt="TikTok">
-                    <span>@lalcalistay</span>
-                </a>
-                <a href="mailto:lalcalistay1989@gmail.com" class="social-link">
-                    <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Gmail">
-                    <span>lalcalistay1989@gmail.com</span>
-                </a>
+                <a href="https://www.instagram.com/lalcalistay" target="_blank" class="social-link"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram"><span>@lalcalistay</span></a>
+                <a href="https://www.tiktok.com/@lalcalistay" target="_blank" class="social-link"><img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" alt="TikTok"><span>@lalcalistay</span></a>
+                <a href="mailto:lalcalistay1989@gmail.com" class="social-link"><img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Gmail"><span>lalcalistay1989@gmail.com</span></a>
             </div>
-
-            <div class="footer-copy">
-                &copy; 2026 Lal Çalıştay. Tüm Hakları Saklıdır.
-            </div>
+            <div class="footer-copy">&copy; 2026 Lal Çalıştay. Tüm Hakları Saklıdır.</div>
         </div>
     </footer>
 
@@ -606,36 +619,38 @@
             }, 100);
         });
 
-        // GÜNCELLENDİ: Kaydırmaya Duyarlı Gecikmeli Takip Motoru
+        // MASCOT ANIMATIONS (LERP)
         const stitch = document.getElementById('smoothStitch');
+        const squirtle = document.getElementById('smoothSquirtle');
         
-        let currentY = window.scrollY + (window.innerHeight / 2); 
-        let targetY = currentY; 
-        const speed = 0.07; 
-
-        function smoothScrollStitch() {
-            targetY = window.scrollY + (window.innerHeight / 2);
-            currentY += (targetY - currentY) * speed;
-            stitch.style.transform = `translateY(${currentY - (stitch.offsetHeight / 2)}px)`;
-            requestAnimationFrame(smoothScrollStitch);
+        let stitchCurrentY = window.scrollY + (window.innerHeight / 2);
+        let squirtleCurrentY = window.scrollY + (window.innerHeight / 2);
+        
+        function animateMascots() {
+            let targetY = window.scrollY + (window.innerHeight / 2);
+            
+            stitchCurrentY += (targetY - stitchCurrentY) * 0.07;
+            squirtleCurrentY += (targetY - squirtleCurrentY) * 0.06;
+            
+            stitch.style.transform = `translateY(${stitchCurrentY - 40}px)`;
+            squirtle.style.transform = `translateY(${squirtleCurrentY - 40}px)`;
+            
+            requestAnimationFrame(animateMascots);
         }
-        
-        requestAnimationFrame(smoothScrollStitch);
+        requestAnimationFrame(animateMascots);
 
-        document.querySelectorAll('.nav-links a, .logo-container, .btn, .stitch-container').forEach(link => {
+        // PAGE EXIT
+        document.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', function(e) {
                 const targetUrl = this.getAttribute('href');
                 if (targetUrl && !targetUrl.startsWith('http') && !targetUrl.startsWith('mailto:') && targetUrl !== '#') {
                     e.preventDefault();
                     document.body.classList.remove('page-ready');
                     document.body.classList.add('page-exit');
-                    setTimeout(() => {
-                        window.location.href = targetUrl;
-                    }, 400);
+                    setTimeout(() => { window.location.href = targetUrl; }, 400);
                 }
             });
         });
     </script>
-
 </body>
 </html>
