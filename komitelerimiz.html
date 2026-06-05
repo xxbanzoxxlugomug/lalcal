@@ -317,7 +317,7 @@
             background: linear-gradient(135deg, #475569, #1e293b);
         }
 
-        /* İNDEX.HTML'DEKİ GİBİ ABSOLUTE VE LERP İLE SÜZÜLEN STITCH */
+        /* SOL STITCH - Orijinal */
         .stitch-container {
             position: absolute;
             top: 0;
@@ -394,6 +394,90 @@
         }
 
         .stitch-container:hover .stitch-bubble {
+            animation-play-state: paused;
+            border-color: #38bdf8;
+        }
+
+        /* SAĞ SQUIRTLE - Yeni, aynı sistem */
+        .squirtle-container {
+            position: absolute;
+            top: 0;
+            right: 20px;
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            cursor: pointer;
+            will-change: transform;
+        }
+
+        /* Squirtle baloncuğu sağda olduğu için ok sağa bakıyor */
+        .squirtle-bubble {
+            background: #ffffff;
+            color: #0f172a;
+            padding: 12px 18px;
+            border-radius: 18px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            width: 220px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            border: 2px solid #1a73e8;
+            position: relative;
+            margin-right: 15px;
+            order: -1; /* Baloncuk solda, squirtle sağda */
+            animation: bubbleSlideFloat 4s ease-in-out infinite 0.8s, bubbleShakeRight 2.5s cubic-bezier(.36,.07,.19,.97) infinite 0.3s;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.3s ease;
+        }
+
+        /* Ok sağ tarafa bakıyor */
+        .squirtle-bubble::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: -10px;
+            transform: translateY(-50%);
+            border-width: 10px 0 10px 10px;
+            border-style: solid;
+            border-color: transparent transparent transparent #ffffff;
+            display: block;
+            width: 0;
+        }
+
+        .squirtle-bubble::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: -13px;
+            transform: translateY(-50%);
+            border-width: 11px 0 11px 11px;
+            border-style: solid;
+            border-color: transparent transparent transparent #1a73e8;
+            display: block;
+            width: 0;
+            z-index: -1;
+        }
+
+        .squirtle-img {
+            width: 85px;
+            height: 85px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #1a73e8;
+            box-shadow: 5px 5px 20px rgba(0,0,0,0.2);
+            background-color: #ffffff;
+            animation: stitchShake 2.5s cubic-bezier(.36,.07,.19,.97) infinite 0.5s;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .squirtle-container:hover .squirtle-img {
+            animation-play-state: paused;
+            transform: scale(1.08) rotate(-5deg);
+            border-color: #38bdf8;
+            box-shadow: 8px 8px 25px rgba(56, 189, 248, 0.4);
+        }
+
+        .squirtle-container:hover .squirtle-bubble {
             animation-play-state: paused;
             border-color: #38bdf8;
         }
@@ -493,6 +577,14 @@
             92% { transform: translateX(-2px); }
         }
 
+        @keyframes bubbleShakeRight {
+            0%, 80%, 100% { transform: translateX(0); }
+            82%, 86%, 94% { transform: translateX(-4px); }
+            84%, 90%, 96% { transform: translateX(4px); }
+            88% { transform: translateX(-2px); }
+            92% { transform: translateX(2px); }
+        }
+
         /* Mobil */
         @media (max-width: 768px) {
             .navbar { flex-direction: column; gap: 15px; padding: 20px; }
@@ -504,6 +596,9 @@
             .stitch-container { left: 10px; }
             .stitch-img { width: 65px; height: 65px; }
             .stitch-bubble { width: 150px; font-size: 0.7rem; margin-left: 8px; }
+            .squirtle-container { right: 10px; }
+            .squirtle-img { width: 65px; height: 65px; }
+            .squirtle-bubble { width: 150px; font-size: 0.7rem; margin-right: 8px; }
         }
     </style>
 </head>
@@ -643,9 +738,16 @@
         </div>
     </div>
 
+    <!-- SOL STITCH - Orijinal, iletişim sayfasına yönlendirir -->
     <a href="iletisim.html" class="stitch-container">
         <img src="stitch.jpg" alt="Stitch Maskot" class="stitch-img">
         <div class="stitch-bubble">Başvurularımız başladı! Hemen sen de gel başvur. 🚀</div>
+    </a>
+
+    <!-- SAĞ SQUIRTLE - Yeni, komiteler sayfasına yönlendirir -->
+    <a href="komitelerimiz.html" class="squirtle-container">
+        <div class="squirtle-bubble">Komitelerimiz ve çalışma rehberleri yayınlandı! 📋✨</div>
+        <img src="squirtle.png" alt="Squirtle Maskot" class="squirtle-img">
     </a>
 
     <footer class="main-footer">
@@ -681,22 +783,36 @@
             }, 100);
             
             updateStitchPosition();
+            updateSquirtlePosition();
         });
 
-        // İNDEX.HTML'DEKİ GİBİ LERP İLE ARKADAN TAKİP EDEN SİSTEM
+        // SOL STITCH - LERP ile arkadan takip eden sistem
         const stitch = document.querySelector('.stitch-container');
-        let currentY = window.scrollY + (window.innerHeight / 2); 
-        let targetY = currentY;
-        const speed = 0.08; 
+        let stitchCurrentY = window.scrollY + (window.innerHeight / 2); 
+        let stitchTargetY = stitchCurrentY;
+        const stitchSpeed = 0.08; 
 
         function updateStitchPosition() {
-            targetY = window.scrollY + (window.innerHeight / 2);
-            currentY += (targetY - currentY) * speed;
-            stitch.style.transform = `translateY(${currentY - 42}px)`;
+            stitchTargetY = window.scrollY + (window.innerHeight / 2);
+            stitchCurrentY += (stitchTargetY - stitchCurrentY) * stitchSpeed;
+            stitch.style.transform = `translateY(${stitchCurrentY - 42}px)`;
             requestAnimationFrame(updateStitchPosition);
         }
 
-        document.querySelectorAll('.nav-links a, .logo-container, .stitch-container').forEach(link => {
+        // SAĞ SQUIRTLE - Aynı LERP sistemi, hafif faz farkıyla
+        const squirtle = document.querySelector('.squirtle-container');
+        let squirtleCurrentY = window.scrollY + (window.innerHeight / 2);
+        let squirtleTargetY = squirtleCurrentY;
+        const squirtleSpeed = 0.06; // Biraz daha yavaş, farklı hissettirmek için
+
+        function updateSquirtlePosition() {
+            squirtleTargetY = window.scrollY + (window.innerHeight / 2);
+            squirtleCurrentY += (squirtleTargetY - squirtleCurrentY) * squirtleSpeed;
+            squirtle.style.transform = `translateY(${squirtleCurrentY - 42}px)`;
+            requestAnimationFrame(updateSquirtlePosition);
+        }
+
+        document.querySelectorAll('.nav-links a, .logo-container, .stitch-container, .squirtle-container').forEach(link => {
             link.addEventListener('click', function(e) {
                 const targetUrl = this.getAttribute('href');
                 
