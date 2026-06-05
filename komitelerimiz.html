@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Komitelerimiz - Lal Çalıştay</title>
-    <!-- Tarayıcı Sekme Logosu (Favicon) -->
     <link class="favicon" rel="icon" type="image/png" href="lal.png">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
@@ -275,8 +274,15 @@
         .komite-card p {
             color: #64748b;
             font-size: 0.95rem;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             flex-grow: 1;
+        }
+
+        /* YENİ EKLENEN BUTON YAPISI */
+        .card-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
         }
 
         .more-btn {
@@ -287,12 +293,13 @@
             background: linear-gradient(135deg, #1a73e8, #1e3a8a);
             color: white;
             text-decoration: none;
-            padding: 12px 24px;
+            padding: 12px 20px;
             border-radius: 10px;
             font-weight: 600;
             font-size: 0.9rem;
             transition: all 0.3s ease;
             box-shadow: 0 4px 12px rgba(26, 115, 232, 0.2);
+            flex: 1;
         }
 
         .more-btn:hover {
@@ -301,9 +308,18 @@
             transform: translateY(-1px);
         }
 
+        /* Çalışma Rehberi Buton Stili */
+        .rehber-btn {
+            background: linear-gradient(135deg, #64748b, #475569);
+            box-shadow: 0 4px 12px rgba(100, 116, 139, 0.2);
+        }
+        .rehber-btn:hover {
+            background: linear-gradient(135deg, #475569, #1e293b);
+        }
+
         /* İNDEX.HTML'DEKİ GİBİ ABSOLUTE VE LERP İLE SÜZÜLEN STITCH */
         .stitch-container {
-            position: absolute; /* Document body'sine bağlı, js ile scroll'a yetişecek */
+            position: absolute;
             top: 0;
             left: 20px;
             z-index: 2000;
@@ -493,7 +509,6 @@
 </head>
 <body>
 
-    <!-- Sayfa Geçiş Örtüsü -->
     <div class="page-transition-overlay"></div>
 
     <nav class="navbar">
@@ -529,7 +544,10 @@
                     </div>
                     <p>Geleceğin öğrenim modellerinin, eğitimde fırsat eşitliğinin ve modern pedagojik yaklaşımların bilimsel süzgeçten geçirilerek tartışıldığı dinamik alanımız.</p>
                 </div>
-                <a href="egitim.pdf" target="_blank" class="more-btn">Dahası...</a>
+                <div class="card-buttons">
+                    <a href="egitim.pdf" target="_blank" class="more-btn">Dahası...</a>
+                    <a href="cegitim.pdf" target="_blank" class="more-btn rehber-btn">Çalışma Rehberi</a>
+                </div>
             </div>
 
             <div class="komite-card">
@@ -544,7 +562,10 @@
                     </div>
                     <p>İnternet çağında veri gizliliği, siber suçlar, yapay zekanın yasal statüsü ve dijital dünyadaki insan haklarının hukuki temellerini inceleyen vizyoner komite.</p>
                 </div>
-                <a href="hukuk.pdf" target="_blank" class="more-btn">Dahası...</a>
+                <div class="card-buttons">
+                    <a href="hukuk.pdf" target="_blank" class="more-btn">Dahası...</a>
+                    <a href="chukuk.pdf" target="_blank" class="more-btn rehber-btn">Çalışma Rehberi</a>
+                </div>
             </div>
 
             <div class="komite-card">
@@ -559,7 +580,10 @@
                     </div>
                     <p>Modern çağın insan psikolojisi üzerindeki etkilerini, toplumsal davranış modellerini, zihinsel sağlık stratejilerini ve bireysel farkındalığı masaya yatıran derin tartışma alanı.</p>
                 </div>
-                <a href="psikoloji.pdf" target="_blank" class="more-btn">Dahası...</a>
+                <div class="card-buttons">
+                    <a href="psikoloji.pdf" target="_blank" class="more-btn">Dahası...</a>
+                    <a href="cpsikoloji.pdf" target="_blank" class="more-btn rehber-btn">Çalışma Rehberi</a>
+                </div>
             </div>
 
             <div class="komite-card">
@@ -574,7 +598,10 @@
                     </div>
                     <p>Toplumsal değişimleri, göç hareketlerini, kültürlerarası etkileşimleri ve kentleşme süreçlerinin getirdiği modern sosyolojik krizleri ve çözüm yollarını arayan küresel komitemiz.</p>
                 </div>
-                <a href="sosyoloji.pdf" target="_blank" class="more-btn">Dahası...</a>
+                <div class="card-buttons">
+                    <a href="sosyoloji.pdf" target="_blank" class="more-btn">Dahası...</a>
+                    <a href="csosyoloji.pdf" target="_blank" class="more-btn rehber-btn">Çalışma Rehberi</a>
+                </div>
             </div>
 
             <div class="komite-card">
@@ -589,7 +616,10 @@
                     </div>
                     <p>Yeni nesil kitle iletişim araçlarını, algı yönetimini, dezenformasyonu (yalan haber), sosyal medyanın gücünü ve modern gazeteciliğin etik kodlarını sorgulayan dinamik komite.</p>
                 </div>
-                <a href="medya.pdf" target="_blank" class="more-btn">Dahası...</a>
+                <div class="card-buttons">
+                    <a href="medya.pdf" target="_blank" class="more-btn">Dahası...</a>
+                    <a href="cmedya.pdf" target="_blank" class="more-btn rehber-btn">Çalışma Rehberi</a>
+                </div>
             </div>
 
             <div class="komite-card">
@@ -604,13 +634,15 @@
                     </div>
                     <p>Büyük dil modellerini, otomasyonu, transhümanizmi, kuantum bilgisayarları ve yapay zekanın insanlığın geleceğini nasıl şekillendireceğini masaya yatıran fütüristik komitemiz.</p>
                 </div>
-                <a href="teknoloji.pdf" target="_blank" class="more-btn">Dahası...</a>
+                <div class="card-buttons">
+                    <a href="teknoloji.pdf" target="_blank" class="more-btn">Dahası...</a>
+                    <a href="cteknoloji.pdf" target="_blank" class="more-btn rehber-btn">Çalışma Rehberi</a>
+                </div>
             </div>
 
         </div>
     </div>
 
-    <!-- PÜRÜZSÜZ LERP MOTORUYLA PENCEREDE YÜZEN STITCH MASKOTU -->
     <a href="iletisim.html" class="stitch-container">
         <img src="stitch.jpg" alt="Stitch Maskot" class="stitch-img">
         <div class="stitch-bubble">Başvurularımız başladı! Hemen sen de gel başvur. 🚀</div>
@@ -641,7 +673,6 @@
         </div>
     </footer>
 
-    <!-- SAYFA GEÇİŞ VE ATALETLİ SCROLL MOTORU -->
     <script>
         window.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
@@ -654,21 +685,14 @@
 
         // İNDEX.HTML'DEKİ GİBİ LERP İLE ARKADAN TAKİP EDEN SİSTEM
         const stitch = document.querySelector('.stitch-container');
-        // Başlangıç noktasını o anki scroll seviyesine göre ayarla ki sayfayı yenileyince yukarıdan uçarak gelmesin
         let currentY = window.scrollY + (window.innerHeight / 2); 
         let targetY = currentY;
-        const speed = 0.08; // Yumuşaklık (lerp katsayısı)
+        const speed = 0.08; 
 
         function updateStitchPosition() {
-            // Hedef Y: Sen ne kadar scroll yaparsan + ekranın yarısı
             targetY = window.scrollY + (window.innerHeight / 2);
-
-            // Aradaki farkı yumuşatarak kapatan LERP algoritması
             currentY += (targetY - currentY) * speed;
-
-            // Maskotu ortaya tam oturtmak için kendi boyunun yarısını çıkartıyoruz (-42)
             stitch.style.transform = `translateY(${currentY - 42}px)`;
-
             requestAnimationFrame(updateStitchPosition);
         }
 
@@ -688,6 +712,5 @@
             });
         });
     </script>
-
 </body>
 </html>
