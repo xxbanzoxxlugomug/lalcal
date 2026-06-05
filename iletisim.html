@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>İletişim & Başvuru - Lal Çalıştay</title>
-    <!-- Tarayıcı Sekme Logosu (Favicon) -->
     <link rel="icon" type="image/png" href="lal.png">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
@@ -21,6 +20,7 @@
             color: #f8fafc;
             line-height: 1.6;
             overflow-x: hidden;
+            position: relative;
         }
 
         /* Üst Menü Barı (Navbar) */
@@ -334,6 +334,89 @@
             transform: translateY(-1px);
         }
 
+        /* SAĞ SQUIRTLE */
+        .squirtle-container {
+            position: absolute;
+            top: 0;
+            right: 0;
+            z-index: 9995;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            cursor: pointer;
+            padding-right: 5px;
+            will-change: transform;
+        }
+
+        .squirtle-bubble {
+            background: #ffffff;
+            color: #0f172a;
+            padding: 12px 18px;
+            border-radius: 18px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            width: 220px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            border: 2px solid #1a73e8;
+            position: relative;
+            margin-right: 15px;
+            order: -1;
+            animation: bubbleSlideFloat 4s ease-in-out infinite 0.8s, bubbleShakeRight 2.5s cubic-bezier(.36,.07,.19,.97) infinite 0.3s;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.3s ease;
+        }
+
+        .squirtle-bubble::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: -10px;
+            transform: translateY(-50%);
+            border-width: 10px 0 10px 10px;
+            border-style: solid;
+            border-color: transparent transparent transparent #ffffff;
+            display: block;
+            width: 0;
+        }
+
+        .squirtle-bubble::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: -13px;
+            transform: translateY(-50%);
+            border-width: 11px 0 11px 11px;
+            border-style: solid;
+            border-color: transparent transparent transparent #1a73e8;
+            display: block;
+            width: 0;
+            z-index: -1;
+        }
+
+        .squirtle-img {
+            width: 85px;
+            height: 85px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #1a73e8;
+            box-shadow: 5px 5px 20px rgba(0,0,0,0.2);
+            background-color: #ffffff;
+            animation: stitchShake 2.5s cubic-bezier(.36,.07,.19,.97) infinite 0.5s;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .squirtle-container:hover .squirtle-img {
+            animation-play-state: paused;
+            transform: scale(1.08) rotate(-5deg);
+            border-color: #38bdf8;
+            box-shadow: 8px 8px 25px rgba(56, 189, 248, 0.4);
+        }
+
+        .squirtle-container:hover .squirtle-bubble {
+            animation-play-state: paused;
+            border-color: #38bdf8;
+        }
+
         /* Footer */
         .main-footer {
             background: #090d16;
@@ -359,6 +442,23 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
+        @keyframes bubbleSlideFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-4px); }
+        }
+
+        @keyframes stitchShake {
+            0%, 80%, 100% { transform: rotate(0deg); }
+            82%, 86%, 94% { transform: rotate(-5deg); }
+            84%, 90%, 96% { transform: rotate(5deg); }
+        }
+
+        @keyframes bubbleShakeRight {
+            0%, 80%, 100% { transform: translateX(0); }
+            82%, 86%, 94% { transform: translateX(-4px); }
+            84%, 90%, 96% { transform: translateX(4px); }
+        }
+
         /* Mobil Uyum */
         @media (max-width: 768px) {
             .navbar { flex-direction: column; gap: 15px; padding: 20px; }
@@ -369,12 +469,13 @@
             .form-row { grid-template-columns: 1fr; gap: 20px; }
             .full-width { grid-column: span 1; }
             .form-section { padding: 35px 20px; }
+            .squirtle-img { width: 65px; height: 65px; }
+            .squirtle-bubble { width: 150px; font-size: 0.7rem; margin-right: 8px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- ÜST MENÜ -->
     <nav class="navbar">
         <a href="index.html" class="logo-container">
             <img src="lal.png" alt="Lal Logo" class="navbar-logo-img">
@@ -388,19 +489,15 @@
         </ul>
     </nav>
 
-    <!-- SAYFA BAŞLIĞI -->
     <header class="page-header">
         <h1>Başvuru & İletişim Formu</h1>
         <p>Görüşleriniz bizim için değerli. Ekibimizle anında iletişime geçin.</p>
     </header>
 
-    <!-- ANA KONTEYNER -->
     <div class="container">
         
-        <!-- SOSYAL MEDYA ŞERİDİ -->
         <div class="horizontal-social-bar">
             
-            <!-- Instagram -->
             <a href="https://www.instagram.com/lalcalistay" target="_blank" class="social-item">
                 <div class="icon-circle">
                     <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram">
@@ -411,7 +508,6 @@
                 </div>
             </a>
 
-            <!-- TikTok -->
             <a href="https://www.tiktok.com/@lalcalistay" target="_blank" class="social-item">
                 <div class="icon-circle">
                     <img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" alt="TikTok">
@@ -422,7 +518,6 @@
                 </div>
             </a>
 
-            <!-- Gmail -->
             <a href="mailto:lalcalistay1989@gmail.com" class="social-item">
                 <div class="icon-circle">
                     <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Gmail">
@@ -435,7 +530,6 @@
 
         </div>
 
-        <!-- FORM ALANI -->
         <section class="form-section">
             <h2 class="section-title">Resmi Başvuru ve Mesaj Alanı</h2>
             <p class="section-subtitle">Çalıştaya katılmak için bilgilerinizi girip motivasyonunuzu bizimle paylaşabilirsiniz.</p>
@@ -443,25 +537,21 @@
             <form onsubmit="sendMail(event)">
                 <div class="form-row">
                     
-                    <!-- Ad Soyad -->
                     <div class="input-box">
                         <label for="name">Adınız ve Soyadınız</label>
                         <input type="text" id="name" class="form-input" placeholder="Adınızı yazın" required>
                     </div>
 
-                    <!-- Telefon Numarası -->
                     <div class="input-box">
                         <label for="phone">Telefon Numaranız</label>
                         <input type="tel" id="phone" class="form-input" placeholder="05XX XXX XX XX" required>
                     </div>
 
-                    <!-- Okul İsmi -->
                     <div class="input-box full-width">
                         <label for="school">Okul İsminiz</label>
                         <input type="text" id="school" class="form-input" placeholder="Okulunuzun adını yazın" required>
                     </div>
 
-                    <!-- Mesaj -->
                     <div class="input-box full-width">
                         <label for="message">Mesajınız</label>
                         <textarea id="message" class="form-input" placeholder="Mesajınız" required></textarea>
@@ -469,14 +559,27 @@
 
                 </div>
 
-                <!-- Gönder Butonu -->
                 <button type="submit" class="action-btn">Mesajı Gönder</button>
             </form>
         </section>
 
     </div>
 
-    <!-- JAVASCRIPT MAILTO -->
+    <!-- SAĞ SQUIRTLE - Komiteler sayfasına yönlendirir -->
+    <a href="komitelerimiz.html" id="smoothSquirtle" class="squirtle-container">
+        <div class="squirtle-bubble">Komitelerimiz ve çalışma rehberleri yayınlandı! 📋✨</div>
+        <img src="squirtle.png" alt="Squirtle Maskot" class="squirtle-img">
+    </a>
+
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="footer-logo">Lüleburgaz Anadolu Lisesi Çalıştayı</div>
+            <div style="font-size: 0.85rem; color: #334155; margin-top: 5px;">
+                &copy; 2026 Lal Çalıştay. Tüm Hakları Saklıdır.
+            </div>
+        </div>
+    </footer>
+
     <script>
         function sendMail(event) {
             event.preventDefault();
@@ -495,17 +598,21 @@
             
             window.location.href = "mailto:lalcalistay1989@gmail.com?subject=" + subject + "&body=" + body;
         }
-    </script>
 
-    <!-- FOOTER -->
-    <footer class="main-footer">
-        <div class="footer-content">
-            <div class="footer-logo">Lüleburgaz Anadolu Lisesi Çalıştayı</div>
-            <div style="font-size: 0.85rem; color: #334155; margin-top: 5px;">
-                &copy; 2026 Lal Çalıştay. Tüm Hakları Saklıdır.
-            </div>
-        </div>
-    </footer>
+        // SAĞ SQUIRTLE - LERP ile gecikmeli takip
+        const squirtle = document.getElementById('smoothSquirtle');
+        let squirtleCurrentY = window.scrollY + (window.innerHeight / 2);
+        let squirtleTargetY = squirtleCurrentY;
+        const squirtleSpeed = 0.06;
+
+        function smoothScrollSquirtle() {
+            squirtleTargetY = window.scrollY + (window.innerHeight / 2);
+            squirtleCurrentY += (squirtleTargetY - squirtleCurrentY) * squirtleSpeed;
+            squirtle.style.transform = `translateY(${squirtleCurrentY - (squirtle.offsetHeight / 2)}px)`;
+            requestAnimationFrame(smoothScrollSquirtle);
+        }
+        requestAnimationFrame(smoothScrollSquirtle);
+    </script>
 
 </body>
 </html>
