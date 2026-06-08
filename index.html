@@ -418,7 +418,6 @@
             transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.3s ease;
         }
 
-        /* Ok sağa bakıyor */
         .squirtle-bubble::after {
             content: '';
             position: absolute;
@@ -568,7 +567,7 @@
             84%, 90%, 96% { transform: translateX(4px); }
         }
 
-        /* Mobil Tasarım (Güncellenmiş Kısım) */
+        /* MOBİL TASARIM (DÜZELTİLMİŞ KISIM) */
         @media (max-width: 768px) {
             .navbar { flex-direction: column; gap: 15px; padding: 20px; }
             .nav-links { gap: 15px; flex-wrap: wrap; justify-content: center; }
@@ -576,20 +575,53 @@
             .hero h1 { font-size: 1.8rem; }
             .main-content { margin: -30px auto 40px; gap: 25px; }
             
-            /* Maskotları mobil için daha minimal boyutlara çekiyoruz */
+            /* Mobilde baloncukları dikey olarak maskotun altına hizalıyoruz */
+            .stitch-container { flex-direction: column; align-items: flex-start; padding-left: 5px; margin-left: 0; }
+            .squirtle-container { flex-direction: column; align-items: flex-end; padding-right: 5px; margin-right: 0; }
+            
             .stitch-img, .squirtle-img { 
-                width: 50px; 
-                height: 50px; 
+                width: 55px; 
+                height: 55px; 
             }
             
-            /* Ekranı kapatmamaları için mobilde baloncukları gizliyoruz */
+            /* Mobilde baloncuklar görünür, dar ve küçük boyutlarda */
             .stitch-bubble, .squirtle-bubble { 
-                display: none; 
+                display: block; 
+                width: 140px; 
+                font-size: 0.75rem; 
+                padding: 8px 12px;
+                margin: 8px 0 0 0; /* Artık yanda değil alttalar */
             }
-            
-            /* Mobilde parmakla tıklamayı kolaylaştırmak için kenar boşluklarını sıfırlıyoruz */
-            .stitch-container { padding-left: 0; }
-            .squirtle-container { padding-right: 0; }
+
+            .squirtle-bubble {
+                order: 1; /* Squirtle görseli üstte, balonu altta çıksın diye */
+            }
+
+            /* Stitch Okunu Mobilde Yukarı Baktırma */
+            .stitch-bubble::after {
+                top: -10px; left: 15px; transform: none;
+                border-width: 0 10px 10px 10px;
+                border-color: transparent transparent #ffffff transparent;
+            }
+            .stitch-bubble::before {
+                top: -13px; left: 14px; transform: none;
+                border-width: 0 11px 11px 11px;
+                border-color: transparent transparent #1a73e8 transparent;
+            }
+
+            /* Squirtle Okunu Mobilde Yukarı Baktırma */
+            .squirtle-bubble::after {
+                top: -10px; right: 15px; transform: none;
+                border-width: 0 10px 10px 10px;
+                border-color: transparent transparent #ffffff transparent;
+                left: auto;
+            }
+            .squirtle-bubble::before {
+                top: -13px; right: 14px; transform: none;
+                border-width: 0 11px 11px 11px;
+                border-color: transparent transparent #1a73e8 transparent;
+                left: auto;
+            }
         }
     </style>
 </head>
@@ -646,13 +678,11 @@
         <a href="iletisim.html" class="btn">İletişime Geç</a>
     </section>
 
-    <!-- SOL STITCH - İletişim sayfasına yönlendirir -->
     <a href="iletisim.html" id="smoothStitch" class="stitch-container">
         <img src="stitch.jpg" alt="Stitch Maskot" class="stitch-img">
         <div class="stitch-bubble">Başvurularımız başladı! Hemen sen de gel başvur. 🚀</div>
     </a>
 
-    <!-- SAĞ SQUIRTLE - Komiteler sayfasına yönlendirir -->
     <a href="komitelerimiz.html" id="smoothSquirtle" class="squirtle-container">
         <div class="squirtle-bubble">Komitelerimiz ve çalışma rehberleri yayınlandı! 📋✨</div>
         <img src="squirtle.png" alt="Squirtle Maskot" class="squirtle-img">
@@ -688,7 +718,7 @@
             }, 100);
         });
 
-        // SOL STITCH - LERP ile gecikmeli takip
+        // SOL STITCH - LERP
         const stitch = document.getElementById('smoothStitch');
         let stitchCurrentY = window.scrollY + (window.innerHeight / 2); 
         let stitchTargetY = stitchCurrentY;
@@ -702,14 +732,14 @@
         }
         requestAnimationFrame(smoothScrollStitch);
 
-        // SAĞ SQUIRTLE - 60px (yaklaşık 1 parmak) offset eklendi
+        // SAĞ SQUIRTLE (1 parmak mesafe = 60px kuralı korunuyor)
         const squirtle = document.getElementById('smoothSquirtle');
         let squirtleCurrentY = window.scrollY + (window.innerHeight / 2) + 60;
         let squirtleTargetY = squirtleCurrentY;
         const squirtleSpeed = 0.06;
 
         function smoothScrollSquirtle() {
-            squirtleTargetY = window.scrollY + (window.innerHeight / 2) + 60; // 60px aşağıda olması için offset
+            squirtleTargetY = window.scrollY + (window.innerHeight / 2) + 60; 
             squirtleCurrentY += (squirtleTargetY - squirtleCurrentY) * squirtleSpeed;
             squirtle.style.transform = `translateY(${squirtleCurrentY - (squirtle.offsetHeight / 2)}px)`;
             requestAnimationFrame(smoothScrollSquirtle);
