@@ -1,618 +1,1828 @@
 <!DOCTYPE html>
+
+
 <html lang="tr">
+
+
 <head>
+
+
     <meta charset="UTF-8">
+
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
     <title>İletişim & Başvuru - Lal Çalıştay</title>
+
+
     <link rel="icon" type="image/png" href="lal.png">
+
+
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+
     <style>
+
+
         /* Genel Sayfa Ayarları */
+
+
         * {
+
+
             margin: 0;
+
+
             padding: 0;
+
+
             box-sizing: border-box;
+
+
             font-family: 'Poppins', sans-serif;
+
+
         }
+
+
 
         body {
+
+
             background-color: #0f172a;
+
+
             color: #f8fafc;
+
+
             line-height: 1.6;
+
+
             overflow-x: hidden;
+
+
             position: relative;
+
+
         }
+
+
 
         /* Üst Menü Barı (Navbar) */
+
+
         .navbar {
+
+
             background: linear-gradient(135deg, #090d16, #1e3a8a);
+
+
             color: white;
+
+
             padding: 15px 5%;
+
+
             display: flex;
+
+
             justify-content: space-between;
+
+
             align-items: center;
+
+
             position: sticky;
+
+
             top: 0;
+
+
             z-index: 1000;
+
+
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+
+
         }
+
+
 
         .logo-container {
+
+
             display: flex;
+
+
             align-items: center;
+
+
             gap: 12px;
+
+
             text-decoration: none;
+
+
             cursor: pointer;
+
+
         }
+
+
 
         .navbar-logo-img {
+
+
             width: 38px;
+
+
             height: 38px;
+
+
             object-fit: contain;
+
+
             filter: drop-shadow(0 2px 8px rgba(56, 189, 248, 0.3));
+
+
         }
+
+
 
         .logo {
+
+
             font-weight: 700;
+
+
             font-size: 1.3rem;
+
+
             letter-spacing: 1px;
+
+
             text-transform: uppercase;
+
+
             background: linear-gradient(to right, #ffffff, #38bdf8, #1a73e8, #ffffff);
+
+
             background-size: 300% auto;
+
+
             -webkit-background-clip: text;
+
+
             -webkit-text-fill-color: transparent;
+
+
             animation: textShine 7s linear infinite;
+
+
         }
+
+
 
         .nav-links {
+
+
             list-style: none;
+
+
             display: flex;
+
+
             gap: 25px;
+
+
             margin-left: auto;
+
+
         }
+
+
 
         .nav-links a {
+
+
             color: rgba(255, 255, 255, 0.85);
+
+
             text-decoration: none;
+
+
             font-size: 0.95rem;
+
+
             font-weight: 500;
+
+
             position: relative;
+
+
             padding: 5px 0;
+
+
             transition: color 0.3s ease;
+
+
         }
+
+
 
         .nav-links a::after {
+
+
             content: '';
+
+
             position: absolute;
+
+
             width: 100%;
+
+
             transform: scaleX(0);
+
+
             height: 2px;
+
+
             bottom: 0;
+
+
             left: 0;
+
+
             background-color: #38bdf8;
+
+
             transform-origin: bottom right;
+
+
             transition: transform 0.25s ease-out;
+
+
         }
+
+
 
         .nav-links a:hover::after {
+
+
             transform: scaleX(1);
+
+
             transform-origin: bottom left;
+
+
         }
+
+
 
         .nav-links a:hover, .nav-links .active {
+
+
             color: #fff;
+
+
         }
+
+
 
         .nav-links .active::after {
+
+
             transform: scaleX(1);
+
+
         }
+
+
 
         /* Başlık Alanı */
+
+
         .page-header {
+
+
             background: linear-gradient(135deg, #090d16, #111827);
+
+
             color: white;
+
+
             text-align: center;
+
+
             padding: 80px 20px 140px;
+
+
             position: relative;
+
+
         }
+
+
 
         .page-header h1 {
+
+
             font-size: 2.8rem;
+
+
             font-weight: 700;
+
+
             text-transform: uppercase;
+
+
             letter-spacing: 1.5px;
+
+
             margin-bottom: 10px;
+
+
             text-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
+
+
             animation: fadeInDown 0.6s ease-out;
+
+
         }
+
+
 
         .page-header p {
+
+
             color: #94a3b8;
+
+
             font-size: 1.05rem;
+
+
             animation: fadeInDown 0.8s ease-out;
+
+
         }
+
+
 
         /* Ana Konteyner */
+
+
         .container {
+
+
             max-width: 1100px;
+
+
             margin: 0 auto 100px;
+
+
             padding: 0 20px;
+
+
         }
+
+
 
         /* Yatay Sosyal Medya Şeridi */
+
+
         .horizontal-social-bar {
+
+
             display: flex;
+
+
             justify-content: space-around;
+
+
             background: rgba(30, 41, 59, 0.7);
+
+
             backdrop-filter: blur(12px);
+
+
             border: 1px solid rgba(255, 255, 255, 0.08);
+
+
             padding: 30px;
+
+
             border-radius: 20px;
+
+
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+
+
             margin-top: -70px;
+
+
             position: relative;
+
+
             z-index: 20;
+
+
             gap: 20px;
+
+
             flex-wrap: wrap;
+
+
             animation: fadeInUp 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+
+
         }
+
+
 
         .social-item {
+
+
             display: flex;
+
+
             align-items: center;
+
+
             gap: 15px;
+
+
             text-decoration: none;
+
+
             color: #cbd5e1;
+
+
             padding: 12px 25px;
+
+
             border-radius: 14px;
+
+
             transition: all 0.4s ease;
+
+
             background: rgba(255, 255, 255, 0.02);
+
+
             border: 1px solid rgba(255, 255, 255, 0.03);
+
+
         }
+
+
 
         .social-item .icon-circle {
+
+
             width: 52px;
+
+
             height: 52px;
+
+
             background-color: rgba(15, 23, 42, 0.6);
+
+
             border-radius: 50%;
+
+
             display: flex;
+
+
             align-items: center;
+
+
             justify-content: center;
+
+
             border: 1px solid rgba(255, 255, 255, 0.1);
+
+
             transition: all 0.4s ease;
+
+
         }
+
+
 
         .social-item .icon-circle img {
+
+
             width: 24px;
+
+
             height: 24px;
+
+
             transition: transform 0.4s ease;
+
+
         }
+
+
 
         .social-text h4 {
+
+
             color: white;
+
+
             font-size: 1.05rem;
+
+
             font-weight: 600;
+
+
         }
+
+
 
         .social-text p {
+
+
             font-size: 0.85rem;
+
+
             color: #94a3b8;
+
+
         }
+
+
 
         .social-item:hover {
+
+
             background-color: rgba(26, 115, 232, 0.1);
+
+
             border-color: rgba(56, 189, 248, 0.3);
+
+
             transform: translateY(-5px);
+
+
             box-shadow: 0 10px 20px rgba(26, 115, 232, 0.15);
+
+
         }
+
+
 
         .social-item:hover .icon-circle {
+
+
             border-color: #38bdf8;
+
+
             background-color: rgba(26, 115, 232, 0.2);
+
+
         }
+
+
 
         .social-item:hover .icon-circle img {
+
+
             transform: rotate(360deg) scale(1.1);
+
+
         }
+
+
+
+        /* Başvuru Kapalı Bloğu */
+
+
+        .closed-section {
+
+
+            background: rgba(22, 32, 51, 0.75);
+
+
+            backdrop-filter: blur(12px);
+
+
+            border: 1px solid rgba(255, 255, 255, 0.05);
+
+
+            border-radius: 24px;
+
+
+            padding: 80px 50px;
+
+
+            margin-top: 60px;
+
+
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+
+
+            animation: fadeInUp 1s cubic-bezier(0.165, 0.84, 0.44, 1);
+
+
+            position: relative;
+
+
+            text-align: center;
+
+
+        }
+
+
+
+        .closed-section::before {
+
+
+            content: '';
+
+
+            position: absolute;
+
+
+            top: 0;
+
+
+            left: 10%;
+
+
+            width: 80%;
+
+
+            height: 2px;
+
+
+            background: linear-gradient(to right, transparent, #ef4444, #b91c1c, transparent);
+
+
+        }
+
+
+
+        .closed-icon {
+
+
+            font-size: 4rem;
+
+
+            margin-bottom: 30px;
+
+
+            display: block;
+
+
+            animation: pulse 2.5s ease-in-out infinite;
+
+
+        }
+
+
+
+        .closed-title {
+
+
+            font-size: 2.8rem;
+
+
+            font-weight: 700;
+
+
+            letter-spacing: 2px;
+
+
+            text-transform: uppercase;
+
+
+            background: linear-gradient(135deg, #ef4444, #f97316, #ef4444);
+
+
+            background-size: 200% auto;
+
+
+            -webkit-background-clip: text;
+
+
+            -webkit-text-fill-color: transparent;
+
+
+            animation: textShine 4s linear infinite;
+
+
+            margin-bottom: 20px;
+
+
+            line-height: 1.2;
+
+
+        }
+
+
+
+        .closed-subtitle {
+
+
+            color: #94a3b8;
+
+
+            font-size: 1.1rem;
+
+
+            max-width: 520px;
+
+
+            margin: 0 auto;
+
+
+            line-height: 1.8;
+
+
+        }
+
+
+
+        .closed-divider {
+
+
+            width: 80px;
+
+
+            height: 3px;
+
+
+            background: linear-gradient(to right, #ef4444, #f97316);
+
+
+            border-radius: 2px;
+
+
+            margin: 30px auto;
+
+
+        }
+
+
 
         /* Form Bloğu */
+
+
         .form-section {
+
+
             background: rgba(22, 32, 51, 0.75);
+
+
             backdrop-filter: blur(12px);
+
+
             border: 1px solid rgba(255, 255, 255, 0.05);
+
+
             border-radius: 24px;
+
+
             padding: 50px;
+
+
             margin-top: 60px;
+
+
             box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+
+
             animation: fadeInUp 1s cubic-bezier(0.165, 0.84, 0.44, 1);
+
+
             position: relative;
+
+
         }
+
+
 
         .form-section::before {
+
+
             content: '';
+
+
             position: absolute;
+
+
             top: 0;
+
+
             left: 10%;
+
+
             width: 80%;
+
+
             height: 2px;
+
+
             background: linear-gradient(to right, transparent, #38bdf8, #1a73e8, transparent);
+
+
         }
+
+
 
         .section-title {
+
+
             font-size: 1.8rem;
+
+
             color: white;
+
+
             margin-bottom: 10px;
+
+
             font-weight: 700;
+
+
             letter-spacing: 0.5px;
+
+
         }
+
+
 
         .section-subtitle {
+
+
             color: #94a3b8;
+
+
             font-size: 0.95rem;
+
+
             margin-bottom: 45px;
+
+
         }
+
+
 
         /* Form Satırları */
+
+
         .form-row {
+
+
             display: grid;
+
+
             grid-template-columns: 1fr 1fr;
+
+
             gap: 35px;
+
+
             margin-bottom: 30px;
+
+
         }
+
+
 
         .input-box {
+
+
             position: relative;
+
+
         }
+
+
 
         .input-box label {
+
+
             display: block;
+
+
             color: #94a3b8;
+
+
             font-size: 0.85rem;
+
+
             font-weight: 600;
+
+
             margin-bottom: 10px;
+
+
             text-transform: uppercase;
+
+
             letter-spacing: 1px;
+
+
         }
+
+
 
         .form-input {
+
+
             width: 100%;
+
+
             padding: 16px 20px;
+
+
             background-color: rgba(15, 23, 42, 0.6);
+
+
             border: 1px solid rgba(255, 255, 255, 0.08);
+
+
             border-radius: 10px;
+
+
             color: white;
+
+
             font-size: 0.95rem;
+
+
             outline: none;
+
+
             transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+
         }
+
+
 
         .form-input:focus {
+
+
             background-color: rgba(15, 23, 42, 0.9);
+
+
             border-color: #38bdf8;
+
+
             box-shadow: 0 0 25px rgba(56, 189, 248, 0.15);
+
+
             transform: scale(1.01);
+
+
         }
+
+
 
         .form-input::placeholder {
+
+
             color: #475569;
+
+
         }
+
+
 
         .full-width {
+
+
             grid-column: span 2;
+
+
         }
+
+
 
         textarea.form-input {
+
+
             resize: vertical;
+
+
             min-height: 160px;
+
+
         }
+
+
 
         /* Gönder Butonu */
+
+
         .action-btn {
+
+
             background: linear-gradient(135deg, #1a73e8, #1e3a8a);
+
+
             color: white;
+
+
             border: none;
+
+
             padding: 16px 50px;
+
+
             border-radius: 10px;
+
+
             font-size: 1rem;
+
+
             font-weight: 600;
+
+
             cursor: pointer;
+
+
             transition: all 0.4s ease;
+
+
             box-shadow: 0 4px 20px rgba(26, 115, 232, 0.3);
+
+
             text-transform: uppercase;
+
+
             letter-spacing: 1px;
+
+
             position: relative;
+
+
             overflow: hidden;
+
+
         }
+
+
 
         .action-btn:hover {
+
+
             background: linear-gradient(135deg, #38bdf8, #1a73e8);
+
+
             box-shadow: 0 8px 30px rgba(56, 189, 248, 0.5), 0 0 15px rgba(56, 189, 248, 0.3);
+
+
             transform: translateY(-3px);
+
+
         }
+
+
 
         .action-btn:active {
+
+
             transform: translateY(-1px);
+
+
         }
+
+
 
         /* SAĞ SQUIRTLE */
+
+
         .squirtle-container {
+
+
             position: absolute;
+
+
             top: 0;
+
+
             right: 0;
+
+
             z-index: 9995;
+
+
             display: flex;
+
+
             align-items: center;
+
+
             text-decoration: none;
+
+
             cursor: pointer;
+
+
             padding-right: 5px;
+
+
             will-change: transform;
+
+
         }
+
+
 
         .squirtle-bubble {
+
+
             background: #ffffff;
+
+
             color: #0f172a;
+
+
             padding: 12px 18px;
+
+
             border-radius: 18px;
+
+
             font-size: 0.85rem;
+
+
             font-weight: 600;
+
+
             width: 220px;
+
+
             text-align: center;
+
+
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+
+
             border: 2px solid #1a73e8;
+
+
             position: relative;
+
+
             margin-right: 15px;
+
+
             order: -1;
+
+
             animation: bubbleSlideFloat 4s ease-in-out infinite 0.8s, bubbleShakeRight 2.5s cubic-bezier(.36,.07,.19,.97) infinite 0.3s;
+
+
             transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.3s ease;
+
+
         }
+
+
 
         .squirtle-bubble::after {
+
+
             content: '';
+
+
             position: absolute;
+
+
             top: 50%;
+
+
             right: -10px;
+
+
             transform: translateY(-50%);
+
+
             border-width: 10px 0 10px 10px;
+
+
             border-style: solid;
+
+
             border-color: transparent transparent transparent #ffffff;
+
+
             display: block;
+
+
             width: 0;
+
+
         }
+
+
 
         .squirtle-bubble::before {
+
+
             content: '';
+
+
             position: absolute;
+
+
             top: 50%;
+
+
             right: -13px;
+
+
             transform: translateY(-50%);
+
+
             border-width: 11px 0 11px 11px;
+
+
             border-style: solid;
+
+
             border-color: transparent transparent transparent #1a73e8;
+
+
             display: block;
+
+
             width: 0;
+
+
             z-index: -1;
+
+
         }
+
+
 
         .squirtle-img {
+
+
             width: 85px;
+
+
             height: 85px;
+
+
             border-radius: 50%;
+
+
             object-fit: cover;
+
+
             border: 3px solid #1a73e8;
+
+
             box-shadow: 5px 5px 20px rgba(0,0,0,0.2);
+
+
             background-color: #ffffff;
+
+
             animation: stitchShake 2.5s cubic-bezier(.36,.07,.19,.97) infinite 0.5s;
+
+
             transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+
         }
+
+
 
         .squirtle-container:hover .squirtle-img {
+
+
             animation-play-state: paused;
+
+
             transform: scale(1.08) rotate(-5deg);
+
+
             border-color: #38bdf8;
+
+
             box-shadow: 8px 8px 25px rgba(56, 189, 248, 0.4);
+
+
         }
+
+
 
         .squirtle-container:hover .squirtle-bubble {
+
+
             animation-play-state: paused;
+
+
             border-color: #38bdf8;
+
+
         }
+
+
 
         /* Footer */
+
+
         .main-footer {
+
+
             background: #090d16;
+
+
             color: #475569;
+
+
             padding: 40px 5%;
+
+
             text-align: center;
+
+
             border-top: 1px solid rgba(255, 255, 255, 0.02);
+
+
         }
+
+
 
         /* Animasyonlar */
+
+
         @keyframes textShine {
+
+
             0% { background-position: 0% 50%; }
+
+
             100% { background-position: 300% 50%; }
+
+
         }
+
+
 
         @keyframes fadeInUp {
+
+
             from { opacity: 0; transform: translateY(40px); }
+
+
             to { opacity: 1; transform: translateY(0); }
+
+
         }
+
+
 
         @keyframes fadeInDown {
+
+
             from { opacity: 0; transform: translateY(-20px); }
+
+
             to { opacity: 1; transform: translateY(0); }
+
+
         }
+
+
 
         @keyframes bubbleSlideFloat {
+
+
             0%, 100% { transform: translateY(0); }
+
+
             50% { transform: translateY(-4px); }
+
+
         }
+
+
 
         @keyframes stitchShake {
+
+
             0%, 80%, 100% { transform: rotate(0deg); }
+
+
             82%, 86%, 94% { transform: rotate(-5deg); }
+
+
             84%, 90%, 96% { transform: rotate(5deg); }
+
+
         }
+
+
 
         @keyframes bubbleShakeRight {
+
+
             0%, 80%, 100% { transform: translateX(0); }
+
+
             82%, 86%, 94% { transform: translateX(-4px); }
+
+
             84%, 90%, 96% { transform: translateX(4px); }
+
+
         }
+
+
+
+        @keyframes pulse {
+
+
+            0%, 100% { transform: scale(1); opacity: 1; }
+
+
+            50% { transform: scale(1.1); opacity: 0.8; }
+
+
+        }
+
+
 
         /* Mobil Uyum */
+
+
         @media (max-width: 768px) {
+
+
             .navbar { flex-direction: column; gap: 15px; padding: 20px; }
+
+
             .nav-links { gap: 15px; flex-wrap: wrap; justify-content: center; margin-left: 0; }
+
+
             .page-header h1 { font-size: 2rem; }
+
+
             .horizontal-social-bar { flex-direction: column; padding: 20px; gap: 12px; margin-top: -50px; }
+
+
             .social-item { width: 100%; justify-content: flex-start; }
+
+
             .form-row { grid-template-columns: 1fr; gap: 20px; }
+
+
             .full-width { grid-column: span 1; }
+
+
             .form-section { padding: 35px 20px; }
+
+
             .squirtle-img { width: 65px; height: 65px; }
+
+
             .squirtle-bubble { width: 150px; font-size: 0.7rem; margin-right: 8px; }
+
+
+            .closed-title { font-size: 2rem; }
+
+
+            .closed-section { padding: 60px 25px; }
+
+
         }
+
+
     </style>
+
+
 </head>
+
+
 <body>
 
+
+
     <nav class="navbar">
+
+
         <a href="index.html" class="logo-container">
+
+
             <img src="lal.png" alt="Lal Logo" class="navbar-logo-img">
+
+
             <div class="logo">Lal Çalıştay</div>
+
+
         </a>
+
+
         <ul class="nav-links">
+
+
             <li><a href="index.html">Ana Sayfa</a></li>
+
+
             <li><a href="iletisim.html" class="active">Başvuru ve İletişim</a></li>
+
+
             <li><a href="komitelerimiz.html">Komitelerimiz ve Çalışma Rehberleri</a></li>
+
+
             <li><a href="calistay-nedir.html">Çalıştay Nedir?</a></li>
+
+
         </ul>
+
+
     </nav>
 
+
+
     <header class="page-header">
+
+
         <h1>Başvuru & İletişim Formu</h1>
+
+
         <p>Görüşleriniz bizim için değerli. Ekibimizle anında iletişime geçin.</p>
+
+
     </header>
 
+
+
     <div class="container">
+
+
         
+
+
         <div class="horizontal-social-bar">
+
+
             
+
+
             <a href="https://www.instagram.com/lalcalistay" target="_blank" class="social-item">
+
+
                 <div class="icon-circle">
+
+
                     <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram">
+
+
                 </div>
+
+
                 <div class="social-text">
+
+
                     <h4>Instagram</h4>
+
+
                     <p>@lalcalistay</p>
+
+
                 </div>
+
+
             </a>
+
+
 
             <a href="https://www.tiktok.com/@lalcalistay" target="_blank" class="social-item">
+
+
                 <div class="icon-circle">
+
+
                     <img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" alt="TikTok">
+
+
                 </div>
+
+
                 <div class="social-text">
+
+
                     <h4>TikTok</h4>
+
+
                     <p>@lalcalistay</p>
+
+
                 </div>
+
+
             </a>
 
+
+
             <a href="mailto:lalcalistay1989@gmail.com" class="social-item">
+
+
                 <div class="icon-circle">
+
+
                     <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Gmail">
+
+
                 </div>
+
+
                 <div class="social-text">
+
+
                     <h4>E-Posta</h4>
+
+
                     <p>lalcalistay1989@gmail.com</p>
+
+
                 </div>
+
+
             </a>
+
+
 
         </div>
 
-        <section class="form-section">
-            <h2 class="section-title">Resmi Başvuru ve Mesaj Alanı</h2>
-            <p class="section-subtitle">Çalıştaya katılmak için bilgilerinizi girip motivasyonunuzu bizimle paylaşabilirsiniz.</p>
-            
-            <form onsubmit="sendMail(event)">
-                <div class="form-row">
-                    
-                    <div class="input-box">
-                        <label for="name">Adınız ve Soyadınız</label>
-                        <input type="text" id="name" class="form-input" placeholder="Adınızı yazın" required>
-                    </div>
 
-                    <div class="input-box">
-                        <label for="phone">Telefon Numaranız</label>
-                        <input type="tel" id="phone" class="form-input" placeholder="05XX XXX XX XX" required>
-                    </div>
 
-                    <div class="input-box full-width">
-                        <label for="school">Okul İsminiz</label>
-                        <input type="text" id="school" class="form-input" placeholder="Okulunuzun adını yazın" required>
-                    </div>
+        <section class="closed-section">
 
-                    <div class="input-box full-width">
-                        <label for="message">Mesajınız</label>
-                        <textarea id="message" class="form-input" placeholder="Mesajınız" required></textarea>
-                    </div>
 
-                </div>
+            <span class="closed-icon">🔒</span>
 
-                <button type="submit" class="action-btn">Mesajı Gönder</button>
-            </form>
+
+            <h2 class="closed-title">Başvurularımız Kapanmıştır</h2>
+
+
+            <div class="closed-divider"></div>
+
+
+            <p class="closed-subtitle">Lal Çalıştay'a gösterdiğiniz ilgi için teşekkür ederiz. Başvuru sürecimiz sona ermiştir. Gelecek etkinliklerimizden haberdar olmak için sosyal medya hesaplarımızı takip edebilirsiniz.</p>
+
+
         </section>
+
+
 
     </div>
 
+
+
     <!-- SAĞ SQUIRTLE - Komiteler sayfasına yönlendirir -->
+
+
     <a href="komitelerimiz.html" id="smoothSquirtle" class="squirtle-container">
+
+
         <div class="squirtle-bubble">Komitelerimiz ve çalışma rehberleri yayınlandı! 📋✨</div>
+
+
         <img src="squirtle.png" alt="Squirtle Maskot" class="squirtle-img">
+
+
     </a>
 
+
+
     <footer class="main-footer">
+
+
         <div class="footer-content">
+
+
             <div class="footer-logo">Lüleburgaz Anadolu Lisesi Çalıştayı</div>
+
+
             <div style="font-size: 0.85rem; color: #334155; margin-top: 5px;">
+
+
                 &copy; 2026 Lal Çalıştay. Tüm Hakları Saklıdır.
+
+
             </div>
+
+
         </div>
+
+
     </footer>
 
+
+
     <script>
+
+
         function sendMail(event) {
+
+
             event.preventDefault();
+
+
             var name = document.getElementById('name').value;
+
+
             var phone = document.getElementById('phone').value;
+
+
             var school = document.getElementById('school').value;
+
+
             var message = document.getElementById('message').value;
+
+
             
+
+
             var subject = encodeURIComponent("Lal Calistay Basvuru / Iletisim - " + name);
+
+
             var body = encodeURIComponent(
+
+
                 "Ad Soyad: " + name + "\n" +
+
+
                 "Telefon: " + phone + "\n" +
+
+
                 "Okul: " + school + "\n\n" +
+
+
                 "Mesaj:\n" + message
+
+
             );
+
+
             
+
+
             window.location.href = "mailto:lalcalistay1989@gmail.com?subject=" + subject + "&body=" + body;
+
+
         }
+
+
 
         // SAĞ SQUIRTLE - LERP ile gecikmeli takip
+
+
         const squirtle = document.getElementById('smoothSquirtle');
+
+
         let squirtleCurrentY = window.scrollY + (window.innerHeight / 2);
+
+
         let squirtleTargetY = squirtleCurrentY;
+
+
         const squirtleSpeed = 0.06;
 
+
+
         function smoothScrollSquirtle() {
+
+
             squirtleTargetY = window.scrollY + (window.innerHeight / 2);
+
+
             squirtleCurrentY += (squirtleTargetY - squirtleCurrentY) * squirtleSpeed;
+
+
             squirtle.style.transform = `translateY(${squirtleCurrentY - (squirtle.offsetHeight / 2)}px)`;
+
+
             requestAnimationFrame(smoothScrollSquirtle);
+
+
         }
+
+
         requestAnimationFrame(smoothScrollSquirtle);
+
+
     </script>
 
+
+
 </body>
+
+
 </html>
