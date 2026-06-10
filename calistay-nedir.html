@@ -289,83 +289,6 @@
             color: #cbd5e1;
         }
 
-        /* STITCH MASCOT */
-        .stitch-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: 9995;
-            display: flex;
-            align-items: center;
-            text-decoration: none;
-            cursor: pointer;
-            padding-left: 5px;
-            will-change: transform;
-        }
-
-        .stitch-bubble {
-            background: #ffffff;
-            color: #0f172a;
-            padding: 12px 18px;
-            border-radius: 18px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            width: 220px;
-            text-align: center;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-            border: 2px solid #1a73e8;
-            position: relative;
-            margin-left: 15px;
-            animation: bubbleSlideFloat 4s ease-in-out infinite, bubbleShake 2.5s cubic-bezier(.36,.07,.19,.97) infinite;
-        }
-
-        .stitch-bubble::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: -10px;
-            transform: translateY(-50%);
-            border-width: 10px 10px 10px 0;
-            border-style: solid;
-            border-color: transparent #ffffff transparent transparent;
-        }
-
-        .stitch-bubble::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: -13px;
-            transform: translateY(-50%);
-            border-width: 11px 11px 11px 0;
-            border-style: solid;
-            border-color: transparent #1a73e8 transparent transparent;
-            z-index: -1;
-        }
-
-        .stitch-img {
-            width: 85px;
-            height: 85px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid #1a73e8;
-            box-shadow: 5px 5px 20px rgba(0,0,0,0.15);
-            background-color: #ffffff;
-            animation: stitchShake 2.5s cubic-bezier(.36,.07,.19,.97) infinite;
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .stitch-container:hover .stitch-img {
-            animation-play-state: paused;
-            transform: scale(1.08) rotate(5deg);
-            border-color: #38bdf8;
-            box-shadow: 8px 8px 25px rgba(56, 189, 248, 0.4);
-        }
-
-        .stitch-container:hover .stitch-bubble {
-            animation-play-state: paused;
-            border-color: #38bdf8;
-        }
-
         /* SAĞ SQUIRTLE */
         .squirtle-container {
             position: absolute;
@@ -515,10 +438,8 @@
 
         /* ANIMATIONS */
         @keyframes textShine { 0% { background-position: 0% 50%; } 100% { background-position: 300% 50%; } }
-        @keyframes pulseBtn { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.04); } }
         @keyframes bubbleSlideFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
         @keyframes stitchShake { 0%, 80%, 100% { transform: rotate(0deg); } 82%, 86%, 94% { transform: rotate(-5deg); } 84%, 90%, 96% { transform: rotate(5deg); } 88% { transform: rotate(-3deg); } 92% { transform: rotate(3deg); } }
-        @keyframes bubbleShake { 0%, 80%, 100% { transform: translateX(0); } 82%, 86%, 94% { transform: translateX(4px); } 84%, 90%, 96% { transform: translateX(-4px); } }
         @keyframes bubbleShakeRight { 0%, 80%, 100% { transform: translateX(0); } 82%, 86%, 94% { transform: translateX(-4px); } 84%, 90%, 96% { transform: translateX(4px); } }
 
         /* RESPONSIVE */
@@ -530,8 +451,6 @@
             .flow-grid { grid-template-columns: 1fr; }
             .summary-box { padding: 35px 20px; }
             .footer-socials { gap: 15px; }
-            .stitch-img { width: 65px; height: 65px; }
-            .stitch-bubble { width: 150px; font-size: 0.7rem; margin-left: 8px; }
             .squirtle-img { width: 65px; height: 65px; }
             .squirtle-bubble { width: 150px; font-size: 0.7rem; margin-right: 8px; }
         }
@@ -588,12 +507,6 @@
         </div>
     </div>
 
-    <!-- MASKOTLAR -->
-    <a href="iletisim.html" id="smoothStitch" class="stitch-container">
-        <img src="stitch.jpg" alt="Stitch Maskot" class="stitch-img">
-        <div class="stitch-bubble">Başvurularımız başladı! Hemen sen de gel başvur. 🚀</div>
-    </a>
-
     <a href="komitelerimiz.html" id="smoothSquirtle" class="squirtle-container">
         <div class="squirtle-bubble">Komitelerimiz ve çalışma rehberleri yayınlandı! 📋✨</div>
         <img src="squirtle.png" alt="Squirtle Maskot" class="squirtle-img">
@@ -619,22 +532,13 @@
             }, 100);
         });
 
-        // MASCOT ANIMATIONS (LERP)
-        const stitch = document.getElementById('smoothStitch');
         const squirtle = document.getElementById('smoothSquirtle');
-        
-        let stitchCurrentY = window.scrollY + (window.innerHeight / 2);
         let squirtleCurrentY = window.scrollY + (window.innerHeight / 2);
-        
+
         function animateMascots() {
             let targetY = window.scrollY + (window.innerHeight / 2);
-            
-            stitchCurrentY += (targetY - stitchCurrentY) * 0.07;
             squirtleCurrentY += (targetY - squirtleCurrentY) * 0.06;
-            
-            stitch.style.transform = `translateY(${stitchCurrentY - 40}px)`;
             squirtle.style.transform = `translateY(${squirtleCurrentY - 40}px)`;
-            
             requestAnimationFrame(animateMascots);
         }
         requestAnimationFrame(animateMascots);
