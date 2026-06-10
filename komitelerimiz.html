@@ -19,7 +19,6 @@
             scroll-behavior: smooth;
         }
 
-        /* Sayfa Geçişi İçin İlk Başta Gövdeyi Gizliyoruz */
         body {
             background-color: #f1f5f9;
             color: #1e293b;
@@ -28,7 +27,7 @@
             opacity: 0;
             transform: translateY(10px);
             transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
-            position: relative; /* Absolute nesnelerin (Stitch) referans noktası */
+            position: relative;
         }
 
         body.page-ready {
@@ -41,7 +40,6 @@
             transform: translateY(-10px);
         }
 
-        /* Sayfa Geçiş Perdesi */
         .page-transition-overlay {
             position: fixed;
             top: 0;
@@ -278,7 +276,6 @@
             flex-grow: 1;
         }
 
-        /* YENİ EKLENEN BUTON YAPISI */
         .card-buttons {
             display: flex;
             gap: 10px;
@@ -308,7 +305,6 @@
             transform: translateY(-1px);
         }
 
-        /* Çalışma Rehberi Buton Stili */
         .rehber-btn {
             background: linear-gradient(135deg, #64748b, #475569);
             box-shadow: 0 4px 12px rgba(100, 116, 139, 0.2);
@@ -317,88 +313,7 @@
             background: linear-gradient(135deg, #475569, #1e293b);
         }
 
-        /* SOL STITCH - Orijinal */
-        .stitch-container {
-            position: absolute;
-            top: 0;
-            left: 20px;
-            z-index: 2000;
-            display: flex;
-            align-items: center;
-            text-decoration: none;
-            cursor: pointer;
-            will-change: transform; 
-        }
-
-        .stitch-bubble {
-            background: #ffffff;
-            color: #0f172a;
-            padding: 12px 18px;
-            border-radius: 18px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            width: 220px;
-            text-align: center;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-            border: 2px solid #1a73e8;
-            position: relative;
-            margin-left: 15px; 
-            animation: bubbleSlideFloat 4s ease-in-out infinite, bubbleShake 2.5s cubic-bezier(.36,.07,.19,.97) infinite;
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.3s ease;
-        }
-
-        .stitch-bubble::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: -10px;
-            transform: translateY(-50%);
-            border-width: 10px 10px 10px 0;
-            border-style: solid;
-            border-color: transparent #ffffff transparent transparent;
-            display: block;
-            width: 0;
-        }
-
-        .stitch-bubble::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: -13px;
-            transform: translateY(-50%);
-            border-width: 11px 11px 11px 0;
-            border-style: solid;
-            border-color: transparent #1a73e8 transparent transparent;
-            display: block;
-            width: 0;
-            z-index: -1;
-        }
-
-        .stitch-img {
-            width: 85px;
-            height: 85px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid #1a73e8;
-            box-shadow: 5px 5px 20px rgba(0,0,0,0.2);
-            background-color: #ffffff;
-            animation: stitchShake 2.5s cubic-bezier(.36,.07,.19,.97) infinite;
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .stitch-container:hover .stitch-img {
-            animation-play-state: paused; 
-            transform: scale(1.08) rotate(5deg);
-            border-color: #38bdf8;
-            box-shadow: 8px 8px 25px rgba(56, 189, 248, 0.4);
-        }
-
-        .stitch-container:hover .stitch-bubble {
-            animation-play-state: paused;
-            border-color: #38bdf8;
-        }
-
-        /* SAĞ SQUIRTLE - Yeni, aynı sistem */
+        /* SAĞ SQUIRTLE */
         .squirtle-container {
             position: absolute;
             top: 0;
@@ -411,7 +326,6 @@
             will-change: transform;
         }
 
-        /* Squirtle baloncuğu sağda olduğu için ok sağa bakıyor */
         .squirtle-bubble {
             background: #ffffff;
             color: #0f172a;
@@ -425,12 +339,11 @@
             border: 2px solid #1a73e8;
             position: relative;
             margin-right: 15px;
-            order: -1; /* Baloncuk solda, squirtle sağda */
+            order: -1;
             animation: bubbleSlideFloat 4s ease-in-out infinite 0.8s, bubbleShakeRight 2.5s cubic-bezier(.36,.07,.19,.97) infinite 0.3s;
             transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.3s ease;
         }
 
-        /* Ok sağ tarafa bakıyor */
         .squirtle-bubble::after {
             content: '';
             position: absolute;
@@ -569,14 +482,6 @@
             92% { transform: rotate(3deg); }
         }
 
-        @keyframes bubbleShake {
-            0%, 80%, 100% { transform: translateX(0); }
-            82%, 86%, 94% { transform: translateX(4px); }
-            84%, 90%, 96% { transform: translateX(-4px); }
-            88% { transform: translateX(2px); }
-            92% { transform: translateX(-2px); }
-        }
-
         @keyframes bubbleShakeRight {
             0%, 80%, 100% { transform: translateX(0); }
             82%, 86%, 94% { transform: translateX(-4px); }
@@ -593,9 +498,6 @@
             .komite-grid { grid-template-columns: 1fr; gap: 25px; }
             .komite-card { padding: 30px 20px; }
             .footer-socials { gap: 15px; }
-            .stitch-container { left: 10px; }
-            .stitch-img { width: 65px; height: 65px; }
-            .stitch-bubble { width: 150px; font-size: 0.7rem; margin-left: 8px; }
             .squirtle-container { right: 10px; }
             .squirtle-img { width: 65px; height: 65px; }
             .squirtle-bubble { width: 150px; font-size: 0.7rem; margin-right: 8px; }
@@ -738,13 +640,6 @@
         </div>
     </div>
 
-    <!-- SOL STITCH - Orijinal, iletişim sayfasına yönlendirir -->
-    <a href="iletisim.html" class="stitch-container">
-        <img src="stitch.jpg" alt="Stitch Maskot" class="stitch-img">
-        <div class="stitch-bubble">Başvurularımız başladı! Hemen sen de gel başvur. 🚀</div>
-    </a>
-
-    <!-- SAĞ SQUIRTLE - Yeni, komiteler sayfasına yönlendirir -->
     <a href="komitelerimiz.html" class="squirtle-container">
         <div class="squirtle-bubble">Komitelerimiz ve çalışma rehberleri yayınlandı! 📋✨</div>
         <img src="squirtle.png" alt="Squirtle Maskot" class="squirtle-img">
@@ -782,28 +677,13 @@
                 document.body.classList.add('page-ready');
             }, 100);
             
-            updateStitchPosition();
             updateSquirtlePosition();
         });
 
-        // SOL STITCH - LERP ile arkadan takip eden sistem
-        const stitch = document.querySelector('.stitch-container');
-        let stitchCurrentY = window.scrollY + (window.innerHeight / 2); 
-        let stitchTargetY = stitchCurrentY;
-        const stitchSpeed = 0.08; 
-
-        function updateStitchPosition() {
-            stitchTargetY = window.scrollY + (window.innerHeight / 2);
-            stitchCurrentY += (stitchTargetY - stitchCurrentY) * stitchSpeed;
-            stitch.style.transform = `translateY(${stitchCurrentY - 42}px)`;
-            requestAnimationFrame(updateStitchPosition);
-        }
-
-        // SAĞ SQUIRTLE - Aynı LERP sistemi, hafif faz farkıyla
         const squirtle = document.querySelector('.squirtle-container');
         let squirtleCurrentY = window.scrollY + (window.innerHeight / 2);
         let squirtleTargetY = squirtleCurrentY;
-        const squirtleSpeed = 0.06; // Biraz daha yavaş, farklı hissettirmek için
+        const squirtleSpeed = 0.06;
 
         function updateSquirtlePosition() {
             squirtleTargetY = window.scrollY + (window.innerHeight / 2);
@@ -812,7 +692,7 @@
             requestAnimationFrame(updateSquirtlePosition);
         }
 
-        document.querySelectorAll('.nav-links a, .logo-container, .stitch-container, .squirtle-container').forEach(link => {
+        document.querySelectorAll('.nav-links a, .logo-container, .squirtle-container').forEach(link => {
             link.addEventListener('click', function(e) {
                 const targetUrl = this.getAttribute('href');
                 
