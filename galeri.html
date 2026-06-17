@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galeri - Lal Çalıştay</title>
+    <link rel="icon" type="image/png" href="lal.png">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Genel Sayfa Düzeni */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #0f172a;
+            color: #f8fafc;
+            line-height: 1.6;
+            overflow-x: hidden;
+            opacity: 0;
+            transition: opacity 0.4s ease-in-out;
+        }
+
+        body.page-ready { opacity: 1; }
+
+        /* Üst Menü Barı (Navbar) */
+        .navbar {
+            background: linear-gradient(135deg, #090d16, #1e3a8a);
+            color: white;
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .navbar-logo-img {
+            width: 38px;
+            height: 38px;
+            object-fit: contain;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.3rem;
+            text-transform: uppercase;
+            background: linear-gradient(to right, #ffffff, #38bdf8, #1a73e8, #ffffff);
+            background-size: 300% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: textShine 7s linear infinite;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            position: relative;
+            padding: 5px 0;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            transform: scaleX(0);
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #38bdf8;
+            transition: transform 0.25s ease-out;
+        }
+
+        .nav-links a:hover::after, .nav-links .active::after { transform: scaleX(1); }
+        .nav-links a:hover, .nav-links .active { color: #fff; }
+
+        /* Başlık Alanı */
+        .page-header {
+            background: linear-gradient(135deg, #090d16, #111827);
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, #fff, #38bdf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .page-header p {
+            color: #94a3b8;
+            font-size: 1.1rem;
+        }
+
+        /* Gün Seçim Butonları */
+        .tabs-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 30px auto;
+            max-width: 600px;
+            padding: 0 20px;
+        }
+
+        .tab-btn {
+            background: rgba(30, 41, 59, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #94a3b8;
+            padding: 15px 25px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            flex: 1;
+            text-align: center;
+        }
+
+        .tab-btn:hover {
+            color: white;
+            border-color: #38bdf8;
+            background: rgba(26, 115, 232, 0.1);
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, #1a73e8, #1e3a8a);
+            color: white;
+            border-color: #38bdf8;
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.3);
+        }
+
+        /* Fotoğraf Izgarası (Grid) */
+        .gallery-container {
+            max-width: 1200px;
+            margin: 0 auto 80px;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            aspect-ratio: 4/3;
+            background: #1e293b;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            cursor: pointer;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            transition: transform 0.3s cubic-bezier(0.165, 0.84, 0.44, 1), border-color 0.3s ease;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.03);
+            border-color: #38bdf8;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.08);
+        }
+
+        /* Durum Mesajları */
+        .status-message {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 50px;
+            color: #64748b;
+            font-size: 1.1rem;
+        }
+
+        /* LIGHTBOX (Görsel İnceleme Modalı) */
+        .lightbox {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(15, 23, 42, 0.96);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .lightbox.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .lightbox-img {
+            max-width: 90%;
+            max-height: 85%;
+            border-radius: 12px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.6);
+            transform: scale(0.95);
+            transition: transform 0.3s ease;
+        }
+
+        .lightbox.active .lightbox-img { transform: scale(1); }
+
+        .lightbox-btn {
+            position: absolute;
+            background: rgba(255,255,255,0.08);
+            color: white;
+            border: none;
+            width: 50px; height: 50px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .lightbox-btn:hover { background: rgba(56, 189, 248, 0.3); color: #38bdf8; }
+        .close-btn { top: 20px; right: 20px; }
+        .prev-btn { left: 20px; }
+        .next-btn { right: 20px; }
+
+        @keyframes textShine {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 300% 50%; }
+        }
+
+        /* Mobil Ekran Uyumluluğu */
+        @media (max-width: 768px) {
+            .navbar { flex-direction: column; gap: 15px; }
+            .page-header h1 { font-size: 1.8rem; }
+            .tabs-container { flex-direction: column; gap: 10px; }
+            .tab-btn { padding: 12px; font-size: 0.9rem; }
+            .lightbox-btn { width: 42px; height: 42px; font-size: 1.2rem; }
+            .prev-btn { left: 10px; }
+            .next-btn { right: 10px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="index.html" class="logo-container">
+            <img src="lal.png" alt="Lal Logo" class="navbar-logo-img">
+            <div class="logo">Lal Çalıştay</div>
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html">Ana Sayfa</a></li>
+            <li><a href="iletisim.html">Başvuru ve İletişim</a></li> 
+            <li><a href="komitelerimiz.html">Komitelerimiz</a></li> 
+            <li><a href="galeri.html" class="active">Galeri</a></li>
+        </ul>
+    </nav>
+
+    <header class="page-header">
+        <h1>Çalıştay Anıları</h1>
+        <p>Lüleburgaz Anadolu Lisesi Çalıştayı'ndan geriye kalan güzel kareler.</p>
+    </header>
+
+    <div class="tabs-container">
+        <button class="tab-btn active" onclick="switchDay('13062026')">13 Haziran Cumartesi</button>
+        <button class="tab-btn" onclick="switchDay('14062026')">14 Haziran Pazar</button>
+    </div>
+
+    <main class="gallery-container" id="galleryGrid">
+        <div class="status-message">Fotoğraflar yükleniyor...</div>
+    </main>
+
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-btn close-btn" onclick="closeLightbox()">&times;</button>
+        <button class="lightbox-btn prev-btn" onclick="changeImage(-1)">&#10094;</button>
+        <img src="" alt="Büyük Görsel" class="lightbox-img" id="lightboxImg">
+        <button class="lightbox-btn next-btn" onclick="changeImage(1)">&#10095;</button>
+    </div>
+
+    <script>
+        // Siteden aldığımız dinamik GitHub bilgileri
+        const GITHUB_USERNAME = "xxbanzoxxlugomug"; 
+        const REPO_NAME = "lalcal"; 
+
+        let currentImages = [];
+        let currentIndex = 0;
+
+        // Sayfa açıldığında otomatik başla
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => { document.body.classList.add('page-ready'); }, 100);
+            loadImages('13062026'); // Açılışta 13 Haziran Cumartesi klasörünü çek
+        });
+
+        // GitHub API yardımıyla klasör içindeki fotoğrafları listeleme
+        async function loadImages(folderName) {
+            const grid = document.getElementById('galleryGrid');
+            grid.innerHTML = '<div class="status-message">Fotoğraflar klasörden taranıyor...</div>';
+            currentImages = [];
+
+            // Direkt ana dizindeki gün klasörünü sorgular
+            const apiUrl = `https://api.github.com/repos/${GITHUB_USERNAME}/${REPO_NAME}/contents/${folderName}`;
+
+            try {
+                const response = await fetch(apiUrl);
+                if (!response.ok) throw new Error('Klasör okunamadı veya henüz boş.');
+                
+                const files = await response.json();
+                
+                // Sistem dosyaları (.gitkeep vb.) elensin, sadece görseller (jpg, png, webp, gif) gelsin
+                const imageFiles = files.filter(file => /\.(jpe?g|png|webp|gif)$/i.test(file.name));
+
+                if (imageFiles.length === 0) {
+                    grid.innerHTML = '<div class="status-message">Bu güne ait yüklü fotoğraf bulunamadı veya henüz klasör açılmadı.</div>';
+                    return;
+                }
+
+                grid.innerHTML = ''; // Yükleniyor ibaresini kaldır
+
+                imageFiles.forEach((file, index) => {
+                    // GitHub Pages üzerindeki ham görsel linki
+                    const imgUrl = `https://${GITHUB_USERNAME}.github.io/${REPO_NAME}/${folderName}/${file.name}`;
+                    currentImages.push(imgUrl);
+
+                    // Grid yapısı için div oluşturma
+                    const item = document.createElement('div');
+                    item.className = 'gallery-item';
+                    item.innerHTML = `<img src="${imgUrl}" alt="Lal Çalıştay" loading="lazy">`;
+                    item.onclick = () => openLightbox(index);
+                    grid.appendChild(item);
+                });
+
+            } catch (error) {
+                console.error(error);
+                grid.innerHTML = '<div class="status-message">Fotoğraflar yüklenirken bir sorun oluştu. Klasörün veya görsellerin doğru yüklendiğinden emin ol kanka.</div>';
+            }
+        }
+
+        // Sekmeler (Günler) arası geçiş mekanizması
+        function switchDay(folderName) {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            loadImages(folderName);
+        }
+
+        // Fotoğraf Büyütme Ekranını Açma (Lightbox)
+        function openLightbox(index) {
+            currentIndex = index;
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightboxImg');
+            lightboxImg.src = currentImages[currentIndex];
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Detay ekranında arka sayfa kaymasın
+        }
+
+        // Fotoğraf Büyütme Ekranını Kapatma
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Önceki-Sonraki Resme Geçiş (Butonlar)
+        function changeImage(direction) {
+            currentIndex += direction;
+            if (currentIndex >= currentImages.length) currentIndex = 0;
+            if (currentIndex < 0) currentIndex = currentImages.length - 1;
+            document.getElementById('lightboxImg').src = currentImages[currentIndex];
+        }
+
+        // Klavye Kısayolları (Esc, Sağ ve Sol Yön Tuşları)
+        document.addEventListener('keydown', (e) => {
+            if (!document.getElementById('lightbox').classList.contains('active')) return;
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowRight') changeImage(1);
+            if (e.key === 'ArrowLeft') changeImage(-1);
+        });
+
+        // Sayfa geçiş animasyon kontrolü
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                const targetUrl = this.getAttribute('href');
+                if (targetUrl && targetUrl !== 'galeri.html') {
+                    e.preventDefault();
+                    document.body.style.opacity = '0';
+                    setTimeout(() => { window.location.href = targetUrl; }, 400);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
