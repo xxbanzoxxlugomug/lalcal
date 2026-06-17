@@ -198,7 +198,7 @@
             z-index: 10;
             padding: 0 20px;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 40px;
         }
 
@@ -475,20 +475,20 @@
 
         @keyframes stitchShake {
             0%, 80%, 100% { transform: rotate(0deg); }
-            82%, 86%, 94% { transform: rotate(-5deg); }
-            84%, 90%, 96% { transform: rotate(5deg); }
+            2%, 6%, 14% { transform: rotate(-5deg); }
+            4%, 10%, 16% { transform: rotate(5deg); }
         }
 
         @keyframes bubbleShake {
             0%, 80%, 100% { transform: translateX(0); }
-            82%, 86%, 94% { transform: translateX(4px); }
-            84%, 90%, 96% { transform: translateX(-4px); }
+            2%, 6%, 14% { transform: translateX(4px); }
+            4%, 10%, 16% { transform: translateX(-4px); }
         }
 
         @keyframes bubbleShakeRight {
             0%, 80%, 100% { transform: translateX(0); }
-            82%, 86%, 94% { transform: translateX(-4px); }
-            84%, 90%, 96% { transform: translateX(4px); }
+            2%, 6%, 14% { transform: translateX(-4px); }
+            4%, 10%, 16% { transform: translateX(4px); }
         }
 
         /* MOBİL TASARIM */
@@ -497,7 +497,7 @@
             .nav-links { gap: 15px; flex-wrap: wrap; justify-content: center; }
             .hero { height: 300px; }
             .hero h1 { font-size: 1.8rem; }
-            .main-content { margin: -30px auto 40px; gap: 25px; }
+            .main-content { margin: -30px auto 40px; gap: 25px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
 
             .squirtle-container { flex-direction: column; align-items: flex-end; padding-right: 5px; margin-right: 0; }
             
@@ -544,6 +544,7 @@
             <li><a href="index.html">Ana Sayfa</a></li>
             <li><a href="iletisim.html">Başvuru ve İletişim</a></li> 
             <li><a href="komitelerimiz.html">Komitelerimiz ve Çalışma Rehberleri</a></li> 
+            <li><a href="galeri.html">Galeri</a></li>
             <li><a href="calistay-nedir.html">Çalıştay Nedir?</a></li>
         </ul>
     </nav>
@@ -555,6 +556,7 @@
     </header>
 
     <main class="main-content">
+        <!-- 1. KART -->
         <div class="card">
             <div class="card-icon-wrapper">
                 <svg class="card-icon-svg" viewBox="0 0 24 24">
@@ -566,6 +568,19 @@
             <a href="calistay-nedir.html" class="btn">Sayfaya Git</a>
         </div>
 
+        <!-- 2. KART (YENİ EKLENEN ORTAKİ GALERİ KARTI) -->
+        <div class="card">
+            <div class="card-icon-wrapper">
+                <svg class="card-icon-svg" viewBox="0 0 24 24">
+                    <path d="M22 16V4c0-1.1-.9-2-2-2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2zm-11-4l2.03 2.71L16 11l4 5H8l3-4zM2 6v14c0 1.1.9 2 2 2h14v-2H4V6H2z"/>
+                </svg>
+            </div>
+            <h3>Çalıştay Anıları</h3>
+            <p>Etkinliğimizden geriye kalan tüm fotoğrafları incele.</p>
+            <a href="galeri.html" class="btn">Galeriye Git</a>
+        </div>
+
+        <!-- 3. KART -->
         <div class="card">
             <div class="card-icon-wrapper">
                 <svg class="card-icon-svg" viewBox="0 0 24 24">
